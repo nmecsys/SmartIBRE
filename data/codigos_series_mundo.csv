@@ -1,0 +1,44 @@
+COD;NOME;COD_NOME;COLUNA;SRC;Periodicidade;Fonte;Data.Inicial;Data.Final;LOCAL
+M0001;S&P 500;^GSPC;GSPC.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0002;Dow Jones Industrial Average;^DJI;DJI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0003;NASDAQ Composite;^IXIC;IXIC.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0004;IBOVESPA;^BVSP;BVSP.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0005;IPSA 40 Santiago de Chile;^IPSA;IPSA.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0006;FTSE 100 Londres;^FTSE;FTSE.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0007;DAX Alemanha;^GDAXI;GDAXI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0008;CAC 40 França;^FCHI;FCHI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0009;EURONEXT 100;^N100;N100.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0010;NIKKEI 225;^N225;N225.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0011;Hang Seng Index;^HSI;HSI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0012;All Ordinaries Austr·lia;^AORD;AORD.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0013;CNX NIFTY Õndia;^NSEI;NSEI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0014;RTS Index R˙ssia;RTS.RS;RTS.RS.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0015;SSE Shanghai Composite China;000001.SS;000001.SS.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0016;USD/BRL;BRL=X;BRL=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0017;USD/EUR;EUR=X;EUR=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0018;USD/ARS;ARS=X;ARS=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0019;Consumer Price Index for All Urban Consumers: All Items Seasonally Adjusted (1982-84=100);CPIAUCSL;CPIAUCSL;FRED;M;Federal Reserve Economic Data;;;EUA
+M0020;Consumer Price Index for All Urban Consumers: All Items Not Seasonally Adjusted (1982-84=100);CPIAUCNS;CPIAUCNS;FRED;M;Federal Reserve Economic Data;;;EUA
+M0021;Gross Domestic Product Trimestral;GDP;GDP;FRED;TRI;Federal Reserve Economic Data;;;EUA
+M0022;Civilian Unemployment Rate Seasonally Adjusted;UNRATE;UNRATE;FRED;M;Federal Reserve Economic Data;;;EUA
+M0023;Civilian Unemployment Rate Not Seasonally Adjusted;UNRATENSA;UNRATENSA;FRED;M;Federal Reserve Economic Data;;;EUA
+M0024;M2 Money Stock Seasonally Adjusted;M2SL;M2SL;FRED;M;Federal Reserve Economic Data;;;EUA
+M0025;M2 Money Stock Not Seasonally Adjusted;M2NS;M2NS;FRED;M;Federal Reserve Economic Data;;;EUA
+M0026;Industrial Production Index Seasonally Adjusted USA (2007=100);INDPRO;INDPRO;FRED;M;Federal Reserve Economic Data;;;EUA
+M0027;Producer Price Index for All Commodities Not Seasonally Adjusted USA(1982=100);PPIACO;PPIACO;FRED;M;Federal Reserve Economic Data;;;EUA
+M0028;Apple Inc.;AAPL;AAPL;yahoo;Di·ria;Yahoo Finance;;;
+M0029;Consumer Price Index: All Items for Mexico;MEXCPIALLMINMEI;MEXCPIALLMINMEI;FRED;M;Federal Reserve Economic Data;;;AL
+M0030;Real Broad Effective Exchange Rate for Argentina;RBARBIS;RBARBIS;FRED;M;Federal Reserve Economic Data;;;AL
+M0031;Business Tendency Surveys for Manufacturing: Confidence Indicators: Composite Indicators: European Commission and National Indicators for Mexico;BSCICP02MXM661N;BSCICP02MXM661N,;FRED;M;Federal Reserve Economic Data;;;AL
+M0032;State Street PriceStats Inflation Series for Argentina;ARINFL;ARINFL;FRED;M;Federal Reserve Economic Data;;;AL
+M0033;Goods, Value of Exports for Argentina;VALEXPARQ052N;VALEXPARQ052N;FRED;TRI;Federal Reserve Economic Data;;;AL
+M0034;Total Gross Domestic Product for the United Kingdom;NAEXKP01GBQ652S;NAEXKP01GBQ652S;FRED;TRI;Federal Reserve Economic Data;;;Europe
+M0035;Gross Domestic Product for Japan;JPNNGDP;JPNNGDP;FRED;TRI;Federal Reserve Economic Data;;;Asia
+M0036;Current Price Gross Domestic Product in China;CHNGDPNQDSMEI;CHNGDPNQDSMEI;FRED;TRI;Federal Reserve Economic Data;;;Asia
+M0037;Current Price Gross Domestic Product in India;INDGDPNQDSMEI;INDGDPNQDSMEI;FRED;TRI;Federal Reserve Economic Data;;;Asia
+M0038;Gross Domestic Product for Japan;†JPNNGDP;†JPNNGDP;FRED;TRI;Federal Reserve Economic Data;;;Asia
+M0039;Consumer Price Index of All Items in Japan;JPNCPIALLMINMEI;JPNCPIALLMINMEI;M;TRI;Federal Reserve Economic Data;;;Asia
+M0040;Gross Domestic Product by Expenditure in Constant Prices: Total Gross Domestic Product for France;NAEXKP01FRQ189S;NAEXKP01FRQ189S;FRED;TRI;Federal Reserve Economic Data;;;Europe
+M0041;Index of Stock Prices for France;M11024FRM324NNBR;M11024FRM324NNBR;FRED;M;Federal Reserve Economic Data;;;Europe
+M0042;Month London Interbank Offered Rate (LIBOR), based on British Pound;GBP3MTD156N;GBP3MTD156N;FRED;M;Federal Reserve Economic Data;;;Europe
+M0043;Gross Domestic Product in Germany;DEURGDPQDSNAQ;DEURGDPQDSNAQ;FRED;TRI;Federal Reserve Economic Data;;;Europe

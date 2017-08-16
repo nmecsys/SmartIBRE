@@ -1,0 +1,225 @@
+Codigo;Descrição Cadastradas;Periodicidade;Periodo;Periodicidade;
+PRECO415;Custo médio do m2;Mensal;1994/jul-2015/mai;Mensal;PRECO415
+SI6;Custo médio do m2 em moeda corrente - componente mão-de-obra;Mensal;2000/jan-2015/mai;Mensal;SI6
+PRECO405;Custo médio do m2 em moeda corrente - Componente material;Mensal;1994/jul-2015/mai;Mensal;PRECO405
+SI9;Custo médio m² em moeda corrente - variação (% em 12 meses);Mensal;1994/jul-2015/mai;Mensal;SI9
+SI8;Custo médio m² em moeda corrente - variação (% no ano);Mensal;1994/jul-2015/mai;Mensal;SI8
+SI7;Custo médio m² em moeda corrente - variação (% no mês);Mensal;1994/jul-2015/mai;Mensal;SI7
+AM38;Doenças relacionadas ao saneamento ambiental inadequado (DRSAI);Anual;1993-2010;Anual;AM38
+AM36;Estabelecimentos de saúde - número de leitos para internação, por esfera administrativa;Irregular;1976-2005;Irregular;AM36
+AM37;Estabelecimentos de saúde, por esfera administrativa;Irregular;1976-2005;Irregular;AM37
+IND03101;Estabelecimentos industriais nas datas dos Inquéritos Industriais e do Censo 1920;Anos de realização do censo;1907-1920;Anos de realização do censo;#N/D
+XY26;Ìndice acumulado no ano do número de horas pagas na indústria (Base: igual período do ano anterior);Mensal;2002/dez-2012/dez;Ano_mes;XY26
+XY24;Índice acumulado no ano do pessoal ocupado assalariado na indústria (Base: igual período do ano anterior);Mensal;2002/dez-2012/dez;Mensal;XY24
+XY29;Índice acumulado no ano do valor da folha de pagamento real na indústria (Base: igual período do ano anterior);Mensal;2002/dez-2012/dez;Mensal;XY29
+IND20700;Índice de base fixa mensal sem ajuste sazonal do número de horas pagas na indústria (Base: jan de 2001=100);Mensal;2000/dez-2015/abr;Mensal;IND20700
+IND19250;Índice de base fixa mensal sem ajuste sazonal do pessoal ocupado assalariado na indústria - (Base: jan de 2001=100);Mensal;2000/dez-2015/abr;Mensal;IND19250
+XY27;Indice de base fixa sem ajuste sazonal do valor da folha de pagamento real na indústria (Base: janeiro de 2001=100);Mensal;2000/dez-2015/abr;Mensal;XY27
+XY25;Indice mensal do número de horas pagas na indústria ( Base: igual mês do ano anterior=100);Mensal;2001/dez-2015/abr;Mensal;XY25
+XY23;Índice mensal do pessoal ocupado assalariado na industria (Base: igual mês do ano anterior=100);Mensal;2001/dez-2015/abr;Mensal;XY23
+XY28;Índice mensal do valor da folha de pagamento real na indústria (Base: igual mês do ano anterior = 100);Mensal;2001/dez-2015/abr;Mensal;XY28
+IL01;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo 15 (%mês);Mensal;2006/ago-2012/jan;Mensal;IL01
+MS34;Leitos por mil habitantes - Privado;Irregular;1990-2009;Irregular;MS34
+MS35;Leitos por mil habitantes - Público;Irregular;1990-2009;Irregular;MS35
+PE349;Média das horas efetivamente trabalhadas por semana, pelas pessoas de 10 anos ou mais de idade, ocupadas na semana de referência - Todos os trabalhados;Mensal;2002/mar-2015/abr;Mensal;PE349
+PE348;Média das horas habitualmente trabalhadas por semana pelas pessoas de 10 anos ou mais de idade, ocupadas na semana de referência - Todos os trabalhos;Mensal;2002/mar-2015/abr;Mensal;#N/D
+CD96;Número de municípios existentes nos Censos Demográficos;Decenal;1950-2010;Decenal;CD96
+FDT01;Pessoas de 15 anos ou mais de idade economicamente ativas;Mensal;jan/1991-dez/2002;Mensal;#N/D
+FDT03;Pessoas de 15 anos ou mais de idade economicamente ativas, desocupadas;Mensal;jan/1991-dez/2002;Mensal;#N/D
+PE59;Pessoas de 15 anos ou mais de idade, economicamente ativas, ocupadas - Setor de Atividade;Mensal;jan/1991-dez/2002;Mensal;#N/D
+FDT04;Pessoas de 15 anos ou mais de idade, economicamente ativas, ocupadas, por posição na ocupação;Mensal;jan/1991-dez/2002;Mensal;#N/D
+FDT0957;Pessoas desocupadas, por grupos de anos de estudo;Mensal;2002/mar-2015/abr;Mensal;FDT0957
+FDT0959;Pessoas desocupadas, por grupos de idade;Mensal;2002/mar-2015/abr;Mensal;FDT0959
+FDT0958;Pessoas desocupadas, por sexo;Mensal;2002/mar-2015/abr;Mensal;FDT0958
+PE54;Pessoas economicamente ativas ocupadas, por anos de estudo;Mensal;2002/mar-2015/abr;Mensal;PE54
+PE55;Pessoas economicamente ativas ocupadas, por grupos de idade;Mensal;2002/mar-2015/abr;Mensal;PE55
+PE53;Pessoas economicamente ativas ocupadas, por sexo;Mensal;2002/mar-2015/abr;Mensal;#N/D
+FDT0905;Pessoas economicamente ativas, por grupos de idade;Mensal;2002/mar-2015/abr;Mensal;FDT0905
+FDT0901;Pessoas economicamente ativas, por sexo;Mensal;2002/mar-2015/abr;Mensal;FDT0901
+FDT09;Taxa de atividade das pessoas de 15 anos ou mais de idade;Mensal;jan/1991-dez/2002;Mensal;#N/D
+PE52;Taxa de atividade, por grupos de idade;Mensal;2002/mar-2015/abr;Mensal;#N/D
+FDT0972;Taxa de atividade, por Sexo;Mensal;2002/mar-2015/abr;Mensal;#N/D
+FDT10;Taxa de desemprego aberto das pessoas de 15 anos e mais de idade. Referência: 30 dias;Mensal;jan/1991-dez/2002;Mensal;#N/D
+FDT0981;Taxa de desocupação das pessoas de 10 anos ou mais de idade, por anos de estudo;Mensal;2002/mar-2015/abr;Mensal;#N/D
+PE62;Taxa de desocupação das pessoas de 10 anos ou mais de idade, por sexo;Mensal;2002/mar-2015/abr;Mensal;PE62
+PE63;Taxa de ocupação;Mensal;2002/mar-2015/abr;Mensal;#N/D
+ST25;Despesa de Consumo das Famílias Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST25
+ST55;Exportação de Bens e Serviços Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST55
+ST37;Formação Bruta de Capital Fixo Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST37
+ST73;Impostos, líquidos de subsídios, sobre produtos Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST73
+IND10202;Índice de base fixa mensal da produção industrial - Categorias de uso - Brasil (Base: média de 2002 = 100);Mensal;1991/jan-2014/fev;Mensal;IND10202
+PC38;INPC - índice geral e grupos de produtos e serviços (% ac. a.);Mensal;1999/ago-2006/jun;Mensal;PC38
+PC42;INPC - índice geral e grupos de produtos e serviços (% ac. a.);Mensal;1991/jan-1999/jul;Mensal;PC42
+IL4;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo 15 (%mês);Mensal;2012/fev-2015/jun;Mensal;IL4
+POP100;População residente - distribuição por Grandes Regiões;Decenal;1940-2010;Decenal;POP100
+ST12;Produto Interno Bruto Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST12
+POP300;Revisão 2008 - Projeção da população do Brasil;Anual;1980-2050;Anual;POP300
+FDT001;Sindicatos existentes;Anual;1931-2001;Anual;FDT001
+IU29;Trabalho e Rendimento - Taxa de desocupação;Anual;2003-2010;Anual;#N/D
+ST67;Valor Adicionado Bruto Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST67
+ST19;Valor Adicionado Bruto da Agropecuária Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST19
+PIG22;Valor bruto da produção industrial, segundo as seções e divisões de atividade da Cnae 2.0;Anual;2007-2009;Anual;PIG22
+PIG14;Valor Bruto da Produção Industrial, segundo grupos de atividade - Cnae 1.0;Anual;1996-2007;Anual;PIG14
+PIG11;Valor da Produção Industrial - Classes e Gêneros da Indústria;Anual;1970-84 e 1988-95;Anual;PIG11
+ST26;Despesa de Consumo das Famílias Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST26
+ST56;Exportação de Bens e Serviços Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST56
+ST50;Formação Bruta de Capital Fixo Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST50
+ST74;Impostos, líquidos de subsídios, sobre produtos Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST74
+IND10301;Índice de base fixa mensal da produção industrial - Atividades Industriais - Brasil e Estados selecionados (Base: média de 2002 = 100);Mensal;1991/jan-2014/fev;Mensal;IND10301
+PC48;INPC - índice geral e grupos de produtos e serviços (% ac. a.);Mensal;2006/jul-2011/dez;Mensal;PC48
+IL2;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo 15 (%ac.ano);Mensal;2006/ago-2012/jan;Mensal;IL2
+FDT030;Período de fundação;Anual;1930-1990;Anual;FDT030
+ST13;Produto Interno Bruto Variação em volume taxa acumulada em quatro trimestres ;Trimestral;1966.1-2015.1;Trimestral;ST13
+POP301;Revisão 2008 - Projeção da população - Homens;Anual;1980-2050;Anual;POP301
+CD100;Taxa de mortalidade infantil;Quinquenal;1930-1990;Quinquenal;CD100
+ST41;Valor Adicionado Bruto da Indústria Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST41
+ST68;Valor Adicionado Bruto Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST68
+PIG12;Valor da Transformação Industrial - Classes e Gêneros da Indústria;Anual;1970-84 e 1988-95;Anual;PIG12
+PIG23;Valor da transformação industrial, segundo as seções e divisões de atividade da Cnae 2.0;Anual;2007-2009;Anual;PIG23
+PIG15;Valor da transformação industrial, segundo os grupos de atividade - Cnae 1.0;Anual;1996-2007;Anual;PIG15
+ST27;Despesa de Consumo das Famílias  Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST27
+IU31;Esperança de vida ao nascer;Anual;1992-2009;Anual;IU31
+ST57;Exportação de Bens e Serviços Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST57
+ST51;Formação Bruta de Capital Fixo Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST51
+ST75;Impostos, líquidos de subsídios, sobre produtos Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST75
+IND14101;Índice acumulado no ano da produção industrial - Categorias de Uso (Base: igual período do ano anterior = 100);Mensal;1992/dez-2012/dez;Mensal;IND14101
+PC51;INPC - índice geral e grupos de produtos e serviços (% ac. a.);Mensal;2012/jan-2015/mai;Mensal;PC51
+PC41;INPC - índice geral e grupos de produtos e serviços (% no mês);Mensal;1991/jan-1999/jul;Mensal;PC41
+IA46;IPCA - índice geral e grupos de produtos e serviços (% ac.a.);Mensal;1991/jan-1999/jul;Mensal;IA46
+IL5;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo 15 (%ac.ano);Mensal;2012/fev-2015/jun;Mensal;IL5
+ST15;Produto Interno Bruto Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST15
+POP302;Revisão 2008 - Projeção da população - Mulheres;Anual;1980-2050;Anual;POP302
+PIG8;Salários Pagos ao Pessoal Ocupado na Indústria - Classes da Indústria;Anual;1970-84 e 1988-95;Anual;PIG8
+FDT003;Sindicatos de empregadores;Anual;1936-2001;Anual;FDT003
+PIG24;Total dos salários, retiradas e outras remunerações, segundo as seções e divisões de atividade da Cnae 2.0;Anual;2007-2009;Anual;PIG24
+PIG16;Total dos salários, retiradas e outras remunerações, segundo grupos de atividades;Anual;1996-2007;Anual;PIG16
+ST47;Valor Adicionado Bruto dos Serviços Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST47
+ST69;Valor Adicionado Bruto Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST69
+ST28;Despesa de Consumo das Famílias Variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST28
+ST58;Exportação de Bens e Serviços variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST58
+ST52;Formação Bruta de Capital Fixo Variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST52
+ST76;Impostos, líquidos de subsídios, sobre produtos Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST76
+IND14001;Índices acumulados no ano da produção industrial - Atividades industriais (Base: igual período do ano anterior = 100);Mensal;1992/dez-2012/dez;Mensal;IND14001
+PC40;INPC - índice geral e grupos de produtos e serviços (% no mês);Mensal;1999/ago-2006/jun;Mensal;PC40
+IA50;IPCA - índice geral e grupos de produtos e serviços (% ac.a.);Mensal;1999/ago-2006/jun;Mensal;IA50
+IL3;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo-15 (peso no mês);Mensal;2006/ago-2012/jan;Mensal;IL3
+CAJ275;Óbitos sem assistência médica de menores de 1 ano de idade;Anual;1990-2007;Anual;CAJ275
+ST16;Produto Interno Bruto Variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST16
+POP305;Revisão 2008 - Projeção da população - Grupos especiais de idade;Anual;1980-2050;Anual;POP305
+PIG9;Salários Pagos ao Pessoal Ocupado Ligado à Produção Industrial - Classes da Indústria;Anual;1970-85 e 1988-95;Anual;PIG9
+PIG25;Salários, retiradas e outras remunerações do pessoal assalariado ligado a produção, segundo as seções e divisões de atividade da Cnae 2.0;Anual;2007-2009;Anual;PIG25
+PIG17;Salários, retiradas e outras remunerações do pessoal assalariado ligado à produção, segundo grupos de atividade Cnae 1.0;Anual;1996-2007;Anual;PIG17
+FDT002;Sindicatos de empregados;Anual;1936-2001;Anual;FDT002
+IU32;Taxa de mortalidade infantil;Anual;1990-2009;Anual;IU32
+ST70;Valor Adicionado Bruto variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST70
+ST20;Valor Adicionado Bruto da Agropecuária Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST20
+CIDG13;Valor da Importação Brasileira de Equipamento Industrial;Anual;1869-1939;Anual;CIDG13
+ST29;Despesa de Consumo das Famílias Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST29
+ST59;Exportação de Bens e Serviços Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST59
+ST53;Formação Bruta de Capital Fixo Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST53
+ST77;Impostos, líquidos de subsídios, sobre produtos Valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST77
+PC49;INPC - índice geral e grupos de produtos e serviços (% no mês);Mensal;2006/jul-2011/dez;Mensal;PC49
+PC52;INPC - índice geral e grupos de produtos e serviços (% no mês);Mensal;2012/jan-2015/mai;Mensal;PC52
+PC44;INPC - índice geral e grupos de produtos e serviços (peso no mês);Mensal;1991/jan-1999/jul;Mensal;PC44
+IA57;IPCA - índice geral e grupos de produtos e serviços (% ac.a.);Mensal;2006/jul-2011/dez;Mensal;IA57
+IL6;IPCA-15 - Índice Nacional de Preços ao Consumidor Amplo-15 (peso no mês);Mensal;2012/fev-2015/jun;Mensal;IL6
+PIG26;Pessoal ocupado em 31-12 em empresas industriais, segundo as seções e divisões de atividades da Cnae 2.0;Anual;2007-2009;Anual;PIG26
+PIG18;Pessoal ocupado em 31-12, segundo grupos de atividade - empresas industriais - Cnae 1.0;Anual;1996-2007;Anual;PIG18
+IND04020;Pessoal ocupado na indústria - Classes da Indústria;Anual;1970-84 e 1988-95;Anual;IND04020
+ST17;Produto Interno Bruto valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST17
+POP327;Revisão 2008 - Projeção da população - Taxa de fecundidade total;Anual;1980-2050;Anual;POP327
+FDT004;Sindicatos de profissionais liberais;Anual;1936-2001;Anual;FDT004
+ST71;Valor Adicionado Bruto Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST71
+ST30;Despesa de Consumo das Famílias  Valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST30
+ST60;Exportação de Bens e Serviços valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST60
+ST54;Formação Bruta de Capital Fixo valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST54
+PC45;INPC - índice geral e grupos de produtos e serviços (peso no mês);Mensal;1999/ago-2006/jun;Mensal;PC45
+IA58;IPCA - índice geral e grupos de produtos e serviços (% ac.a.);Mensal;2012/jan-2015/mai;Mensal;IA58
+PIG27;Pessoal ocupado assalariado ligado a produção em 31-12 das empresas industriais, segundo as seções e divisões de atividades da Cnae 2.0;Anual;2007-2009;Anual;PIG27
+PIG19;Pessoal ocupado assalariado ligado a produção, em 31/12, segundo grupos de atividade - Empresas industriais Cnae 1.0;Mensal;1996-2007;Mensal;PIG19
+IND04080;Pessoal ocupado ligado à produção industrial - Indústria Geral;Anual;1970-84 e 1988-95;Anual;IND04080
+IND04100;Pessoal ocupado ligado à produção industrial - Indústrias de Transformação;Anual;1970-84 e 1988-95;Anual;IND04100
+IND04090;Pessoal ocupado ligado à produção industrial - Indústrias Extrativas;Anual;1970-84 e 1988-95;Anual;IND04090
+ST18;Produto Interno Bruto valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST18
+POP318;Revisão 2008 - Projeção da população - Taxas Brutas de Natalidade;Anual;1980-2050;Anual;POP318
+FDT005;Sindicatos urbanos;Anual;1936-2001;Anual;FDT005
+CD101;Taxa de analfabetismo de pessoas de 15 anos ou mais de idade, por grupos de idade;Decenal;1970-1991;Decenal;CD101
+ST48;Valor Adicionado Bruto dos Serviços Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST48
+IND06004;Valor da produção industrial, nas datas do censo industrial - Indústrias de transformação;Anos de realização do censo;1939-1985;Anos de realização do censo;IND06004
+IND06003;Valor da produção industrial, nas datas do censo industrial - Indústrias extrativas;Anos de realização do censo;1939-1985;Anos de realização do censo;IND06003
+IND06002;Valor da produção industrial, nas datas dos censos industriais - Indústria Geral;Anos de realização do censo;1939-1985;Anos de realização do censo;IND06002
+ST31;Despesa de Consumo da Administração Pública Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST31
+PIG20;Empresas industriais, segundo grupos de atividade - Cnae 1.0;Anual;1996-2007;Anual;PIG20
+PIG10;Estabelecimentos Industriais - Classes e Gêneros da Indústria;Anual;1970-84 e 1988-95;Anual;PIG10
+ST61;Importação de Bens e Serviços Variação em volume taxa trimestral;Trimestral;1996.1-2015.1;Trimestral;ST61
+PC50;INPC - índice geral e grupos de produtos e serviços (peso no mês);Mensal;2006/jul-2011/dez;Mensal;PC50
+PC50;IPCA - índice geral e grupos de produtos e serviços (% no mês);Mensal;1991/jan - 1999/jul;Mensal;PC50
+PIG29;Número de empresas industriais, segundo as seções e divisões de atividades da Cnae 2.0;Anual;2007-2009;Anual;PIG29
+POP320;Projeção da população - Taxas Brutas de Mortalidade;Anual;1980-2050;Anual;POP320
+FDT036;Sindicatos urbanos - período de fundação;Anual;1930-1990;Anual;FDT036
+ST21;Valor Adicionado Bruto da Agropecuária Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST21
+CIDG14;Valor da Transformação Industrial, nas datas do Censo Industrial - Classes e Gêneros da Indústria;Anos de realização do censo;1939-1985;Anos de realização do censo;CIDG14
+ST32;Despesa de Consumo da Administração Pública - Variação em volume (taxa acumulada em quatro trimestres);Trimestral;1996.1-2015.1;Trimestral;ST32
+ST62;Importação de Bens e Serviços Variação em volume taxa acumulada em quatro trimestres;Trimestral;1996.1-2015.1;Trimestral;ST62
+PIG13;Investimentos na Indústria - Classes da Indústria;Anual;1970-84 e 1988-95;Anual;PIG13
+IA48;IPCA - índice geral e grupos de produtos e serviços (% no mês);Mensal;1999/ago-2006/jun;Mensal;IA48
+POP324;Revisão 2008 - Projeção da população - Taxa de mortalidade infantil;Anual;1980-2050;Anual;POP324
+IND05002;Salários pagos ao pessoal ocupado na indústria nas datas do censo industrial - Indústria de transformação;Anos de realização do censo;1939-1985;Anos de realização do censo;IND05002
+IND05001;Salários pagos ao pessoal ocupado na indústria nas datas do censo industrial - Indústria extrativa;Anos de realização do censo;1939-1985;Anos de realização do censo;IND05001
+IND05000;Salários pagos ao pessoal ocupado na indústria nas datas dos censos industriais - Indústria Geral;Anos de realização do censo;1939-1985;Anos de realização do censo;IND05000
+FDT031;Sindicatos urbanos de empregadores - período de fundação;Anual;1930-1990;Anual;FDT031
+ECE305;Taxa de analfabetismo das pessoas de 15 anos ou mais de idade - homens;Decenal;1970-2000;Decenal;ECE305
+ECE306;Taxa de analfabetismo das pessoas de 15 anos ou mais de idade - mulheres;Decenal;1970-2000;Decenal;ECE306
+ST43;Valor Adicionado Bruto da Indústria Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST43
+PIG21;Valor da aquisições do ativo imobilizado das empresas industriais, segundo grupos de atividade Cnae 1.0;Anual;1996-2007;Anual;PIG21
+ST33;Despesa de Consumo da Administração Pública Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST33
+ST63;Importação de Bens e Serviços Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST63
+IND9550;Índice de base fixa mensal da produção industrial - Atividades Industriais (Base: média de 1991=100);Mensal;1985/jan-2004/jan;Mensal;IND9550
+IA55;IPCA - índice geral e grupos de produtos e serviços (% no mês);Mensal;2006/jul-2011/dez;Mensal;IA55
+POP326;Revisão 2008 - Projeção da população - Taxa de mortalidade infantil - sexo feminino;Anual;1980-2050;Anual;POP326
+FDT032;Sindicatos urbanos de empregados - período de fundação;Anual;1930-1990;Anual;FDT032
+ST49;Valor Adicionado Bruto dos Serviços Variação em volume taxa acumulada ao longo do ano;Trimestral;1996.1-2015.1;Trimestral;ST49
+PIG28;Valor das aquisições do ativo imobilizado das empresas industriais, segundo as seções e divisões de atividades da Cnae 2.0;Anual;2007-2009;Anual;PIG28
+ST34;Despesa de Consumo da Administração Pública Variação de volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST34
+ST64;Importação de Bens e Serviços Variação em volume série com ajuste sazonal;Trimestral;1996.1-2015.1;Trimestral;ST64
+IA59;IPCA - índice geral e grupos de produtos e serviços (% no mês);Mensal;2012/jan-2015/mai;Mensal;IA59
+POP2;Migrações externas - Total de imigrantes no Brasil;Irregular;1820-1975;Irregular;POP2
+IND04003;Pessoal ocupado na indústria, nas datas do censo industrial - Indústria de transformação;Anos de realização do censo;1939-1985;Anos de realização do censo;IND04003
+IND04002;Pessoal ocupado na indústria, nas datas do censo industrial - Indústria extrativa;Anos de realização do censo;1939-1985;Anos de realização do censo;IND04002
+IND04001;Pessoal ocupado na indústria, nas datas do censo industrial - Indústria Geral;Anos de realização do censo;1939-1985;Anos de realização do censo;IND04001
+POP325;Revisão 2008 - Projeção da população - Taxa de mortalidade infantil - sexo masculino;Anual;1980-2050;Anual;POP325
+FDT033;Sindicatos urbanos de profissionais liberais - período de fundação;Anual;1930-1990;Anual;FDT033
+ST38;Valor Adicionado Bruto da Agropecuária Variação em volume taxa com ajuste sazonal;Trimestral;1996.2-2015.1;Trimestral;ST38
+ST35;Despesa de Consumo da Administração Pública Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST35
+ST65;Importação de Bens e Serviços Valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST65
+IA52;IPCA - índice geral e grupos de produtos e serviços (% peso no mês);Mensal;1991/jan-1999/jul;Mensal;IA52
+IND04006;Pessoal ocupado ligado à produção industrial, nas datas do censo industrial - Indústria de transformação;Anos de realização do censo;1939-1985;Anos de realização do censo;#N/D
+IND04005;Pessoal ocupado ligado à produção industrial, nas datas do censo industrial - Indústria extrativa;Anos de realização do censo;1939-1985;Anos de realização do censo;IND04005
+IND04004;Pessoal ocupado ligado à produção industrial, nas datas do censo industrial - Indústria Geral;Anos de realização do censo;1939-1985;Anos de realização do censo;IND04004
+POP317;Revisão 2008 - Projeção da população - Nascimentos;Anual;1980-2050;Anual;POP317
+FDT006;Sindicatos rurais;Anual;1936-2001;Anual;FDT006
+ST44;Valor Adicionado Bruto da Indústria Variação em volume taxa com ajuste sazonal;Trimestral;1996.2-2015.1;Trimestral;ST44
+ST36;Despesa de Consumo da Administração Pública Valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST36
+ST66;Importação de Bens e Serviços valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST66
+IA53;IPCA - índice geral e grupos de produtos e serviços (% peso no mês);Mensal;1999/ago-2006/jun;Mensal;IA53
+POP319;Revisão 2008 - Projeção da população - Óbitos;Anual;1980-2050;Anual;POP319
+FDT042;Sindicatos rurais - período de fundação;Anual;1930-1990;Anual;FDT042
+ST22;Valor Adicionado Bruto dos Serviços Variação em volume taxa com ajuste sazonal;Trimestral;1996.2-2015.1;Trimestral;ST22
+CIDG15;Investimento na Indústria nas datas do Censo Industrial - Classes e Gêneros da Indústria;Anos de realização do censo;1959-1985;Anos de realização do censo;CIDG15
+IA56;IPCA - índice geral e grupos de produtos e serviços (peso no mês);Mensal;2006/jul-2011/dez;Mensal;IA56
+POP321;Revisão 2008 - Projeção da população - Esperança de Vida;Anual;1980-2050;Anual;POP321
+FDT040;Sindicatos rurais de empregadores - período de fundação;Anual;1930-1990;Anual;FDT040
+ST39;Valor Adicionado Bruto da Agropecuária valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST39
+PC53;INPC - índice geral e grupos de produtos e serviços (peso no mês);Mensal;2012/jan-2015/mai;Mensal;PC53
+IA60;IPCA - índice geral e grupos de produtos e serviços (peso no mês);Mensal;2012/jan-2015/mai;Mensal;IA60
+POP322;Revisão 2008 - Projeção da população - Esperança de Vida - Homens;Anual;1980-2000;Anual;POP322
+FDT041;Sindicatos rurais trabalhadores - período de fundação;Anual;1930-1990;Anual;FDT041
+ST45;Valor Adicionado Bruto da Indústria valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST45
+POP323;Revisão 2008 - Projeção da população - Esperança de Vida - Mulheres;Anual;1980-2050;Anual;POP323
+ST23;Valor Adicionado Bruto dos Serviços valores correntes;Trimestral;1996.1-2015.1;Trimestral;ST23
+ST40;Valor Adicionado Bruto da Agropecuária valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST40
+ST46;Valor Adicionado Bruto da Indústria valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST46
+ST24;Valor Adicionado Bruto dos Serviços valores constantes de 1995;Trimestral;1996.1-2015.1;Trimestral;ST24
+RC52;Divórcios - responsável pela guarda de filhos menores;Anual;1984-2002;Anual;RC52
+IND03800;Pessoal empregado na indústria nas datas dos Inquéritos Industriais e do Censo 1920;Anos de realização do censo;1907-1920;Anos de realização do censo;IND03800
+SCN51;Produto Interno Bruto (PIB) valores em Real;Anual;1901-2000;Anual;SCN51

@@ -1,0 +1,29 @@
+COD;NOME;COD_NOME;COLUNA;SRC;Periodicidade;Fonte;Data.Inicial;Data.Final;LOCAL
+M0001;S&P 500;^GSPC;GSPC.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0002;Dow Jones  Industrial Average;^DJI;DJI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0003;NASDAQ Composite;^IXIC;IXIC.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0004;IBOVESPA;^BVSP;BVSP.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0005;IPSA 40 Santiago de Chile;^IPSA;IPSA.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0006;FTSE 100 Londres;^FTSE;FTSE.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0007;DAX Alemanha;^GDAXI;GDAXI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0008;CAC 40 França;^FCHI;FCHI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0009;EURONEXT 100;^N100;N100.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0010;NIKKEI 225;^N225;N225.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0011;Hang Seng Index;^HSI;HSI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0012;All Ordinaries Austr·lia;^AORD;AORD.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0013;CNX NIFTY Õndia;^NSEI;NSEI.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0014;RTS Index R˙ssia;RTS.RS;RTS.RS.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0015;SSE Shanghai Composite China;000001.SS;000001.SS.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0016;USD/BRL;BRL=X;BRL=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0017;USD/EUR;EUR=X;EUR=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0018;USD/ARS;ARS=X;ARS=X.Close;yahoo;Di·ria;Yahoo Finance;;;
+M0019;Consumer Price Index for All Urban Consumers: All Items Seasonally Adjusted (1982-84=100);CPIAUCSL;CPIAUCSL;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0020;Consumer Price Index for All Urban Consumers: All Items Not Seasonally Adjusted (1982-84=100);CPIAUCNS;CPIAUCNS;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0021;Gross Domestic Product Trimestral;GDP;GDP;FRED;Trimestral;Federal Reserve Economic Data;;;EUA
+M0022;Civilian Unemployment Rate Seasonally Adjusted;UNRATE;UNRATE;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0023;Civilian Unemployment Rate Not Seasonally Adjusted;UNRATENSA;UNRATENSA;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0024;M2 Money Stock Seasonally Adjusted;M2SL;M2SL;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0025;M2 Money Stock Not Seasonally Adjusted;M2NS;M2NS;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0026;Industrial Production Index Seasonally Adjusted USA (2007=100);INDPRO;INDPRO;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0027;Producer Price Index for All Commodities Not Seasonally Adjusted USA(1982=100);PPIACO;PPIACO;FRED;Mensal;Federal Reserve Economic Data;;;EUA
+M0028;Apple Inc.;AAPL;AAPL;yahoo;Di·ria;Yahoo Finance;;;
