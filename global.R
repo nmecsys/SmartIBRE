@@ -24,8 +24,9 @@ library(stringr)
 library(dplyr)
 library(xtable)
 library(RODBC)
+#banco de dados
 library(DBI)
-#library(stargazer)
+library(RMySQL)
 library(chron)
 
  
@@ -152,6 +153,15 @@ names_s<-c("Serviço","Indústria","Comércio","Construção","Consumidor")
 tsondagem <- ts(sondagens[,-1], start =  c(2013, 09), freq = 12)
 
 #######NOVO FAVORITOS########
+
+dbname <- "classificador"
+host   <- "200.20.164.178"
+user   <- "angelBolado"
+pass   <- "123123"
+conn   <- dbConnect(MySQL(),dbname=dbname,user=user,password=pass,host=host)
+#####IDENTIFICAR O id do usuario logado e buscar os favoritos, se existir
+
+
 
 #########Favoritos######################
 
