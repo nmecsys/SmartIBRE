@@ -94,34 +94,6 @@ shinyServer(function(input, output,session) {
     c(ipa_estrutura2(), ipa_unidade(), input$ipa_indice, dim(subset_ipa_novo()))
     })
   
-  # IPA - 10  
-#   output$ipa10_estagios <- renderUI({
-#     subset_ipa_estrutura <- subset(subset_ipa_novo(), subset_ipa$Estrutura == ipa_estrutura2())
-#     nomes <- c("TODOS OS ESTÁGIOS (MAIOR NÍVEL)", subset(names(table(subset_ipa_estrutura$Estagio)), table(subset_ipa_estrutura$Estagio) != 0  & !(names(table(subset_ipa_estrutura$Estagio)) %in% c("NA 0", "NA NA")))) 
-#     selectInput("ipa10_estagios", label = "1 - Estágios:", width = "100%", 
-#                 choices = c("Selecione o item" = '',nomes))
-#   })
-#   
-#   output$ipa10_grupos <- renderUI({
-#     subset_ipa_estrutura <- subset(subset_ipa_novo(), subset_ipa$Estrutura == ipa_estrutura2() &  subset_ipa$Estagio == input$ipa10_estagios)
-#     nomes <- c("TODOS OS GRUPOS (MAIOR NÍVEL)", subset(names(table(subset_ipa_estrutura$Grupo)), table(subset_ipa_estrutura$Grupo) != 0 & !(names(table(subset_ipa_estrutura$Grupo)) %in% c("NA 0", "NA NA")))) 
-#     selectInput("ipa10_grupos", label = "2 - Grupos:", width = "100%", 
-#                 choices = c("Selecione o item" = '',nomes))
-#   })
-# 
-#   output$ipa10_subgrupos <- renderUI({
-#     subset_ipa_estrutura <- subset(subset_ipa_novo(), subset_ipa$Estrutura == ipa_estrutura2() & subset_ipa$Estagio == input$ipa10_estagios & subset_ipa$Grupo == input$ipa10_grupos)
-#     nomes <- c("TODOS OS SUBGRUPOS (MAIOR NÍVEL)", subset(names(table(subset_ipa_estrutura$Subgrupo)), table(subset_ipa_estrutura$Subgrupo) != 0 & !(names(table(subset_ipa_estrutura$Subgrupo)) %in% c("NA 0", "NA NA")))) 
-#     selectInput("ipa10_subgrupos", label = "3 - Subgrupos:", width = "100%", 
-#                 choices = c("Selecione o subgrupo" = '',nomes))
-#   }) 
-#   
-#   output$ipa10_item <- renderUI({
-#     subset_ipa_estrutura <- subset(subset_ipa_novo(), subset_ipa$Estrutura == ipa_estrutura2() & subset_ipa$Estagio == input$ipa10_estagios & subset_ipa$Grupo == input$ipa10_grupos & subset_ipa$Subgrupo == input$ipa10_subgrupos)
-#     nomes <- c("TODOS OS ITENS (MAIOR NÍVEL)", subset(names(table(subset_ipa_estrutura$Item)), table(subset_ipa_estrutura$Item) != 0 & !(names(table(subset_ipa_estrutura$Item)) %in% c('NA 0', 'NA NA')))) 
-#     selectInput("ipa10_itens", label = "4 - Itens:", width = "100%", 
-#                 choices = c("Selecione o item" = '', nomes))
-#   }) 
   
   output$ipa10_estagios <- renderUI({
     subset_ipa_estrutura <- subset(subset_ipa, subset_ipa$Estrutura == ipa_estrutura())
@@ -269,7 +241,7 @@ shinyServer(function(input, output,session) {
   
 
   output$tabelaipc <- renderPrint({
-    #a()
+    
     c(input$ipc10_grupos, input$ipc10_itens)
   })
   
@@ -1384,25 +1356,7 @@ shinyServer(function(input, output,session) {
     })
   
   
-  # output$download_BACEN <- downloadHandler(
-  #     filename = function() {
-  #       paste('data-', Sys.Date(), '.csv', sep='')
-  #     },
-  #     content = function(con) {
-  #       
-  #         dados <- dados_bacen()$ts
-  #           nome <- dados_bacen()$nome
-  # 
-  #           data <- as.character(seq(as.Date(paste0(start(dados)[1],"/",start(dados)[2],"/",1)),
-  #                                    as.Date(paste0(end(dados)[1],"/",end(dados)[2],"/",1)),
-  #                                    "1 months"))
-  # 
-  #           frame <- data.frame(cbind(data, dados))
-  #           colnames(frame) <- c("Data",nome)
-  #       write.csv(frame, con)
-  #     }
-  #   )
-
+  
   
   
   # Botão de download BACEN
@@ -1747,137 +1701,6 @@ shinyServer(function(input, output,session) {
                                      paste0(ano_final,"-",mes_final,"-01")))
     
   })
-  
-  
-  
-  # ### Modelo Paramétrico -------------------------------------------------- 
-  # 
-  # 
-  # # Parte 1: Modelagem --------------------------- #
-  # 
-  # # Seleção automática?
-  # auto <- reactive({
-  #   switch(input$auto,
-  #          "Sim" = TRUE,
-  #          "Não" = FALSE)
-  # })
-  # 
-  # # Descobrir o número e o nome das variáveis
-  # nvar <- reactive({
-  #   colnames(mp()$serie_variacao)[-1]
-  # })
-  # 
-  # # Selecionar Variáveis
-  # output$select_var <- renderUI({
-  #   selectInput("select_var", p("Selecionar Covariáveis:", style = "font-size:90%"), 
-  #               choices = nvar(), multiple = T, selectize = F)
-  # })
-  # 
-  # # Executar a função do modelo paramétrico
-  # mp <- reactive({
-  #   input$atualizar
-  #   isolate(regressao_parametrica(importado_mp(), defx = input$defx, defy = input$defy, covar = input$select_var, auto = auto()))
-  # }) 
-  # 
-  # # Soltar summary do modelo ajustado final
-  # output$summary_mp <- renderPrint({
-  #   mp()$resumo_modelo
-  # }) 
-  # 
-  # 
-  # 
-  # # Criar lista de covariáveis que podem ser selecionadas pro modelo
-  # 
-  # # Gráfico dos dados originais e ajustados
-  # output$mp_grafico <- renderDygraph({
-  #   
-  #   ajustada <- mp()$serie_ajustada
-  #   acumulada <- mp()$preco_acumulado
-  #   dados <- cbind(ajustada,acumulada)
-  #   colnames(dados) <- c("Ajustada", "Observados")
-  #   
-  #   # encontrar as datas iniciais e finais da série temporal
-  #   mes_final <- end(dados)[2]
-  #   ano_final <- end(dados)[1]
-  #   mes_inicial <- start(dados)[2]
-  #   ano_inicial <- start(dados)[1]
-  #   
-  #   # Fazer o gráfico
-  #   dygraph(dados[,1:2], main = "Observados vs. Ajustada" ) %>%
-  #     dyOptions(colors = c( "dodgerblue","black")) %>% 
-  #     dyRangeSelector(fillColor = "skyblue",
-  #                     dateWindow = c(paste0(ano_inicial,"-",mes_inicial,"-01"),
-  #                                    paste0(ano_final,"-",mes_final,"-01")))
-  # })
-  # 
-  # # Gráfico dos resíduos
-  # output$mp_grafico_res <- renderDygraph({
-  #   
-  #   outro_dado <- mp()$serie_ajustada
-  #   
-  #   # encontrar as datas iniciais e finais da série temporal
-  #   mes_final <- end(outro_dado)[2]
-  #   ano_final <- end(outro_dado)[1]
-  #   mes_inicial <- start(outro_dado)[2]
-  #   ano_inicial <- start(outro_dado)[1]
-  #   
-  #   residuos <- ts(mp()$residuos, start = c(ano_inicial,mes_inicial), freq = 12)
-  #   
-  #   # Fazer o gráfico
-  #   dygraph(residuos, main = "Resíduos do modelo") %>%
-  #     dyOptions(colors = "black") %>% 
-  #     dyRangeSelector(fillColor = "skyblue",
-  #                     dateWindow = c(paste0(ano_inicial,"-",mes_inicial,"-01"),
-  #                                    paste0(ano_final,"-",mes_final,"-01")))
-  # })
-  # 
-  # # Parte 2: Pesos --------------------------- #
-  # 
-  # # Escolha dos pesos
-  # escolher_pesos <- reactive({
-  #   pesos <- input$pesos
-  #   as.numeric(strsplit(pesos, " ")[[1]])
-  # }) 
-  # 
-  # # Informar pesos
-  # output$pesos <- renderPrint({
-  #   print(escolher_pesos())
-  # })
-  # 
-  # # Selecionar Variáveis
-  # output$select_var_pesos <- renderUI({
-  #   selectInput("select_var_pesos", p("Selecionar variáveis:", style = "font-size:90%"), 
-  #               choices = nvar(), multiple = T, selectize = F)
-  # })
-  # 
-  # # Executar a função
-  # mp_pesos <- reactive({
-  #   input$atualizar_pesos
-  #   isolate(indparam_fixo(importado_mp(), coef = escolher_pesos(), covar = input$select_var_pesos ))
-  # }) 
-  # 
-  # # Gráfico dos dados originais e ajustados
-  # output$mp_grafico_pesos <- renderDygraph({
-  #   
-  #   ponderada <- mp_pesos()$PrecoParametrico_acumulado
-  #   acumulada <- mp_pesos()$Preco_Transformador
-  #   dados <- cbind(ponderada,acumulada)
-  #   colnames(dados) <- c("Ajustada", "Observados")
-  #   
-  #   # encontrar as datas iniciais e finais da série temporal
-  #   mes_final <- end(dados)[2]
-  #   ano_final <- end(dados)[1]
-  #   mes_inicial <- start(dados)[2]
-  #   ano_inicial <- start(dados)[1]
-  #   
-  #   # Fazer o gráfico
-  #   dygraph(dados[,1:2], main = "Observados vs. Ajustada", ) %>%
-  #     dyOptions(colors = c( "dodgerblue","black")) %>% 
-  #     dyRangeSelector(fillColor = "skyblue",
-  #                     dateWindow = c(paste0(ano_inicial,"-",mes_inicial,"-01"),
-  #                                    paste0(ano_final,"-",mes_final,"-01")))
-  # })
-  # 
   
   # Importar um arquivo local no formato .xlsx para modelo paramétrico
   importado_mp2 <- reactive({
