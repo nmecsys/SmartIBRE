@@ -1,5 +1,6 @@
 # pacotes
 library(shiny)
+library(BETS)
 library(dygraphs)
 library(forecast)
 library(shinythemes)
