@@ -2013,10 +2013,6 @@ shinyServer(function(input, output,session) {
     
     teste_mp3 = importado_mp2()
     
-    # mes_inicio_dadosmp2 <- as.numeric(substr(teste_mp3[1,1], 6, 7))
-    # ano_inicio_dadosmp2 <- as.numeric(substr(teste_mp3[1,1], 1, 4))
-    # mes_final_dadosmp2 <- as.numeric(substr(teste_mp3[nrow(teste_mp3),1], 6, 7))
-    # ano_final_dadosmp2 <- as.numeric(substr(teste_mp3[nrow(teste_mp3),1], 1, 4))
     
     aux_inicio_dadosmp2 <- max("200201", paste0(substr(teste_mp3[1,1], 1, 4), substr(teste_mp3[1,1], 6, 7)))
     aux_final_dadosmp2 <- min("201504", paste0(substr(teste_mp3[nrow(teste_mp3),1], 1, 4), substr(teste_mp3[nrow(teste_mp3),1], 6, 7)))
@@ -2069,14 +2065,6 @@ shinyServer(function(input, output,session) {
     
   })
   
-  #     # Teste 
-  #     ntext2 <- reactive({
-  #       
-  #       if(is.null(input$ipc_itens)){
-  #         list(cov_num = input$cov_max, var = input$variacao)
-  #       }else{list(cov_num = input$cov_max, var = input$variacao, variaveis = series_excluidas())}
-  #       
-  #     })
   
   output$teste_eventReactive <- renderPrint({
     
@@ -2223,18 +2211,6 @@ shinyServer(function(input, output,session) {
       
     }else{
       
-      #         if(input$atualizar2 & !is.null(mp_series())){
-      #            withProgress(message = 'Carregando', value = 0, {
-      #            for (i in 1:100) {
-      #              # Increment the progress bar, and update the detail text.
-      #              incProgress(0.01)
-      #                      
-      #              # Pause for 0.1 seconds to simulate a long computation.
-      #              Sys.sleep(0.05)
-      #            }
-      #                        
-      #         })}
-      
       if(ntext()$var == "Sim"){variacao_aux = TRUE}else{variacao_aux = FALSE}
       if(is.null(ntext()$variaveis)){
         # Graficos
@@ -2293,10 +2269,7 @@ shinyServer(function(input, output,session) {
             dygraph(aux_p1)%>%
               dySeries("Preco_Transf", strokeWidth = 1.5, strokePattern = "solid", color = "steelblue", label = "Custo Observado") %>%
               dySeries("Preco_Ajustado", strokeWidth = 1.5, strokePattern = "dotted", color = "#707070", label = "Custo Ajustado") %>%
-              # dyHighlight(highlightCircleSize = 3, 
-              #             highlightSeriesBackgroundAlpha = 0.2,
-              #             hideOnMouseOut = FALSE) %>%
-              # dyOptions(axisLineWidth = 1.5, fillGraph = FALSE, drawGrid = FALSE)
+              
               dyAxis("x", drawGrid = FALSE) %>%
               dyAxis("y", label = "Custo em R$") %>%
               dyOptions(gridLineColor = "lightgray") %>%
@@ -2326,10 +2299,7 @@ shinyServer(function(input, output,session) {
             dygraph(aux_p1)%>%
               dySeries("Preco_Transf", strokeWidth = 1.5, strokePattern = "solid", color = "steelblue", label = "Custo do Transformador") %>%
               dySeries("Preco_Ajustado", strokeWidth = 1.5, strokePattern = "dotted", color = "#707070", label = "Custo Ajustado") %>%
-              # dyHighlight(highlightCircleSize = 3, 
-              #             highlightSeriesBackgroundAlpha = 0.2,
-              #             hideOnMouseOut = FALSE) %>%
-              # dyOptions(axisLineWidth = 1.5, fillGraph = FALSE, drawGrid = FALSE)
+              
               dyAxis("x", drawGrid = FALSE) %>%
               dyAxis("y", label = "Custo em R$") %>%
               dyOptions(gridLineColor = "lightgray") %>%
@@ -2362,10 +2332,6 @@ shinyServer(function(input, output,session) {
       
       dygraph(dados)%>%
         dySeries("data", color = "white") %>%
-        # dyHighlight(highlightCircleSize = 3, 
-        #             highlightSeriesBackgroundAlpha = 0.2,
-        #             hideOnMouseOut = FALSE) %>%
-        # dyOptions(axisLineWidth = 1.5, fillGraph = FALSE, drawGrid = FALSE)
         dyAxis("x", drawGrid = FALSE, axisLineColor = "white", axisLabelColor = "white") %>%
         dyAxis("y", drawGrid = FALSE, axisLineColor = "white", axisLabelColor = "white") %>%
         dyLegend(width = 0)
@@ -2454,9 +2420,7 @@ shinyServer(function(input, output,session) {
                                                 fgv_aux$Descricao_def2 == as.character(teste_lista$nome_serie[i])), "Nome_Bonito"]
     }
     
-    # teste2_lista = as.list(as.character(teste_lista$nome_serie))
-    # names(teste2_lista) = teste_lista$Teste
-    # teste2_lista
+    
     teste3_lista = list(NA)
     nomes_unicos = unique(teste_lista$Teste)
     for(k in 1:length(nomes_unicos)){
@@ -2510,18 +2474,7 @@ shinyServer(function(input, output,session) {
   # Checkbox para exclusão de séries
   output$choose_columns_series <- renderUI({
     
-    #       if(input$atualizar2 & !is.null(mp_series())){
-    #         withProgress(message = 'Carregando', value = 0, {
-    #           for (i in 1:100) {
-    #             # Increment the progress bar, and update the detail text.
-    #             incProgress(0.01)
-    #             
-    #             # Pause for 0.1 seconds to simulate a long computation.
-    #             Sys.sleep(0.05)
-    #           }
-    #           
-    #         })}
-    
+   
     # nomes = as.character(unique(names(nomes_series())))
     nomes = nomes_series()
     checkboxGroupInput("ipc_itens", label = "Selecione as variáveis a serem excluídas:", width = "100%", choices = nomes)
@@ -5095,11 +5048,11 @@ output$descritiva_inccdi <- renderTable({
      #  api_ibge(linhas)
     linhas<-as.numeric(as.character(base_IBGE[input$tabela_IBGE_rows_selected,1]))
     periodicidade=subset(base_IBGE,base_IBGE$Cód. %in% base_IBGE[input$tabela_IBGE_rows_selected,1] )[1,4]
-    ts=getSeries(linhas,periodicidade=periodicidade)[[1]]
+    ts=BETS.get(linhas,periodicidade=periodicidade)[[1]]
     if(!is.null(dim(ts))){
       colnames(ts)<-subset(base_IBGE,base_IBGE$Cód. %in% base_IBGE[input$tabela_IBGE_rows_selected,1])[,2]
     }
-    list(ts=ts,data=as.character(getSeries(linhas,periodicidade=periodicidade)[[2]]),nome=subset(base_IBGE,base_IBGE$Cód. %in% linhas)[,2],cod=linhas,periodicidade=periodicidade)
+    list(ts=ts,data=as.character(BETS.get(linhas,periodicidade=periodicidade)[[2]]),nome=subset(base_IBGE,base_IBGE$Cód. %in% linhas)[,2],cod=linhas,periodicidade=periodicidade)
     })
   
   # 
@@ -5458,20 +5411,14 @@ output$descritiva_inccdi <- renderTable({
         Sys.sleep(0.2)
       }
     }) 
-      # linhas<-as.numeric(as.character(input$bacentabela_rows_selected))
-      # periodicidade=subset(base_bacen,base_bacen$Cód. %in% linhas )[1,4]
-      # ts=getSeries(linhas,periodicidade = periodicidade)[[1]]
-      # if(!is.null(dim(ts))){
-      #   colnames(ts)<-subset(base_bacen,base_bacen$Cód. %in% input$bacentabela_rows_selected,periodidicidade=)[,2]
-      # }
-      # list(ts=ts,data=as.character(getSeries(linhas,periodicidade = periodicidade)[[2]]),nome=subset(base_bacen,base_bacen$Cód. %in% input$bacentabela_rows_selected)[,2],cod=linhas)
+      
     linhas<-as.numeric(as.character(bacen_grupo()[input$bacentabela_rows_selected,1]))
     periodicidade=subset(base_bacen,base_bacen$Cód. %in% linhas )[1,4]
-    ts=getSeries(linhas,periodicidade=periodicidade)[[1]]
+    ts=BETS.get(linhas,periodicidade=periodicidade)[[1]]
     if(!is.null(dim(ts))){
       colnames(ts)<-subset(base_bacen,base_bacen$Cód. %in% bacen_grupo()[input$bacentabela_rows_selected,1])[,2]
     }
-    list(ts=ts,data=as.character(getSeries(linhas,periodicidade=periodicidade)[[2]]),nome=subset(base_bacen,base_bacen$Cód. %in% linhas)[,2],cod=linhas,periodicidade=periodicidade)
+    list(ts=ts,data=as.character(BETS.get(linhas,periodicidade=periodicidade)[[2]]),nome=subset(base_bacen,base_bacen$Cód. %in% linhas)[,2],cod=linhas,periodicidade=periodicidade)
 
     })
   
@@ -7058,11 +7005,11 @@ output$descritiva_inccdi <- renderTable({
      linhas<-as.numeric(as.character(st_favoritos()$IBGE[,1]))
      periodicidade=subset(base_IBGE,base_IBGE$Cód. %in% linhas )[1,4]
      base<-subset(base_IBGE,base_IBGE$Cód. %in% linhas)
-     ts=getSeries(linhas,periodicidade = periodicidade)[[1]]
+     ts=BETS.get(linhas,periodicidade = periodicidade)[[1]]
      if(!is.null(dim(ts))){
        colnames(ts)<-subset(base_IBGE,base_IBGE$Cód. %in% as.numeric(as.character(st_favoritos()$IBGE[,1])))[,2]
      }
-     data=as.character(getSeries(linhas,periodicidade = periodicidade)[[2]])
+     data=as.character(BETS.get(linhas,periodicidade = periodicidade)[[2]])
      nome=subset(base_IBGE,base_IBGE$Cód. %in% as.numeric(as.character(st_favoritos()$IBGE[,1])))[,2]
      cod=linhas
    }else{
@@ -7090,11 +7037,11 @@ output$descritiva_inccdi <- renderTable({
      linhas<-as.numeric(as.character(st_favoritos()$BACEN[,1]))
      periodicidade=subset(base_bacen,base_bacen$Cód. %in% linhas )[1,4]
      base<-subset(base_bacen,base_bacen$Cód. %in% linhas )
-     ts=getSeries(linhas,periodicidade = periodicidade)[[1]]
+     ts=BETS.get(linhas,periodicidade = periodicidade)[[1]]
      if(!is.null(dim(ts))){
        colnames(ts)<-subset(base_bacen,base_bacen$Cód. %in% as.numeric(as.character(st_favoritos()$BACEN[,1])))[,2]
      }
-     data=as.character(getSeries(linhas,periodicidade = periodicidade)[[2]])
+     data=as.character(BETS.get(linhas,periodicidade = periodicidade)[[2]])
      nome=subset(base_bacen,base_bacen$Cód. %in% as.numeric(as.character(st_favoritos()$BACEN[,1])))[,2]
      cod=linhas
    }else{
