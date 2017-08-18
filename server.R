@@ -5429,30 +5429,14 @@ output$descritiva_inccdi <- renderTable({
     df2<-data.frame(dados_bacen()$data)
     df<-cbind(df2,df)
     names(df)<-c("Data",name)
-    #data.frame(input$bacentabela_rows_selected)
-    #data.frame(dados_bacen()$data)
     row.names(df)<-df$Data
     df[,-1]
-    #data.frame(as.numeric(as.character(input$bacentabela_rows_selected)))
   })
   
   
   output$teste_bacen<-renderPrint({
     
-    # dados <- dados_bacen()$ts
-    # nome <- dados_bacen()$nome
-    # 
-    # data <- as.character(seq(as.Date(paste0(start(dados)[1],"/",start(dados)[2],"/",1)),
-    #                          as.Date(paste0(end(dados)[1],"/",end(dados)[2],"/",1)),
-    #                          "1 months"))
-    # 
-    # frame <- cbind(data, dados)
-    # colnames(frame) <- c("Data",nome)
-    # 
-    # data.frame(input$formato_bacen)
-    
-    
-    #}
+   
     if(dados_bacen()$periodicidade!="A"){
       mes_final <- end(dados_bacen()$ts)[2]
       ano_final <- end(dados_bacen()$ts)[1]
@@ -5486,19 +5470,7 @@ output$descritiva_inccdi <- renderTable({
   
   # Mostrar gráficos IGP
   output$grafico_bacen <- renderDygraph({
-    # Encontrar n
-    # n <- length(dados_bacen()$data)
-    # # Fazer o gráfico
-    # if(n == 1){    
-    #   dygraph(dados_bacen()$ts, main = "") %>%
-    #     dySeries("V1", label = dados_bacen()$cod, strokeWidth = 2) %>%
-    #     dyOptions(colors = RColorBrewer::brewer.pal(n, "Set1")) %>%
-    #     dyRangeSelector()
-    # }else{
-    #   dygraph(dados_bacen()$ts, main = "") %>%
-    #     dyOptions(colors = RColorBrewer::brewer.pal(n, "Set1"), strokeWidth = 2) %>%
-    #     dyRangeSelector()
-    #}
+   
     if(dados_bacen()$periodicidade!="A"){
       mes_final <- end(dados_bacen()$ts)[2]
       ano_final <- end(dados_bacen()$ts)[1]
