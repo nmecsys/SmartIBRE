@@ -35,7 +35,14 @@ library(seasonal)
 air <- AirPassengers
 drive <- UKDriverDeaths
 pim <- readRDS("data/pim.rds")
-ipc <- readRDS("data/ipc.rds")
+#get sidra from BETS.sidra.get()
+#criando variavel pra data atual
+data  <- strsplit(as.character(Sys.Date()),split="-")[[1]]
+ano   <- data[1]
+mes   <- data[2]
+atual <- paste0(ano,mes)
+pim2  <- BETS::BETS.sidra.get(x = c(3653),from="200201",to=atual,variable = 3153)
+ipc   <- readRDS("data/ipc.rds")
 
 # helpers -------------------------------------------------
 source("helpers.R")
@@ -63,44 +70,20 @@ pop <- WDI(indicator='SP.POP.TOTL', start = 2013, end = 2013)
 pop <- na.omit(pop)
 colnames(pop) <- c("COD", "País", "População", "Ano")
 
-# séries IBGE -----------------------------------------------------------------------------
-# url_IBGE<-read_html("http://seriesestatisticas.ibge.gov.br/lista_tema.aspx?op=2&no=1")
-# ibge<-data.frame(html_table(url_IBGE))
-# names(ibge)<-iconv(ibge[1,],"UTF-8","latin1")
-# ibge<-ibge[-1,]
-# ibge[,2]<-iconv(ibge[,2],"UTF-8","latin1")
-# 
-# dados<-ibge
-# #dados <- readRDS("data/IBEG.rds")
-# #dados<-read.csv2("data/IBEG_v2.csv")
-# dados[,3]<-as.character(dados[,3])
-# dados <- subset(dados,dados[,3] %in% c("Trimestral","Mensal","Anual"))
-# dados[,1]<-as.character(dados[,1])
-# a<-data.frame(do.call('rbind', strsplit(as.character(dados$Período),'-',fixed=TRUE)))[2]
-# #dados[,5]<-as.character(dados[,5])
-# #dados<-subset(dados,dados[,5]=="Trimestral")
-# dados_faltante<- readRDS("data/IBGE_faltante.rds")
-# dados_faltante[,1]<-as.character(dados_faltante[,1])
-# dados_faltante[,6]<-as.character(dados_faltante[,6])
-# names_IBGE<-as.character(list(dados[,2])[[1]])
-# codigos<-as.character(list(dados[,1])[[1]])
 
-#setwd("V:\\SUEP\\Núcleo de Métodos Estatísticos e Computacionais\\19 Shiny\\smart_IBRE\\Banco_central")
 base_IBGE<-readRDS("./Banco_central/series_tabela_v2.rds")
-#base_IBGE<-subset(base_bacen,base_bacen$Per.=="M")
+
 
 base_IBGE<-subset(base_IBGE,grepl("IBGE",base_IBGE$Fonte)==TRUE)
 names(base_IBGE)[5]<-"Inicio"
 names(base_IBGE)[6]<-"Fim"
 names(base_IBGE)[2]<-"Nome"
 names(base_IBGE)[4]<-"Periodicidade"
-# source("api_ibge.R")
+
 
 # Séries FGV IBRE -----------------------------------------------------------------
 series <- readRDS("data/fgv_indices.rds")
 ipc <- series[,2]
-# incc <- series[,3]
-# ipa <- series[,4]
 igp <- readRDS("data/igp.rds")
 
 FGV <- readRDS("data/FGV_dados.rds")
@@ -155,17 +138,7 @@ falencia2<-read.csv2("data/boletim_macro_falencia_empresas_2.csv")
 monitor_pib<-read.csv2("data/monitor_pib.csv")
 
 
-
-# ipc_grupos <- substr(subset_ipc$item_fgv,1,1)
-# ipc_subgrupos <- substr(subset_ipc$item_fgv,1,2)
-# ipc_itens <- substr(subset_ipc$item_fgv,1,4)
-# ipc_subitens <- substr(subset_ipc$item_fgv,1,6)
-
-
-# names(table(substr(names(subset(table(subset_ipc$Serviço), table(subset_ipc$Serviço) != 0)), 4,5)))
-# names(table(subset_ipc$Serviço)), 4,5)
-
-############sONDAGENS#############
+############SONDAGENS#############
 sondagens<-read.csv2("data/teste_sondagens.csv")
 sondagens[,2]<-as.numeric(as.character(sondagens[,2]))
 sondagens[,3]<-as.numeric(as.character(sondagens[,3]))
@@ -178,7 +151,9 @@ names_s<-c("Serviço","Indústria","Comércio","Construção","Consumidor")
 
 tsondagem <- ts(sondagens[,-1], start =  c(2013, 09), freq = 12)
 
-######### Favoritos######################
+#######NOVO FAVORITOS########
+
+#########Favoritos######################
 
 y<-file.exists("data/save_favoritos.csv",stringsAsFactors=F)
 
