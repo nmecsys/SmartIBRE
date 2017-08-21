@@ -57,7 +57,8 @@ shinyServer(function(input, output,session){
   
   # MENU MEUS FAVORITOS ------------------------------------
   
-  
+  series = paste("insert into favoritos(series) values(",input$,")")
+  dbSendQuery(conn,seires)
   
   # MENU RELATÓRIOS ----------------------------------------
   
