@@ -75,6 +75,7 @@ dashboardPage(
                 ),
                 mainPanel(width = 9,
                           wellPanel(style = "background-color:#F7F7F7;",
+                                    dataTableOutput("BETS_search"),
                                     "OUTPUT LEGAL AQUI")
                 )
               ),
