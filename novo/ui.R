@@ -57,7 +57,30 @@ dashboardPage(
       # Item: Banco de séries temporais - Pesquisar ----------------------------------------------------------------- 
       tabItem(tabName = "bd_pesquisar",
               
-              "PESQUISE"
+              wellPanel(style = "background-color:#F7F7F7;",
+                        div("PESQUISAR", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
+                        "Utilize os campos de pesquisa a seguir para encontrar séries temporais de interesse."),
+              
+              
+              sidebarLayout(
+                sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
+                             textInput("search_description", label = "Busca textual:", value = "", width = "90%"),
+                             bsButton("action_search_description", label = "", icon = icon("search"), style = "primary"),
+                             
+                             hr(),
+                             
+                             numericInput("search_code", label = "Busca por código:", value = "", width = "90%"),
+                             bsButton("action_search_code", label = "", icon = icon("search"), style = "primary")
+                             
+                ),
+                mainPanel(width = 9,
+                          wellPanel(style = "background-color:#F7F7F7;",
+                                    "OUTPUT LEGAL AQUI")
+                )
+              ),
+              
+              
+              hr()
               
       ), # fim do Item: Banco de séries temporais - Pesquisar
       
