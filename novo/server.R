@@ -46,7 +46,9 @@ shinyServer(function(input, output,session){
   observeEvent(input$action_search_description, {
     BETS_search$data <- tryCatch(BETS.search(description = input$search_description, view = F, lang = "pt"), error = function(e) NULL) 
   })
-  
+  observeEvent(input$action_search_src, {
+    BETS_search$data <- tryCatch(BETS.search(src = input$search_src, view = F, lang = "pt"), error = function(e) NULL)
+  })
   output$BETS_search <- renderDataTable({
     if(is.null(BETS_search$data)){NULL
     }else{
@@ -55,10 +57,18 @@ shinyServer(function(input, output,session){
       x}
   },  options = list(pageLength = 5, searching = F))
   
+  # observe({
+  #   if(input$search_code != 0){
+  #   #if(input$search_code != 0){
+  #   #if(input$search_code != 0 & input$search_description != 0 & input$search_src != 0){
+  #   updateButton(session, "action_add_consulta", disabled = F)
+  #   }
+  # })
+    
   # MENU MEUS FAVORITOS ------------------------------------
   
-  series = paste("insert into favoritos(series) values(",input$,")")
-  dbSendQuery(conn,seires)
+  #series = paste("insert into favoritos(series) values(",input$,")")
+  #dbSendQuery(conn,seires)
   
   # MENU RELATÓRIOS ----------------------------------------
   
