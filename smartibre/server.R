@@ -110,7 +110,7 @@ shinyServer(function(input, output,session){
   # > texto consultar ---------------------
   
   output$texto_consultar <- renderUI({
-    if(is.null(codigos_favoritos$data)){
+    if(is.null(consultar_codigos$data)){
       span("Nenhuma série adicionada à lista de consulta.", style = "color:grey")
     }else{
       ""
@@ -150,7 +150,40 @@ shinyServer(function(input, output,session){
     }
   })
   
+  # > visualizar séries temporais da aba de consulta -------------------
   
+  observe({
+    # se estiver na aba 'Busca' e selecionou alguma linha do resultado da busca: habilitar botão adicionar e favoritos
+    if(is.null(consultar_codigos$data)){
+      updateButton(session, "action_ver_consultar", disabled = T, style = "default")
+      updateButton(session, "action_exportar_consultar", disabled = T, style = "default")
+    }else{
+      updateButton(session, "action_ver_consultar", disabled = F, style = "primary")
+      updateButton(session, "action_exportar_consultar", disabled = F, style = "primary")
+    }
+  })
+  
+  # baixar séries da aba 'Consultar'
+  series_consultar <- reactive({
+    baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
+    baixar.df <- do.call(cbind, baixar.list)
+    baixar.df
+  })
+  
+  # gráfico
+  output$grafico_consultar <- renderDygraph({
+    dygraph(series_consultar())
+  })
+  
+  observeEvent(input$action_ver_consultar, {
+    showModal(
+      modalDialog(
+        dygraphOutput("grafico_consultar"),
+        title = "Gráfico",
+        easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
+      )
+    )
+  })
   
   # MENU GERENCIAR FAVORITOS ------------------------------------------------------------
   codigos_favoritos <- reactiveValues()
@@ -218,6 +251,7 @@ shinyServer(function(input, output,session){
     }
   })
   
+  # > visualizar séries temporais da aba favoritos -------------------
 
   # auxiliar dfsd
   # output$linhas_consultar1 <- renderPrint({ busca_codigos_selecionados()})

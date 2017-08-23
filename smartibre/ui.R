@@ -93,7 +93,19 @@ dashboardPage(
                                                 ),
                                                 tabPanel("Consultar", br(),
                                                          uiOutput("texto_consultar"),
-                                                         dataTableOutput("tabela_consultar")
+                                                         br(),
+                                                         dataTableOutput("tabela_consultar"),
+                                                         hr(),
+                                                         fluidRow(
+                                                           column(offset = 3, width = 3,
+                                                                  bsButton("action_ver_consultar", label = "Gráfico", icon = icon("area-chart"), disabled = T, width = "100%")
+                                                           ),
+                                                           column(width = 3,   
+                                                                  bsButton("action_exportar_consultar", label = "Exportar", icon = icon("save"), disabled = T, width = "100%")
+                                                           )
+                                                         )
+                                                         
+                                                           
                                                          #tipify(bsButton("action_view_consulta", label = "", icon = icon("line-chart")), title = "Visualizar gráfico e dados", placement = "top"), HTML("&nbsp;"),
                                                          #selectInput("pesquisar_exportar_data", label = "", choices = c(".txt",".csv"), width = 200),
                                                          #tipify(bsButton("action_save_consulta", label = "", icon = icon("save")), title = "Exportar", placement = "top"), HTML("&nbsp;")
