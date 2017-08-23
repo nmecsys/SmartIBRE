@@ -9,13 +9,29 @@ library(RMySQL)
 library(DT)
 library(dygraphs)
 
-# conexão >> favoritos
-# conn <- dbConnect(MySQL(), host = "200.20.164.178", db = "smartibredb", user = "smartibre_user", password = "123456", port = 3306)
+
+#conexão >> favoritos
+conn < - dbConnect(MySQL(), host = "200.20.164.178", db = "smartibredb", user = "smartibre_user", password = "123456", port = 3306)
+#adicionar ao favoritos 
 
 
-#dbSendQuery(conn,"insert into favoritos(series) values('c(1,2,3)')")
-#supondo que conseguimos identificar o usuario, atraves do seu username
-# dbGetQuery(conn,"select * from favoritos where username = 'username'")
-# 
-# dbListFields(conn,'favoritos')
-# dbGetQuery(conn,'select * from favoritos')
+
+user = "jonatha.costa"
+add_fav <- function(code,user){
+#verificando se já existe o campo pro usuario
+  sql <- paste0("select * from favoritos where user_name like '",user,"'")
+  aux <- dbGetQuery(conn,sql)
+  if(nrow(aux)==0){
+    #esse usuario ainda nao criou favoritos
+    #vamos criar :)
+    
+  }
+  sql <- paste0("insert into favoritos(codes) values('",code,"')")
+  dbSendQuery(conn,sql)
+}
+
+#deletar nos favoritos
+
+delete_fav <-function(code){
+  sql = paste0("")
+}
