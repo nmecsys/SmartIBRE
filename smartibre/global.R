@@ -24,10 +24,14 @@ add_fav <- function(code,user){
   if(nrow(aux)==0){
     #esse usuario ainda nao criou favoritos
     #vamos criar :)
-    
+    sql<-paste0("insert into favoritos() values('",code,"')")
+    dbSendQuery(conn,sql)
+  }else{
+    #ja tem, bora dar um update
+    sql <-paste0("update")
+    dbSendQuery(conn,sql)
   }
-  sql <- paste0("insert into favoritos(codes) values('",code,"')")
-  dbSendQuery(conn,sql)
+  
 }
 
 #deletar nos favoritos
