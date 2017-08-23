@@ -37,8 +37,9 @@ shinyServer(function(input, output,session){
   })
   
 
-  # MENU PESQUISAR -----------------------------------------
+  # MENU PESQUISAR ----------------------------------------------------------------
   
+  # > aba busca ----------------------------------------
   BETS_search <- reactiveValues()
   observeEvent(input$action_search_code, {
     BETS_search$data <- tryCatch(BETS.search(code = input$search_code, view = F), error = function(e) NULL)
@@ -65,8 +66,22 @@ shinyServer(function(input, output,session){
       updateButton(session, "action_add_favoritos", disabled = F, style = "danger")
     }
   })
-    
-  # MENU MEUS FAVORITOS ------------------------------------
+  
+  # > aba consultar ----------------------------------------
+  
+  output$linhas_consultar1 <- renderPrint({busca_codigos_selecionados()})
+  
+  
+  busca_codigos_selecionados <- reactive({BETS_search$data[input$BETS_search_rows_selected,"code"]})
+  
+  busca_codigos_consultar <- reactiveValues()
+  observeEvent(input$action_add_consulta, {
+    busca_codigos_consultar$data <- c(busca_codigos_consultar$data, busca_codigos_selecionados())
+  })
+  
+  output$linhas_consultar2 <- renderPrint({ busca_codigos_consultar$data})
+  #observeEvent()
+  # MENU GERENCIAR FAVORITOS ------------------------------------------------------------
   
   #series = paste("insert into favoritos(series) values(",input$,")")
   #dbSendQuery(conn,seires)

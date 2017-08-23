@@ -10,7 +10,7 @@ dashboardPage(
       menuItem("Página Inicial", tabName = "home", icon = icon("home")),
       menuItem("Banco de séries temporais", icon = icon("database"), startExpanded = T,
                menuSubItem("Pesquisar", tabName = "bd_pesquisar"),
-               menuSubItem("Meus Favoritos", tabName = "bd_favoritos"),
+               menuSubItem("Gerenciar Favoritos", tabName = "bd_favoritos"),
                menuSubItem("Relatórios", tabName = "bd_relatorios")
                ),
       menuItem("Modelo Paramétrico", tabName = "mod_param", icon = icon("dashboard"))
@@ -93,13 +93,15 @@ dashboardPage(
                                       tabPanel("Busca", br(),
                                                conditionalPanel("input.action_search_description == 0 & input.action_search_code == 0 & input.action_search_src == 0",
                                                                 span("Use o painel à esquerda para buscar séries.", style = "color:grey")),
-                                               
+                                               verbatimTextOutput("linhas_consultar1"),
+                                               verbatimTextOutput("linhas_consultar2"),
                                                dataTableOutput("BETS_search")
                                       ),
                                       tabPanel("Consultar", br(),
                                                conditionalPanel("input.action_add_consulta == 0",
                                                                 span("Nenhuma série adicionada à lista de consulta.", style = "color:grey")
                                                ),
+                                              
                                                
                                                conditionalPanel("input.action_add_consulta != 0",
                                                                 tipify(bsButton("action_view_consulta", label = "", icon = icon("line-chart")), title = "Visualizar gráfico e dados", placement = "top"), HTML("&nbsp;"),
@@ -121,7 +123,7 @@ dashboardPage(
               
       ), # fim do Item: Banco de séries temporais - Pesquisar
       
-      # Item: Banco de séries temporais - Meus Favoritos ------------------------------------------------------------ 
+      # Item: Banco de séries temporais - Gerenciar Favoritos ------------------------------------------------------------ 
       tabItem(tabName = "bd_favoritos",
               
               "FAVORITE"
