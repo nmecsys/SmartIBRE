@@ -55,15 +55,16 @@ shinyServer(function(input, output,session){
       x <- BETS_search$data
       colnames(x) <- c("Cód.", "Descrição", "Unid.", "Period.", "Início", "Fim", "Fonte")
       x}
-  },  options = list(pageLength = 5, searching = F))
-  
-  # observe({
-  #   if(input$search_code != 0){
-  #   #if(input$search_code != 0){
-  #   #if(input$search_code != 0 & input$search_description != 0 & input$search_src != 0){
-  #   updateButton(session, "action_add_consulta", disabled = F)
-  #   }
-  # })
+  },  options = list(pageLength = 5, searching = T))
+
+  # ativar botões de adicionar/remover/favoritos
+  observe({
+    if(input$action_search_description != 0 | input$action_search_code != 0 | input$action_search_src != 0 ){
+      updateButton(session, "action_add_consulta", disabled = F, style = "primary")
+      updateButton(session, "action_remove_consulta", disabled = F, style = "warning")
+      updateButton(session, "action_add_favoritos", disabled = F, style = "danger")
+    }
+  })
     
   # MENU MEUS FAVORITOS ------------------------------------
   

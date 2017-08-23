@@ -75,7 +75,7 @@ dashboardPage(
                            
                              hr(),
                              
-                             selectInput("search_src", label = "Busca por centro:", multiple = F, width = "90%",
+                             selectInput("search_src", label = "Busca por fonte:", multiple = F, width = "90%",
                                           choices = c("Selecione"="", "IBGE","BCB","FGV","FGV|IBRE","BCB e FGV","BCB-Deban",
                                                     "BCB-Depin","BCB-Derin","BCB-Desig","BCB-Secre","BCB-Demab",
                                                     "BCB-Denor","BCB-Depec","Sisbacen","Abecip")),
@@ -85,10 +85,9 @@ dashboardPage(
                 mainPanel(width = 9,
                           wellPanel(style = "background-color:#F7F7F7;",
                                     
-                                    tipify(bsButton("action_add_consulta", label = "", icon = icon("plus"), style = "primary", disabled = T), title = "Adicionar à lista de consulta", placement = "top"), HTML("&nbsp;"),
-                                    tipify(bsButton("action_remove_consulta", label = "", icon = icon("minus"), style = "primary", disabled = T), title = "Remover da lista de consulta", placement = "top"), HTML("&nbsp;"),
-                                    tipify(bsButton("action_add_favoritos", label = "", icon = icon("heart"), style = "danger", disabled = T), title = "Adicionar aos favoritos", placement = "top"), HTML("&nbsp;"),
-                                    tipify(bsButton("action_remove_favoritos", label = "", icon = icon("trash"), style = "danger"), title = "Remover dos favoritos", placement = "top"), HTML("&nbsp;"),
+                                    tipify(bsButton("action_add_consulta", label = "", icon = icon("plus"), disabled = T), title = "Adicionar à lista de consulta", placement = "top"), HTML("&nbsp;"),
+                                    tipify(bsButton("action_remove_consulta", label = "", icon = icon("minus"), disabled = T), title = "Remover da lista de consulta", placement = "top"), HTML("&nbsp;"),
+                                    tipify(bsButton("action_add_favoritos", label = "", icon = icon("heart"), disabled = T), title = "Adicionar aos favoritos", placement = "top"), HTML("&nbsp;"),
                                     hr(),
                                     tabsetPanel(
                                       tabPanel("Busca", br(),
