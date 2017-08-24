@@ -207,9 +207,7 @@ shinyServer(function(input, output,session){
           column(2, textOutput("legenda_grafico_consultar"))
         ),
         hr(),
-        #bsButton("action_salvar_grafico_consultar", label = "Exportar Gráfico", icon = icon("save"), width = "100%")
-        downloadButton("download_grafico_consultar", 'Exportar Gráfico')
-        ,
+        downloadButton("download_grafico_consultar", 'Exportar Gráfico'),
         title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
         easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
       )
