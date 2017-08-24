@@ -21,7 +21,6 @@ dashboardPage(
       
       # Item: Página inicial ---------------------------------------------------------------------------------------- 
       tabItem(tabName = "home", 
-              #fluidPage(theme = shinytheme("lumen")),
               wellPanel(style = "background-color:#F7F7F7;",
                         div("Bem-vindo(a) ao SmartIBRE. Selecione o que você deseja fazer hoje.", style = "text-align:center; font-size:120%"),
                         hr(),

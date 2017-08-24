@@ -71,7 +71,7 @@ shinyServer(function(input, output,session){
       ""
     }
   })
-
+  
   # > aba 'Consultar' ----------------------------------------
   
   # códigos selecionados na aba busca
@@ -116,7 +116,7 @@ shinyServer(function(input, output,session){
       ""
     }
   })
-
+  
   
   # > ativar botões de adicionar/remover/remover tudo/favoritos ------------------
   observe({
@@ -165,25 +165,67 @@ shinyServer(function(input, output,session){
   
   # baixar séries da aba 'Consultar'
   series_consultar <- reactive({
-    baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
-    baixar.df <- do.call(cbind, baixar.list)
-    baixar.df
+    
+    if(length(consultar_codigos$data) == 1){
+      baixar.df <- BETS.get(consultar_codigos$data)
+      list(st = baixar.df, nomes = consultar_codigos$data)
+    }else{
+      baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
+      baixar.df <- do.call(cbind, baixar.list)
+      list(st = baixar.df, nomes = consultar_codigos$data)
+    }
+    
   })
   
   # gráfico
-  output$grafico_consultar <- renderDygraph({
-    dygraph(series_consultar())
+  
+  grafico_consultar <- reactive({
+    if(is.null(ncol(series_consultar()$st))){
+      dygraph(series_consultar()$st) %>%
+        dySeries(name = "V1", label = series_consultar()$nomes) %>%
+        dyOptions(colors = brewer.pal(9, "Set1")) %>%
+        dyRangeSelector(fillColor = "#F7F7F7") %>%
+        dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
+    }else{
+      dygraph(series_consultar()$st) %>%
+        dyOptions(colors = brewer.pal(9, "Set1")) %>%
+        dyRangeSelector(fillColor = "#F7F7F7") %>%
+        dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
+    }
   })
   
+  output$grafico_consultar <- renderDygraph({
+    grafico_consultar()
+  })
+  
+  # > visualizar gráfico
   observeEvent(input$action_ver_consultar, {
     showModal(
       modalDialog(
-        dygraphOutput("grafico_consultar"),
-        title = "Gráfico",
+        fluidRow(
+          column(10, dygraphOutput("grafico_consultar")),
+          column(2, textOutput("legenda_grafico_consultar"))
+        ),
+        hr(),
+        #bsButton("action_salvar_grafico_consultar", label = "Exportar Gráfico", icon = icon("save"), width = "100%")
+        downloadButton("download_grafico_consultar", 'Exportar Gráfico')
+        ,
+        title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
         easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
       )
     )
   })
+  
+  # baixar gráfico.html
+  output$download_grafico_consultar <- downloadHandler(
+    filename = "SMARTIBRE_grafico.html",
+    content = function(file) saveWidget(grafico_consultar(), file, selfcontained = T)
+  )
+  
+  # auxiliar 
+  # output$aux <- renderPrint({ series_consultar() })
+  # output$linhas_consultar2 <- renderPrint({ consultar_codigos_selecionados() })
+  # output$linhas_consultar3 <- renderPrint({ codigos_favoritos$data })
   
   # MENU GERENCIAR FAVORITOS ------------------------------------------------------------
   codigos_favoritos <- reactiveValues()
@@ -245,19 +287,14 @@ shinyServer(function(input, output,session){
   
   output$texto_favoritos <- renderUI({
     if(is.null(codigos_favoritos$data)){
-    span("Nenhuma série adicionada aos favoritos.", style = "color:grey")
+      span("Nenhuma série adicionada aos favoritos.", style = "color:grey")
     }else{
-    ""
+      ""
     }
   })
   
   # > visualizar séries temporais da aba favoritos -------------------
-
-  # auxiliar dfsd
-  # output$linhas_consultar1 <- renderPrint({ busca_codigos_selecionados()})
-  # output$linhas_consultar2 <- renderPrint({ consultar_codigos_selecionados() })
-  # output$linhas_consultar3 <- renderPrint({ codigos_favoritos$data })
-   
+  
   #series = paste("insert into favoritos(series) values(",input$,")")
   #dbSendQuery(conn,seires)
   
