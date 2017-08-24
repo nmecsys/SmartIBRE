@@ -100,7 +100,7 @@ dashboardPage(
                                                                   bsButton("action_ver_consultar", label = "Gráfico", icon = icon("area-chart"), disabled = T, width = "100%")
                                                            ),
                                                            column(width = 3,   
-                                                                  bsButton("action_exportar_consultar", label = "Exportar", icon = icon("save"), disabled = T, width = "100%")
+                                                                  downloadButton("download_series_consultar", 'Exportar Séries')
                                                            )
                                                          )
                                                          

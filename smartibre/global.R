@@ -10,11 +10,11 @@ library(DT)
 library(dygraphs)
 library(RColorBrewer)
 library(htmlwidgets)
-
+library(zoo)
 
 #conexão >> favoritos
 conn < - dbConnect(MySQL(), host = "200.20.164.178", db = "smartibredb", user = "smartibre_user", password = "123456", port = 3306)
-#adicionar ao favoritos 
+adicionar ao favoritos
 
 
 
@@ -33,7 +33,7 @@ add_fav <- function(code,user){
     sql <-paste0("update")
     dbSendQuery(conn,sql)
   }
-  
+
 }
 
 #deletar nos favoritos

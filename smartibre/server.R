@@ -168,11 +168,15 @@ shinyServer(function(input, output,session){
     
     if(length(consultar_codigos$data) == 1){
       baixar.df <- BETS.get(consultar_codigos$data)
-      list(st = baixar.df, nomes = consultar_codigos$data)
+      frame <- data.frame(data = as.Date(baixar.df),  baixar.df)
+      colnames(frame) <- c("Data", consultar_codigos$data)
+      list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
     }else{
       baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
       baixar.df <- do.call(cbind, baixar.list)
-      list(st = baixar.df, nomes = consultar_codigos$data)
+      frame <- data.frame(data = as.Date(baixar.df), baixar.df)
+      colnames(frame) <- c("Data", consultar_codigos$data)
+      list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
     }
     
   })
@@ -218,6 +222,11 @@ shinyServer(function(input, output,session){
   output$download_grafico_consultar <- downloadHandler(
     filename = "SMARTIBRE_grafico.html",
     content = function(file) saveWidget(grafico_consultar(), file, selfcontained = T)
+  )
+  
+  output$download_series_consultar <- downloadHandler(
+    filename = "SMARTIBRE_series.csv",
+    content = function(file) write.csv2(series_consultar()$df, file, row.names = F, na = "")
   )
   
   # auxiliar 
