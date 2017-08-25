@@ -97,7 +97,7 @@ dashboardPage(
                                                          hr(),
                                                          fluidRow(
                                                            column(offset = 3, width = 3,
-                                                                  bsButton("action_ver_consultar", label = "Gráfico", icon = icon("area-chart"), disabled = T, width = "100%")
+                                                                  bsButton("action_ver_consultar", label = "Visualizar", icon = icon("area-chart"), disabled = T, width = "100%")
                                                            ),
                                                            column(width = 3,   
                                                                   downloadButton("download_series_consultar", 'Exportar Séries')

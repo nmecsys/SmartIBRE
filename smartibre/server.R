@@ -168,20 +168,26 @@ shinyServer(function(input, output,session){
     
     if(length(consultar_codigos$data) == 1){
       baixar.df <- BETS.get(consultar_codigos$data)
-      frame <- data.frame(data = as.Date(baixar.df),  baixar.df)
+      frame <- data.frame(data = as.character(zoo::as.Date(baixar.df)),  baixar.df)
       colnames(frame) <- c("Data", consultar_codigos$data)
       list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
     }else{
       baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
       baixar.df <- do.call(cbind, baixar.list)
-      frame <- data.frame(data = as.Date(baixar.df), baixar.df)
+      frame <- data.frame(data = as.character(zoo::as.Date(baixar.df)), baixar.df)
       colnames(frame) <- c("Data", consultar_codigos$data)
       list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
     }
     
   })
   
-  # gráfico
+  # tabela (consultar)
+  
+  output$ver_tabela_consultar <- renderTable({
+    series_consultar()$df
+  })
+  
+  # gráfico (consultar)
   
   grafico_consultar <- reactive({
     if(is.null(ncol(series_consultar()$st))){
@@ -206,12 +212,19 @@ shinyServer(function(input, output,session){
   observeEvent(input$action_ver_consultar, {
     showModal(
       modalDialog(
-        fluidRow(
-          column(10, dygraphOutput("grafico_consultar")),
-          column(2, textOutput("legenda_grafico_consultar"))
+        tabsetPanel(
+          tabPanel("Gráfico",
+                   fluidRow(
+                     column(10, dygraphOutput("grafico_consultar")),
+                     column(2, textOutput("legenda_grafico_consultar"))
+                   ),
+                   hr(),
+                   downloadButton("download_grafico_consultar", 'Exportar Gráfico')
+          ),
+          tabPanel("Dados",
+                   tableOutput("ver_tabela_consultar")
+          )
         ),
-        hr(),
-        downloadButton("download_grafico_consultar", 'Exportar Gráfico'),
         title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
         easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
       )
