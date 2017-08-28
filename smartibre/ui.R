@@ -97,11 +97,11 @@ dashboardPage(
                                                          dataTableOutput("tabela_consultar"),
                                                          hr(),
                                                          fluidRow(
-                                                           column(offset = 3, width = 3,
+                                                           column(width = 2,
                                                                   bsButton("action_ver_consultar", label = "Visualizar", icon = icon("area-chart"), disabled = T, width = "100%")
                                                            ),
-                                                           column(width = 3,   
-                                                                  downloadButton("download_series_consultar", 'Exportar Séries', class = "background-color:blue")
+                                                           column(width = 2,   
+                                                                  downloadButton("download_series_consultar", 'Exportar Séries', class = "background-color:blue;")
                                                            )
                                                          )
                                                          
@@ -135,7 +135,16 @@ dashboardPage(
                         tipify(bsButton("action_removeall_favoritos", label = "", icon = icon("trash"), disabled = T), title = "Limpar lista de favoritos", placement = "top"), HTML("&nbsp;"),
                         hr(),
                         uiOutput("texto_favoritos"),
-                        dataTableOutput("tabela_favoritos")
+                        dataTableOutput("tabela_favoritos"),
+                        hr(),
+                        fluidRow(
+                          column(width = 2,
+                                 bsButton("action_ver_favoritos", label = "Visualizar", icon = icon("area-chart"), disabled = T, width = "100%")
+                          ),
+                          column(width = 2,   
+                                 downloadButton("download_series_favoritos", 'Exportar Séries', class = "background-color:blue")
+                          )
+                        )
               )
               
               

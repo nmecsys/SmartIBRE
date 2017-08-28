@@ -148,7 +148,8 @@ shinyServer(function(input, output,session){
   
   # habilitar botões de visualizar séries se (não) houver algo selecionado na aba consulta
   observe({
-    toggleState(id = "download_series_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
+    toggleState(id = "download_series_consultar", condition = !(length(consultar_codigos$data[input$tabela_consultar_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(as.numeric(consultar_codigos$data[input$tabela_consultar_rows_selected]),
+                                                                                                                                                                                   FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
     toggleState(id = "action_ver_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
   })
   
@@ -161,12 +162,6 @@ shinyServer(function(input, output,session){
   grafico_consultar <- reactive({
     if(is.null(series_consultar()$st)){ 
       NULL
-      # }else if(ncol(series_consultar()$st) == 1){
-      #   dygraph(series_consultar()$st) %>%
-      #     dySeries(name = "V1", label = series_consultar()$nomes) %>%
-      #     dyOptions(colors = brewer.pal(9, "Set1")) %>%
-      #     dyRangeSelector(fillColor = "#F7F7F7") %>%
-      #     dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
     }else{
       dygraph(series_consultar()$st) %>%
         dyOptions(colors = brewer.pal(9, "Set1")) %>%
@@ -187,13 +182,15 @@ shinyServer(function(input, output,session){
       tabsetPanel(
         tabPanel("Gráfico",
                  fluidRow(
-                   column(10, dygraphOutput("grafico_consultar")),
-                   column(2, textOutput("legenda_grafico_consultar"))
+                   column(10, br(), dygraphOutput("grafico_consultar")),
+                   column(2, br(), textOutput("legenda_grafico_consultar"))
                  ),
                  hr(),
                  downloadButton("download_grafico_consultar", 'Exportar Gráfico')
         ),
         tabPanel("Dados",
+                 br(),
+                 span("Veja as 12 observações mais recentes:", style = "color:grey"), br(), br(),
                  tableOutput("ver_tabela_consultar")
         )
       )
@@ -221,10 +218,6 @@ shinyServer(function(input, output,session){
     content = function(file) write.csv2(series_consultar()$df, file, row.names = F, na = "")
   )
   
-  # auxiliar 
-  output$aux <- renderPrint({ series_consultar() })
-  # output$linhas_consultar2 <- renderPrint({ consultar_codigos_selecionados() })
-  # output$linhas_consultar3 <- renderPrint({ codigos_favoritos$data })
   
   # > ativar botões de adicionar/remover/remover tudo/favoritos ------------------
   observe({
@@ -261,13 +254,9 @@ shinyServer(function(input, output,session){
   
   
   # MENU GERENCIAR FAVORITOS ------------------------------------------------------------
+  
+  # códigos adicionados na tabela favoritos
   codigos_favoritos <- reactiveValues()
-  
-  # códigos selecionados na tabela consultar
-  # consultar_codigos_selecionados <- reactive({
-  #   consultar_codigos$data[input$tabela_consultar_rows_selected]
-  # })
-  
   observe({
     observeEvent(input$action_add_favoritos,{
       if(input$tab_pesquisar == "Busca"){  # se estiver na aba 'Busca'
@@ -278,7 +267,7 @@ shinyServer(function(input, output,session){
     })
   })
   
-  # criar tabela para a aba consultar
+  # criar tabela de favoritos
   output$tabela_favoritos <- renderDataTable({
     if(is.null(codigos_favoritos$data)){ NULL
     }else{
@@ -290,19 +279,19 @@ shinyServer(function(input, output,session){
     }
   },  options = list(pageLength = 5, searching = T))
   
-  # remover códigos selecionados na aba consultar
+  # remover códigos selecionados na tabela favoritos
   observeEvent(input$action_remove_favoritos, {
     codigos <- codigos_favoritos$data
     data <- data.frame(t(sapply(as.numeric(codigos), FUN = function(x){BETS.search(code = x, view = F)})))
     codigos_favoritos$data <- unlist(data[-c(input$tabela_favoritos_rows_selected),"code"])
   })
   
-  # remover todos os códigos na aba consultar
+  # remover todos os códigos da tabela favoritos
   observeEvent(input$action_removeall_favoritos, {
     codigos_favoritos$data <- NULL
   })
   
-  # > ativar botões de remover/remover tudo/salvar ------------------
+  # ativar botões de remover/remover tudo
   
   observe({
     # se estiver na aba 'Busca' e selecionou alguma linha do resultado da busca: habilitar botão adicionar e favoritos
@@ -315,7 +304,7 @@ shinyServer(function(input, output,session){
     }
   })
   
-  # > texto favoritos ---------------------
+  # texto favoritos
   
   output$texto_favoritos <- renderUI({
     if(is.null(codigos_favoritos$data)){
@@ -325,7 +314,109 @@ shinyServer(function(input, output,session){
     }
   })
   
-  # > visualizar séries temporais da aba favoritos -------------------
+  # baixar séries selecionadas da tabela favoritos
+  series_favoritos <- reactive({
+    selecionados <- codigos_favoritos$data[input$tabela_favoritos_rows_selected]
+    periodo <- unique(unlist(data.frame(t(sapply(as.numeric(selecionados), FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
+    if(length(periodo) > 1){
+      list(nomes = NULL, df = NULL, st = NULL)
+    }else{
+      if(length(selecionados) == 1){
+        st <- BETS.get(selecionados, data.frame = T)
+        st <- xts(st[,2], st[,1])
+        names(st) <- selecionados
+        frame <- data.frame(data = as.character(index(st)), st)
+        rownames(frame) <- 1:nrow(frame)
+        colnames(frame) <- c("data", selecionados)
+        list(nomes = selecionados, st = st, df = frame)
+      }else{
+        baixar.list <- lapply(selecionados, FUN = BETS.get, data.frame = T)
+        names(baixar.list) <- selecionados
+        st <- do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1])))
+        names(st) <- selecionados
+        frame <- data.frame(data = as.character(index(st)), st)
+        rownames(frame) <- 1:nrow(frame)
+        colnames(frame) <- c("data", selecionados)
+        list(nomes = selecionados, st = st, df = frame)
+      }
+    }
+  })
+  
+  # habilitar botões de visualizar séries se (não) houver algo selecionado nos favoritos
+  observe({
+    observe({
+      toggleState(id = "download_series_favoritos", condition = !(length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(as.numeric(codigos_favoritos$data[input$tabela_favoritos_rows_selected]),
+                                                                                                                                                                                       FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
+      toggleState(id = "action_ver_favoritos", condition = length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) != 0)
+    })
+  })
+
+  # tabela (favoritos)
+  output$ver_tabela_favoritos <- renderTable({
+    tail(series_favoritos()$df, n = 12)
+  })
+
+  # gráfico (favoritos)
+  grafico_favoritos <- reactive({
+    if(is.null(series_favoritos()$st)){
+      NULL
+    }else{
+      dygraph(series_favoritos()$st) %>%
+        dyOptions(colors = brewer.pal(9, "Set1")) %>%
+        dyRangeSelector(fillColor = "#F7F7F7") %>%
+        dyLegend(labelsDiv = "legenda_grafico_favoritos", show = "always")
+    }
+  })
+   
+  output$grafico_favoritos <- renderDygraph({
+    grafico_favoritos()
+  })
+
+  # > visualizar gráfico e tabela
+  output$ver_favoritos <- renderUI({
+    if(is.null(series_favoritos()$st)){
+      span("Séries selecionadas com periodicidade diferente. Selecione apenas séries de mesma periodicidade.", style = "color:grey")
+    }else{
+      tabsetPanel(
+        tabPanel("Gráfico",
+                 fluidRow(
+                   column(10, br(), dygraphOutput("grafico_favoritos")),
+                   column(2, br(), textOutput("legenda_grafico_favoritos"))
+                 ),
+                 hr(),
+                 downloadButton("download_grafico_favoritos", 'Exportar Gráfico')
+        ),
+        tabPanel("Dados",
+                 br(),
+                 span("Veja as 12 observações mais recentes:", style = "color:grey"), br(), br(),
+                 tableOutput("ver_tabela_favoritos")
+        )
+      )
+    }
+  })
+
+  observeEvent(input$action_ver_favoritos, {
+    showModal(
+      modalDialog(
+        uiOutput("ver_favoritos"),
+        title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
+        easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
+      )
+    )
+  })
+
+  # baixar gráfico.html
+  output$download_grafico_favoritos <- downloadHandler(
+    filename = "SMARTIBRE_grafico.html",
+    content = function(file) saveWidget(grafico_favoritos(), file, selfcontained = T)
+  )
+
+  output$download_series_favoritos <- downloadHandler(
+    filename = "SMARTIBRE_series.csv",
+    content = function(file) write.csv2(series_favoritos()$df, file, row.names = F, na = "")
+  )
+
+  # visualizar séries temporais da aba favoritos -------------------
   
   #series = paste("insert into favoritos(series) values(",input$,")")
   #dbSendQuery(conn,seires)
