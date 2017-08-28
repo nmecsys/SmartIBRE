@@ -17,8 +17,9 @@ dashboardPage(
     )
   ),
   body = dashboardBody(#style = "background-color:#FFFFFF",
-    tabItems(
-      
+    shinyjs::useShinyjs(),  
+     tabItems(
+
       # Item: Página inicial ---------------------------------------------------------------------------------------- 
       tabItem(tabName = "home", 
               wellPanel(style = "background-color:#F7F7F7;",
@@ -79,7 +80,7 @@ dashboardPage(
                              bsButton("action_search_src", label = "", icon = icon("search"), style = "primary")
                 ),
                 mainPanel(width = 9,
-                          wellPanel(style = "background-color:#F7F7F7;",
+                         wellPanel(style = "background-color:#F7F7F7;",
                                     tipify(bsButton("action_add_consulta", label = "", icon = icon("plus"), disabled = T), title = "Adicionar à lista de consulta", placement = "top"), HTML("&nbsp;"),
                                     tipify(bsButton("action_remove_consulta", label = "", icon = icon("minus"), disabled = T), title = "Remover da lista de consulta", placement = "top"), HTML("&nbsp;"),
                                     tipify(bsButton("action_removeall_consulta", label = "", icon = icon("trash"), disabled = T), title = "Remover tudo da lista de consulta", placement = "top"), HTML("&nbsp;"),
@@ -100,7 +101,7 @@ dashboardPage(
                                                                   bsButton("action_ver_consultar", label = "Visualizar", icon = icon("area-chart"), disabled = T, width = "100%")
                                                            ),
                                                            column(width = 3,   
-                                                                  downloadButton("download_series_consultar", 'Exportar Séries')
+                                                                  downloadButton("download_series_consultar", 'Exportar Séries', class = "background-color:blue")
                                                            )
                                                          )
                                                          
@@ -129,7 +130,7 @@ dashboardPage(
               
               wellPanel(style = "background-color:#F7F7F7;",
                         div("SÉRIES FAVORITAS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"), hr(),
-                        tipify(bsButton("action_save_favoritos", label = "", icon = icon("save"), disabled = T), title = "Salvar lista", placement = "top"), HTML("&nbsp;"),
+                        tipify(bsButton("action_save_favoritos", label = "", icon = icon("save"), disabled = F, style = "danger"), title = "Salvar lista", placement = "top"), HTML("&nbsp;"),
                         tipify(bsButton("action_remove_favoritos", label = "", icon = icon("minus"), disabled = T), title = "Remover de favoritos", placement = "top"), HTML("&nbsp;"),
                         tipify(bsButton("action_removeall_favoritos", label = "", icon = icon("trash"), disabled = T), title = "Limpar lista de favoritos", placement = "top"), HTML("&nbsp;"),
                         hr(),

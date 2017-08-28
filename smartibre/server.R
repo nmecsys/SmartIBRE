@@ -62,7 +62,7 @@ shinyServer(function(input, output,session){
       x}
   },  options = list(pageLength = 5, searching = T))
   
-  # > texto busca ------------------
+  # > texto 'busca' ------------------
   
   output$texto_busca <- renderUI({
     if(is.null(BETS_search$data)){
@@ -107,8 +107,7 @@ shinyServer(function(input, output,session){
     consultar_codigos$data <- NULL
   })
   
-  # > texto consultar ---------------------
-  
+  # texto consultar
   output$texto_consultar <- renderUI({
     if(is.null(consultar_codigos$data)){
       span("Nenhuma série adicionada à lista de consulta.", style = "color:grey")
@@ -117,6 +116,115 @@ shinyServer(function(input, output,session){
     }
   })
   
+  # >> visualizar séries temporais da aba 'consultar' -------------------
+  
+  # baixar séries selecionadas da aba 'Consultar'
+  series_consultar <- reactive({
+    selecionados <- consultar_codigos$data[input$tabela_consultar_rows_selected]
+    periodo <- unique(unlist(data.frame(t(sapply(as.numeric(selecionados), FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
+    if(length(periodo) > 1){
+      list(nomes = NULL, df = NULL, st = NULL)
+    }else{
+      if(length(selecionados) == 1){
+        st <- BETS.get(selecionados, data.frame = T)
+        st <- xts(st[,2], st[,1])
+        names(st) <- selecionados
+        frame <- data.frame(data = as.character(index(st)), st)
+        rownames(frame) <- 1:nrow(frame)
+        colnames(frame) <- c("data", selecionados)
+        list(nomes = selecionados, st = st, df = frame)
+      }else{
+        baixar.list <- lapply(selecionados, FUN = BETS.get, data.frame = T)
+        names(baixar.list) <- selecionados
+        st <- do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1])))
+        names(st) <- selecionados
+        frame <- data.frame(data = as.character(index(st)), st)
+        rownames(frame) <- 1:nrow(frame)
+        colnames(frame) <- c("data", selecionados)
+        list(nomes = selecionados, st = st, df = frame)
+      }
+    }
+  })
+  
+  # habilitar botões de visualizar séries se (não) houver algo selecionado na aba consulta
+  observe({
+    toggleState(id = "download_series_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
+    toggleState(id = "action_ver_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
+  })
+  
+  # tabela (consultar)
+  output$ver_tabela_consultar <- renderTable({
+    tail(series_consultar()$df, n = 12)
+  })
+  
+  # gráfico (consultar)
+  grafico_consultar <- reactive({
+    if(is.null(series_consultar()$st)){ 
+      NULL
+      # }else if(ncol(series_consultar()$st) == 1){
+      #   dygraph(series_consultar()$st) %>%
+      #     dySeries(name = "V1", label = series_consultar()$nomes) %>%
+      #     dyOptions(colors = brewer.pal(9, "Set1")) %>%
+      #     dyRangeSelector(fillColor = "#F7F7F7") %>%
+      #     dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
+    }else{
+      dygraph(series_consultar()$st) %>%
+        dyOptions(colors = brewer.pal(9, "Set1")) %>%
+        dyRangeSelector(fillColor = "#F7F7F7") %>%
+        dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
+    }
+  })
+  
+  output$grafico_consultar <- renderDygraph({
+    grafico_consultar()
+  })
+  
+  # > visualizar gráfico e tabela
+  output$ver_consultar <- renderUI({
+    if(is.null(series_consultar()$st)){
+      span("Séries selecionadas com periodicidade diferente. Selecione apenas séries de mesma periodicidade.", style = "color:grey")
+    }else{
+      tabsetPanel(
+        tabPanel("Gráfico",
+                 fluidRow(
+                   column(10, dygraphOutput("grafico_consultar")),
+                   column(2, textOutput("legenda_grafico_consultar"))
+                 ),
+                 hr(),
+                 downloadButton("download_grafico_consultar", 'Exportar Gráfico')
+        ),
+        tabPanel("Dados",
+                 tableOutput("ver_tabela_consultar")
+        )
+      )
+    }
+  })
+  
+  observeEvent(input$action_ver_consultar, {
+    showModal(
+      modalDialog(
+        uiOutput("ver_consultar"),
+        title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
+        easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
+      )
+    )
+  })
+  
+  # baixar gráfico.html
+  output$download_grafico_consultar <- downloadHandler(
+    filename = "SMARTIBRE_grafico.html",
+    content = function(file) saveWidget(grafico_consultar(), file, selfcontained = T)
+  )
+  
+  output$download_series_consultar <- downloadHandler(
+    filename = "SMARTIBRE_series.csv",
+    content = function(file) write.csv2(series_consultar()$df, file, row.names = F, na = "")
+  )
+  
+  # auxiliar 
+  output$aux <- renderPrint({ series_consultar() })
+  # output$linhas_consultar2 <- renderPrint({ consultar_codigos_selecionados() })
+  # output$linhas_consultar3 <- renderPrint({ codigos_favoritos$data })
   
   # > ativar botões de adicionar/remover/remover tudo/favoritos ------------------
   observe({
@@ -150,116 +258,22 @@ shinyServer(function(input, output,session){
     }
   })
   
-  # > visualizar séries temporais da aba de consulta -------------------
   
-  observe({
-    # se estiver na aba 'Busca' e selecionou alguma linha do resultado da busca: habilitar botão adicionar e favoritos
-    if(is.null(consultar_codigos$data)){
-      updateButton(session, "action_ver_consultar", disabled = T, style = "default")
-      updateButton(session, "action_exportar_consultar", disabled = T, style = "default")
-    }else{
-      updateButton(session, "action_ver_consultar", disabled = F, style = "primary")
-      updateButton(session, "action_exportar_consultar", disabled = F, style = "primary")
-    }
-  })
-  
-  # baixar séries da aba 'Consultar'
-  series_consultar <- reactive({
-    
-    if(length(consultar_codigos$data) == 1){
-      baixar.df <- BETS.get(consultar_codigos$data)
-      frame <- data.frame(data = as.character(zoo::as.Date(baixar.df)),  baixar.df)
-      colnames(frame) <- c("Data", consultar_codigos$data)
-      list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
-    }else{
-      baixar.list <- sapply(consultar_codigos$data, FUN = BETS.get)
-      baixar.df <- do.call(cbind, baixar.list)
-      frame <- data.frame(data = as.character(zoo::as.Date(baixar.df)), baixar.df)
-      colnames(frame) <- c("Data", consultar_codigos$data)
-      list(st = baixar.df, nomes = consultar_codigos$data, df = frame)
-    }
-    
-  })
-  
-  # tabela (consultar)
-  
-  output$ver_tabela_consultar <- renderTable({
-    series_consultar()$df
-  })
-  
-  # gráfico (consultar)
-  
-  grafico_consultar <- reactive({
-    if(is.null(ncol(series_consultar()$st))){
-      dygraph(series_consultar()$st) %>%
-        dySeries(name = "V1", label = series_consultar()$nomes) %>%
-        dyOptions(colors = brewer.pal(9, "Set1")) %>%
-        dyRangeSelector(fillColor = "#F7F7F7") %>%
-        dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
-    }else{
-      dygraph(series_consultar()$st) %>%
-        dyOptions(colors = brewer.pal(9, "Set1")) %>%
-        dyRangeSelector(fillColor = "#F7F7F7") %>%
-        dyLegend(labelsDiv = "legenda_grafico_consultar", show = "always")
-    }
-  })
-  
-  output$grafico_consultar <- renderDygraph({
-    grafico_consultar()
-  })
-  
-  # > visualizar gráfico
-  observeEvent(input$action_ver_consultar, {
-    showModal(
-      modalDialog(
-        tabsetPanel(
-          tabPanel("Gráfico",
-                   fluidRow(
-                     column(10, dygraphOutput("grafico_consultar")),
-                     column(2, textOutput("legenda_grafico_consultar"))
-                   ),
-                   hr(),
-                   downloadButton("download_grafico_consultar", 'Exportar Gráfico')
-          ),
-          tabPanel("Dados",
-                   tableOutput("ver_tabela_consultar")
-          )
-        ),
-        title = div("Visualização de Séries Temporais", style = "font-weight:bold"),
-        easyClose = TRUE, footer = modalButton("Fechar"), size = "l"
-      )
-    )
-  })
-  
-  # baixar gráfico.html
-  output$download_grafico_consultar <- downloadHandler(
-    filename = "SMARTIBRE_grafico.html",
-    content = function(file) saveWidget(grafico_consultar(), file, selfcontained = T)
-  )
-  
-  output$download_series_consultar <- downloadHandler(
-    filename = "SMARTIBRE_series.csv",
-    content = function(file) write.csv2(series_consultar()$df, file, row.names = F, na = "")
-  )
-  
-  # auxiliar 
-  # output$aux <- renderPrint({ series_consultar() })
-  # output$linhas_consultar2 <- renderPrint({ consultar_codigos_selecionados() })
-  # output$linhas_consultar3 <- renderPrint({ codigos_favoritos$data })
   
   # MENU GERENCIAR FAVORITOS ------------------------------------------------------------
   codigos_favoritos <- reactiveValues()
   
-  consultar_codigos_selecionados <- reactive({
-    consultar_codigos$data[input$tabela_consultar_rows_selected]
-  })
+  # códigos selecionados na tabela consultar
+  # consultar_codigos_selecionados <- reactive({
+  #   consultar_codigos$data[input$tabela_consultar_rows_selected]
+  # })
   
   observe({
     observeEvent(input$action_add_favoritos,{
       if(input$tab_pesquisar == "Busca"){  # se estiver na aba 'Busca'
         codigos_favoritos$data <- unique(c(codigos_favoritos$data, busca_codigos_selecionados()))
       }else if(input$tab_pesquisar == "Consultar"){  # se estiver na aba 'Consultar'
-        codigos_favoritos$data <- unique(c(codigos_favoritos$data, consultar_codigos_selecionados()))
+        codigos_favoritos$data <- unique(c(codigos_favoritos$data, consultar_codigos$data[input$tabela_consultar_rows_selected]))
       }
     })
   })
@@ -293,11 +307,9 @@ shinyServer(function(input, output,session){
   observe({
     # se estiver na aba 'Busca' e selecionou alguma linha do resultado da busca: habilitar botão adicionar e favoritos
     if(is.null(codigos_favoritos$data)){
-      updateButton(session, "action_save_favoritos", disabled = T, style = "default")
       updateButton(session, "action_remove_favoritos", disabled = T, style = "default")
       updateButton(session, "action_removeall_favoritos", disabled = T, style = "default")
     }else{
-      updateButton(session, "action_save_favoritos", disabled = F, style = "success")
       updateButton(session, "action_remove_favoritos", disabled = F, style = "warning")
       updateButton(session, "action_removeall_favoritos", disabled = F, style = "warning")
     }

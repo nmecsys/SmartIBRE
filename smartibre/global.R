@@ -11,7 +11,8 @@ library(dygraphs)
 library(RColorBrewer)
 library(htmlwidgets)
 library(zoo)
-
+library(shinyjs)
+library(xts)
 #conexão >> favoritos
 #conn < - dbConnect(MySQL(), host = "200.20.164.178", db = "smartibredb", user = "smartibre_user", password = "123456", port = 3306)
 #adicionar ao favoritos
