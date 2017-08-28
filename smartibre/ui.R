@@ -18,8 +18,8 @@ dashboardPage(
   ),
   body = dashboardBody(#style = "background-color:#FFFFFF",
     shinyjs::useShinyjs(),  
-     tabItems(
-
+    tabItems(
+      
       # Item: Página inicial ---------------------------------------------------------------------------------------- 
       tabItem(tabName = "home", 
               wellPanel(style = "background-color:#F7F7F7;",
@@ -42,14 +42,8 @@ dashboardPage(
                           width = 3, background = "light-blue",
                           tipify(actionLink("action_parametrico", div("PREVISÃO", style = "font-weight:bold; text-align:center; color:#FFF")), "Crie um modelo paramétrico", placement = "top")
                         ),
-                        
-                        
                         br(),br(),hr()
-                        
-                        
-                        
               )
-              
       ), # fim do Item: Página inicial
       
       
@@ -80,7 +74,7 @@ dashboardPage(
                              bsButton("action_search_src", label = "", icon = icon("search"), style = "primary")
                 ),
                 mainPanel(width = 9,
-                         wellPanel(style = "background-color:#F7F7F7;",
+                          wellPanel(style = "background-color:#F7F7F7;",
                                     tipify(bsButton("action_add_consulta", label = "", icon = icon("plus"), disabled = T), title = "Adicionar à lista de consulta", placement = "top"), HTML("&nbsp;"),
                                     tipify(bsButton("action_remove_consulta", label = "", icon = icon("minus"), disabled = T), title = "Remover da lista de consulta", placement = "top"), HTML("&nbsp;"),
                                     tipify(bsButton("action_removeall_consulta", label = "", icon = icon("trash"), disabled = T), title = "Remover tudo da lista de consulta", placement = "top"), HTML("&nbsp;"),
@@ -104,11 +98,6 @@ dashboardPage(
                                                                   downloadButton("download_series_consultar", 'Exportar Séries', class = "background-color:blue;")
                                                            )
                                                          )
-                                                         
-                                                           
-                                                         #tipify(bsButton("action_view_consulta", label = "", icon = icon("line-chart")), title = "Visualizar gráfico e dados", placement = "top"), HTML("&nbsp;"),
-                                                         #selectInput("pesquisar_exportar_data", label = "", choices = c(".txt",".csv"), width = 200),
-                                                         #tipify(bsButton("action_save_consulta", label = "", icon = icon("save")), title = "Exportar", placement = "top"), HTML("&nbsp;")
                                                 )
                                     )
                           )
@@ -119,6 +108,8 @@ dashboardPage(
               hr()
               
       ), # fim do Item: Banco de séries temporais - Pesquisar
+      
+      
       
       # Item: Banco de séries temporais - Gerenciar Favoritos ------------------------------------------------------------ 
       tabItem(tabName = "bd_favoritos",
@@ -151,6 +142,7 @@ dashboardPage(
       ), # fim do Item: Banco de séries temporais - Meus Favoritos
       
       
+      
       # Item: Banco de séries temporais - Relatório ----------------------------------------------------------------- 
       tabItem(tabName = "bd_relatorios",
               
@@ -163,7 +155,54 @@ dashboardPage(
       # Item: Modelo Paramétrico ------------------------------------------------------------------------------------ 
       tabItem(tabName = "mod_param",
               
-              "PARAMETRIZE"
+              wellPanel(style = "background-color:#F7F7F7;",
+                        div("Custos Paramétricos", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
+                        "Estima automaticamente um modelo paramétrico."),
+              sidebarLayout(
+                sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
+                             radioButtons("param_tipo", label = "Custo Paramétrico", choices = c("Regressão","Índice"), inline = T),
+                             textInput("param_y", label = "Y - série resposta (código):", value = "", width = "90%"),
+                             textInput("param_x", label = "X - séries explicativas (códigos):", value = "", width = "90%"),
+                             numericInput("def_y", label = "Defasagem Y:", value = 1, min = 1, step = 1, width = "90%"),
+                             numericInput("def_x", label = "Defasagem X:", value = 1, min = 1, step = 1, width = "90%"),
+                             textInput("param_coefs", label = "Coeficientes covariáveis:", value = "", width = "90%"),
+                             bsButton("action_param", label = span("Executar", style = "font-weight:bold"), icon = icon("check"), style = "primary")
+                ),
+                mainPanel(width = 9,
+                          wellPanel(style = "background-color:#F7F7F7;",
+                                    dygraphOutput("reg_param"),
+                                    #verbatimTextOutput("aux"),
+                                    verbatimTextOutput("aux2")
+                                    
+                          #           tipify(bsButton("action_add_consulta", label = "", icon = icon("plus"), disabled = T), title = "Adicionar à lista de consulta", placement = "top"), HTML("&nbsp;"),
+                          #           tipify(bsButton("action_remove_consulta", label = "", icon = icon("minus"), disabled = T), title = "Remover da lista de consulta", placement = "top"), HTML("&nbsp;"),
+                          #           tipify(bsButton("action_removeall_consulta", label = "", icon = icon("trash"), disabled = T), title = "Remover tudo da lista de consulta", placement = "top"), HTML("&nbsp;"),
+                          #           tipify(bsButton("action_add_favoritos", label = "", icon = icon("heart"), disabled = T), title = "Adicionar aos favoritos", placement = "top"), HTML("&nbsp;"),
+                          #           hr(),
+                          #           tabsetPanel(id = "tab_pesquisar",
+                          #                       tabPanel("Busca", br(),
+                          #                                uiOutput("texto_busca"),
+                          #                                dataTableOutput("BETS_search")
+                          #                       ),
+                          #                       tabPanel("Consultar", br(),
+                          #                                uiOutput("texto_consultar"),
+                          #                                br(),
+                          #                                dataTableOutput("tabela_consultar"),
+                          #                                hr(),
+                          #                                fluidRow(
+                          #                                  column(width = 2,
+                          #                                         bsButton("action_ver_consultar", label = "Visualizar", icon = icon("area-chart"), disabled = T, width = "100%")
+                          #                                  ),
+                          #                                  column(width = 2,   
+                          #                                         downloadButton("download_series_consultar", 'Exportar Séries', class = "background-color:blue;")
+                          #                                  )
+                          #                                )
+                          #                       )
+                          #           )
+                          # )
+                )
+              )
+              )
               
       ) # fim do Item: Modelo Paramétrico
       

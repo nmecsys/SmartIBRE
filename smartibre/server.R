@@ -213,6 +213,7 @@ shinyServer(function(input, output,session){
     content = function(file) saveWidget(grafico_consultar(), file, selfcontained = T)
   )
   
+  # baixar séries
   output$download_series_consultar <- downloadHandler(
     filename = "SMARTIBRE_series.csv",
     content = function(file) write.csv2(series_consultar()$df, file, row.names = F, na = "")
@@ -410,18 +411,65 @@ shinyServer(function(input, output,session){
     filename = "SMARTIBRE_grafico.html",
     content = function(file) saveWidget(grafico_favoritos(), file, selfcontained = T)
   )
-
+  
+  # baixar séries
   output$download_series_favoritos <- downloadHandler(
     filename = "SMARTIBRE_series.csv",
     content = function(file) write.csv2(series_favoritos()$df, file, row.names = F, na = "")
   )
 
-  # visualizar séries temporais da aba favoritos -------------------
   
   #series = paste("insert into favoritos(series) values(",input$,")")
   #dbSendQuery(conn,seires)
   
   # MENU RELATÓRIOS ----------------------------------------
   
+  # MENU MODELO PARAMÉTRICO ----------------------------------------
   
+  # regressão paramétrica
+  # series_param <- reactive({
+  #   input$action_param
+  #   isolate({
+  #     codigo_y <- input$param_y
+  #     codigo_x <- strsplit(input$param_x, ",")[[1]]
+  #     baixar.list <- lapply(c(codigo_y,codigo_x), FUN = BETS.get, data.frame = T)
+  #     st <- na.omit(do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1]))))
+  #     frame <- data.frame(data = as.character(index(st)), st)
+  #     rownames(frame) <- 1:nrow(frame)
+  #     colnames(frame) <- c("Periodo", paste0("y_",codigo_y), paste0("x_",codigo_x))
+  #     frame[,1] <- as.character(frame[,1])
+  #     frame
+  #   })
+  # })
+  # 
+  # # regressão paramétrica
+  # reg_param <- reactive({
+  #   regressao_parametrica(series_param(), defx=input$def_x, defy=input$def_y, auto=TRUE)   
+  # })
+  # 
+  # # índice paramétrico
+  # ind_param <- reactive({
+  #   coefs <- strsplit(input$param_coefs, ",")[[1]]
+  #   indparam_fixo(series_param(), coef = coefs)
+  # })
+  # 
+  # output$reg_param <- renderDygraph({
+  #   x <- cbind(reg_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
+  #   colnames(x) <- c("y","fit.y")
+  #   dygraph(x)
+  # })
+  # 
+  # output$ind_param <- renderDygraph({
+  #   x <- cbind(ind_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
+  #   colnames(x) <- c("y","fit.y")
+  #   dygraph(x)
+  # })
+  
+#     regressao_precotransformador =   
+#     # ?ndice param?trico
+#     indiceparametrico_fixo = indparam_fixo(serie_original, coef=c(0.3,0.7),
+#                                            covar=c("IPA", "Prod_Sid"))
+  
+  output$aux <- renderPrint({reg_param()})
+  output$aux2 <- renderPrint({ind_param()})
 })
