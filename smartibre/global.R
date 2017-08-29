@@ -13,6 +13,7 @@ library(htmlwidgets)
 library(zoo)
 library(shinyjs)
 library(xts)
+library(glmulti)
 
 # modelo paramétrico
 # source("funcoes_parametrico.R")
@@ -545,4 +546,65 @@ regressao_parametrica = function(serie_original, defx, defy, covar = NULL, auto=
     }
   }
   
+}
+indparam_fixo = function(serie_original, coef, covar=covar_aux){
+  
+  covar_aux = seq(1, (ncol(serie_original)-2), by=1)
+  
+  if(length(coef)!=length(covar)){
+    stop("O vetor de coeficientes tem dimensão diferente do vetor de covariáveis!")
+  }
+  
+  if(sum(coef) != 1){stop("A soma dos coeficientes deve ser igual a 1!")}
+  
+  if(is.character(covar)){
+    covar_novo = c()
+    for(t in 1:length(covar)){
+      for(p in 1:(ncol(serie_original)-2)){
+        if(covar[t] == colnames(serie_original)[p+2]){
+          covar_novo[t]=p
+        }
+        if(covar[t] == colnames(serie_original)[1] | covar[t] == colnames(serie_original)[2]){
+          stop(paste(covar[t], "não é uma variável válida."))
+        }
+      }
+    }
+    if(NA%in%covar_novo | length(covar)!=length(covar_novo)){
+      stop("Os nomes das variáveis estão incorretos.")
+    }
+  }else{covar_novo = covar}
+  
+  covar_novo = sort(covar_novo)
+  
+  # Periodo da serie
+  mes_acum = as.numeric(substr(x = serie_original$Periodo[1], start = 6, stop = 7)) + 1
+  ano = as.numeric(substr(x = serie_original$Periodo[1], start = 1, stop = 4))
+  
+  # Calcular a variacao do preco do transformador
+  var_Transf = NA
+  for(k in 1:(length(serie_original[,2])-1)){
+    var_Transf[k] = ((serie_original[k+1,2] - serie_original[k,2])/serie_original[k,2])*100
+  }
+  
+  # Especificar inicio da series acumulada
+  mes_acum = as.numeric(substr(x = serie_original$Periodo[1], start = 6, stop = 7)) + 1
+  
+  preco_aux = matrix(NA, nrow(serie_original), length(coef))
+  colnames(preco_aux) = names(serie_original)[3:(length(coef)+2)]
+  for(i in 1:length(coef)){
+    preco_aux[,i] = coef[i]*serie_original[,(covar_novo[i]+2)]
+  }
+  Preco_Parametrico = apply(preco_aux, 1, sum)
+  PrecoAcum_Parametrico = cumsum(Preco_Parametrico)
+  PrecoAcum_Parametrico = ts(PrecoAcum_Parametrico[-1], start = c(ano, mes_acum), frequency=12)
+  
+  Preco_Acum =  ts(cumsum(var_Transf), start = c(ano, mes_acum), frequency=12)
+  
+  coef_aux = matrix(coef, 1, length(coef))
+  colnames(coef_aux) = colnames(serie_original)[(covar_novo+2)]
+  results = list(Preco_Parametrico = Preco_Parametrico, 
+                 PrecoParametrico_acumulado = PrecoAcum_Parametrico, 
+                 Preco_Transformador = Preco_Acum,
+                 Coeficientes = coef_aux)
+  return(results)
 }

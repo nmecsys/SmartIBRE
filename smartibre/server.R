@@ -149,7 +149,7 @@ shinyServer(function(input, output,session){
   # habilitar botões de visualizar séries se (não) houver algo selecionado na aba consulta
   observe({
     toggleState(id = "download_series_consultar", condition = !(length(consultar_codigos$data[input$tabela_consultar_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(as.numeric(consultar_codigos$data[input$tabela_consultar_rows_selected]),
-                                                                                                                                                                                   FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
+                                                                                                                                                                                     FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
     toggleState(id = "action_ver_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
   })
   
@@ -345,18 +345,18 @@ shinyServer(function(input, output,session){
   
   # habilitar botões de visualizar séries se (não) houver algo selecionado nos favoritos
   observe({
-    observe({
-      toggleState(id = "download_series_favoritos", condition = !(length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(as.numeric(codigos_favoritos$data[input$tabela_favoritos_rows_selected]),
-                                                                                                                                                                                       FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
-      toggleState(id = "action_ver_favoritos", condition = length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) != 0)
-    })
+    toggleState(id = "download_series_favoritos", condition = !(length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) == 0 | 
+                                                                  length(unique(unlist(data.frame(t(sapply(as.numeric(codigos_favoritos$data[input$tabela_favoritos_rows_selected]),
+                                                                                                           FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
+    toggleState(id = "action_ver_favoritos", condition = length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) != 0)
   })
-
+  
+  
   # tabela (favoritos)
   output$ver_tabela_favoritos <- renderTable({
     tail(series_favoritos()$df, n = 12)
   })
-
+  
   # gráfico (favoritos)
   grafico_favoritos <- reactive({
     if(is.null(series_favoritos()$st)){
@@ -368,11 +368,11 @@ shinyServer(function(input, output,session){
         dyLegend(labelsDiv = "legenda_grafico_favoritos", show = "always")
     }
   })
-   
+  
   output$grafico_favoritos <- renderDygraph({
     grafico_favoritos()
   })
-
+  
   # > visualizar gráfico e tabela
   output$ver_favoritos <- renderUI({
     if(is.null(series_favoritos()$st)){
@@ -395,7 +395,7 @@ shinyServer(function(input, output,session){
       )
     }
   })
-
+  
   observeEvent(input$action_ver_favoritos, {
     showModal(
       modalDialog(
@@ -405,7 +405,7 @@ shinyServer(function(input, output,session){
       )
     )
   })
-
+  
   # baixar gráfico.html
   output$download_grafico_favoritos <- downloadHandler(
     filename = "SMARTIBRE_grafico.html",
@@ -417,7 +417,7 @@ shinyServer(function(input, output,session){
     filename = "SMARTIBRE_series.csv",
     content = function(file) write.csv2(series_favoritos()$df, file, row.names = F, na = "")
   )
-
+  
   
   #series = paste("insert into favoritos(series) values(",input$,")")
   #dbSendQuery(conn,seires)
@@ -426,50 +426,64 @@ shinyServer(function(input, output,session){
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
   
+  # download das séries 
+  series_param <- reactive({
+    input$action_param
+    isolate({
+      codigo_y <- input$param_y
+      codigo_x <- strsplit(input$param_x, ",")[[1]]
+      baixar.list <- lapply(c(codigo_y,codigo_x), FUN = BETS.get, data.frame = T)
+      st <- na.omit(do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1]))))
+      frame <- data.frame(data = as.character(index(st)), st)
+      rownames(frame) <- 1:nrow(frame)
+      colnames(frame) <- c("Periodo", paste0("y_",codigo_y), paste0("x_",codigo_x))
+      frame[,1] <- as.character(frame[,1])
+      frame
+    })
+  })
+  
   # regressão paramétrica
-  # series_param <- reactive({
-  #   input$action_param
-  #   isolate({
-  #     codigo_y <- input$param_y
-  #     codigo_x <- strsplit(input$param_x, ",")[[1]]
-  #     baixar.list <- lapply(c(codigo_y,codigo_x), FUN = BETS.get, data.frame = T)
-  #     st <- na.omit(do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1]))))
-  #     frame <- data.frame(data = as.character(index(st)), st)
-  #     rownames(frame) <- 1:nrow(frame)
-  #     colnames(frame) <- c("Periodo", paste0("y_",codigo_y), paste0("x_",codigo_x))
-  #     frame[,1] <- as.character(frame[,1])
-  #     frame
-  #   })
-  # })
-  # 
-  # # regressão paramétrica
-  # reg_param <- reactive({
-  #   regressao_parametrica(series_param(), defx=input$def_x, defy=input$def_y, auto=TRUE)   
-  # })
-  # 
-  # # índice paramétrico
-  # ind_param <- reactive({
-  #   coefs <- strsplit(input$param_coefs, ",")[[1]]
-  #   indparam_fixo(series_param(), coef = coefs)
-  # })
-  # 
-  # output$reg_param <- renderDygraph({
-  #   x <- cbind(reg_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
-  #   colnames(x) <- c("y","fit.y")
-  #   dygraph(x)
-  # })
-  # 
-  # output$ind_param <- renderDygraph({
-  #   x <- cbind(ind_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
-  #   colnames(x) <- c("y","fit.y")
-  #   dygraph(x)
-  # })
+  reg_param <- reactive({
+    regressao_parametrica(series_param(), defx=input$def_x, defy=input$def_y, auto=TRUE)
+  })
   
-#     regressao_precotransformador =   
-#     # ?ndice param?trico
-#     indiceparametrico_fixo = indparam_fixo(serie_original, coef=c(0.3,0.7),
-#                                            covar=c("IPA", "Prod_Sid"))
+  # índice paramétrico
+  ind_param <- reactive({
+    input$action_param
+    isolate({
+      coefs <- strsplit(input$param_coefs, ",")[[1]]
+      indparam_fixo(series_param(), coef = as.numeric(coefs))
+    })
+  })
   
+  # gráfico da regressão paramétrica
+  output$reg_param <- renderDygraph({
+    x <- cbind(reg_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
+    colnames(x) <- c("y","fit.y")
+    dygraph(x) %>%
+      dySeries("y", color = "#000000", strokePattern = "dotted") %>%
+      dySeries("fit.y", color = "#3299CC", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#F7F7F7") %>%
+      dyLegend(labelsDiv = "legenda_grafico_reg_param", show = "always")
+  })
+  
+  # gráfico do índice paramétrico
+  output$ind_param <- renderDygraph({
+    x <- cbind(ind_param()$Preco_Transformador,ind_param()$PrecoParametrico_acumulado)
+    colnames(x) <- c("y","fit.y")
+    dygraph(x) %>%
+      dySeries("y", color = "#000000", strokePattern = "dotted") %>%
+      dySeries("fit.y", color = "#3299CC", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#F7F7F7") %>%
+      dyLegend(labelsDiv = "legenda_grafico_ind_param", show = "always")
+  })
+  
+  # habilitar/desabilitar inputs dependendo da escolha reg ou ind
+  observe({
+    toggleState(id = "param_coefs", condition = input$param_tipo == "Índice")
+    toggleState(id = "def_x", condition = input$param_tipo == "Regressão")
+    toggleState(id = "def_y", condition = input$param_tipo == "Regressão")
+  })
   output$aux <- renderPrint({reg_param()})
   output$aux2 <- renderPrint({ind_param()})
 })
