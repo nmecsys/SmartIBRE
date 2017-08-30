@@ -50,7 +50,6 @@ dashboardPage(
       
       # Item: Banco de séries temporais - Pesquisar ----------------------------------------------------------------- 
       tabItem(tabName = "bd_pesquisar",
-              
               wellPanel(style = "background-color:#F7F7F7;",
                         div("PESQUISAR", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
                         "Utilize os campos de pesquisa a seguir para encontrar séries temporais de interesse."),

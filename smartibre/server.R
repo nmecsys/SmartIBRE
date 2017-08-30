@@ -38,7 +38,6 @@ shinyServer(function(input, output,session){
   
   
   # MENU PESQUISAR -----------------------------------------------------------------------------
-  
   # > aba 'Busca' ----------------------------------------
   
   # buscar
@@ -88,7 +87,7 @@ shinyServer(function(input, output,session){
     if(is.null(consultar_codigos$data)){ NULL
     }else{
       codigos <- consultar_codigos$data
-      data <- data.frame(t(sapply(as.numeric(codigos), FUN = function(x){BETS.search(code = x, view = F)})))
+      data <- data.frame(t(sapply(codigos, FUN = function(x){BETS.search(code = x, view = F)})))
       rownames(data) <- 1:nrow(data)
       colnames(data) <- c("Cód.", "Descrição", "Unid.", "Period.", "Início", "Fim", "Fonte")
       data
@@ -98,7 +97,7 @@ shinyServer(function(input, output,session){
   # remover códigos selecionados na aba consultar
   observeEvent(input$action_remove_consulta, {
     codigos <- consultar_codigos$data
-    data <- data.frame(t(sapply(as.numeric(codigos), FUN = function(x){BETS.search(code = x, view = F)})))
+    data <- data.frame(t(sapply(codigos, FUN = function(x){BETS.search(code = x, view = F)})))
     consultar_codigos$data <- unlist(data[-c(input$tabela_consultar_rows_selected),"code"])
   })
   
@@ -121,7 +120,7 @@ shinyServer(function(input, output,session){
   # baixar séries selecionadas da aba 'Consultar'
   series_consultar <- reactive({
     selecionados <- consultar_codigos$data[input$tabela_consultar_rows_selected]
-    periodo <- unique(unlist(data.frame(t(sapply(as.numeric(selecionados), FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
+    periodo <- unique(unlist(data.frame(t(sapply(selecionados, FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
     if(length(periodo) > 1){
       list(nomes = NULL, df = NULL, st = NULL)
     }else{
@@ -148,7 +147,7 @@ shinyServer(function(input, output,session){
   
   # habilitar botões de visualizar séries se (não) houver algo selecionado na aba consulta
   observe({
-    toggleState(id = "download_series_consultar", condition = !(length(consultar_codigos$data[input$tabela_consultar_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(as.numeric(consultar_codigos$data[input$tabela_consultar_rows_selected]),
+    toggleState(id = "download_series_consultar", condition = !(length(consultar_codigos$data[input$tabela_consultar_rows_selected]) == 0 | length(unique(unlist(data.frame(t(sapply(consultar_codigos$data[input$tabela_consultar_rows_selected],
                                                                                                                                                                                      FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
     toggleState(id = "action_ver_consultar", condition = length(consultar_codigos$data[input$tabela_consultar_rows_selected]) != 0)
   })
@@ -273,7 +272,7 @@ shinyServer(function(input, output,session){
     if(is.null(codigos_favoritos$data)){ NULL
     }else{
       codigos <- codigos_favoritos$data
-      data <- data.frame(t(sapply(as.numeric(codigos), FUN = function(x){BETS.search(code = x, view = F)})))
+      data <- data.frame(t(sapply(codigos, FUN = function(x){BETS.search(code = x, view = F)})))
       rownames(data) <- 1:nrow(data)
       colnames(data) <- c("Cód.", "Descrição", "Unid.", "Period.", "Início", "Fim", "Fonte")
       data
@@ -283,7 +282,7 @@ shinyServer(function(input, output,session){
   # remover códigos selecionados na tabela favoritos
   observeEvent(input$action_remove_favoritos, {
     codigos <- codigos_favoritos$data
-    data <- data.frame(t(sapply(as.numeric(codigos), FUN = function(x){BETS.search(code = x, view = F)})))
+    data <- data.frame(t(sapply(codigos, FUN = function(x){BETS.search(code = x, view = F)})))
     codigos_favoritos$data <- unlist(data[-c(input$tabela_favoritos_rows_selected),"code"])
   })
   
@@ -318,7 +317,7 @@ shinyServer(function(input, output,session){
   # baixar séries selecionadas da tabela favoritos
   series_favoritos <- reactive({
     selecionados <- codigos_favoritos$data[input$tabela_favoritos_rows_selected]
-    periodo <- unique(unlist(data.frame(t(sapply(as.numeric(selecionados), FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
+    periodo <- unique(unlist(data.frame(t(sapply(selecionados, FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))
     if(length(periodo) > 1){
       list(nomes = NULL, df = NULL, st = NULL)
     }else{
@@ -346,7 +345,7 @@ shinyServer(function(input, output,session){
   # habilitar botões de visualizar séries se (não) houver algo selecionado nos favoritos
   observe({
     toggleState(id = "download_series_favoritos", condition = !(length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) == 0 | 
-                                                                  length(unique(unlist(data.frame(t(sapply(as.numeric(codigos_favoritos$data[input$tabela_favoritos_rows_selected]),
+                                                                  length(unique(unlist(data.frame(t(sapply(codigos_favoritos$data[input$tabela_favoritos_rows_selected],
                                                                                                            FUN = function(x){BETS.search(code = x, view = F)})))$periodicity))) > 1))
     toggleState(id = "action_ver_favoritos", condition = length(codigos_favoritos$data[input$tabela_favoritos_rows_selected]) != 0)
   })
@@ -484,6 +483,5 @@ shinyServer(function(input, output,session){
     toggleState(id = "def_x", condition = input$param_tipo == "Regressão")
     toggleState(id = "def_y", condition = input$param_tipo == "Regressão")
   })
-  output$aux <- renderPrint({reg_param()})
-  output$aux2 <- renderPrint({ind_param()})
+
 })
