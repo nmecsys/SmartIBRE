@@ -1,19 +1,30 @@
 # pacotes necessários
-library(shiny)
-library(shinydashboard)
-library(shinythemes)
-library(shinyBS)
-library(BETS)
-library(DBI)
-library(RMySQL)
-library(DT)
-library(dygraphs)
-library(RColorBrewer)
-library(htmlwidgets)
-library(zoo)
-library(shinyjs)
-library(xts)
-library(glmulti)
+ if(require(pacman)){
+ 
+   pacman::p_load(shiny,shinydashboard,shinythemes,shinyBS,BETS,DBI,RMySQL,DT,dygraphs,RColorBrewer,
+                  htmlwidgets,zoo,shinyjs,xts,glmulti)  
+ }else{
+   install.packages("pacman")
+   pacman::p_load(shiny,shinydashboard,shinythemes,shinyB,BETS,DBI,RMySQL,DT,dygraphs,RColorBrewer,
+                  htmlwidgets,zoo,shinyjs,xts,glmulti)  
+ }
+
+# 
+# library(shiny)
+# library(shinydashboard)
+# library(shinythemes)
+# library(shinyBS)
+# library(BETS)
+# library(DBI)
+# library(RMySQL)
+# library(DT)
+# library(dygraphs)
+# library(RColorBrewer)
+# library(htmlwidgets)
+# library(zoo)
+# library(shinyjs)
+# library(xts)
+# library(glmulti)
 
 # modelo paramétrico
 # source("funcoes_parametrico.R")
