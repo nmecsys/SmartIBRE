@@ -117,6 +117,8 @@ shinyServer(function(input, output,session){
   
   # >> visualizar séries temporais da aba 'consultar' -------------------
   
+  #output$ver <- renderPrint({series_consultar()})
+  
   # baixar séries selecionadas da aba 'Consultar'
   series_consultar <- reactive({
     selecionados <- consultar_codigos$data[input$tabela_consultar_rows_selected]

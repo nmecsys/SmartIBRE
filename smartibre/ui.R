@@ -1,6 +1,6 @@
 dashboardPage(
   skin = "blue",
-  title = "SMARTIBRE - NMECSYS",
+  title = "SMARTIBRE",
   header = dashboardHeader(title = div("SMARTIBRE", style = "font-family: sans-serif; font-weight:bold"),
                            dropdownMenuOutput("notif_user")
                            
@@ -22,27 +22,48 @@ dashboardPage(
       
       # Item: Página inicial ---------------------------------------------------------------------------------------- 
       tabItem(tabName = "home", 
-              wellPanel(style = "background-color:#F7F7F7;",
-                        div("Bem-vindo(a) ao SmartIBRE. Selecione o que você deseja fazer hoje.", style = "text-align:center; font-size:120%"),
-                        hr(),
-                        box(
-                          width = 3, background = "light-blue",
-                          tipify(actionLink("action_pesquisar", div("PESQUISAR SÉRIES TEMPORAIS", style = "font-weight:bold; text-align:center; color:#FFF")),"Busque e baixe séries temporais", placement = "top")
-                        ),
-                        box(
-                          width = 3, background = "light-blue",
-                          tipify(actionLink("action_favoritos", div("ACESSAR MEUS FAVORITOS", style = "font-weight:bold; text-align:center; color:#FFF")), "Acompanhe suas séries temporais favoritadas", placement = "bottom")
-                        ),
-                        
-                        box(
-                          width = 3, background = "light-blue",
-                          tipify(actionLink("action_relatorios", div("CRIAR RELATÓRIOS", style = "font-weight:bold; text-align:center; color:#FFF")), "Relatório de análise de séries temporais automático", placement = "bottom")
-                        ),
-                        box(
-                          width = 3, background = "light-blue",
-                          tipify(actionLink("action_parametrico", div("PREVISÃO", style = "font-weight:bold; text-align:center; color:#FFF")), "Crie um modelo paramétrico", placement = "top")
-                        ),
-                        br(),br(),hr()
+              div(style = "height: 900px",
+                  div("Bem-vindo(a) ao SmartIBRE!", style = "text-align:center; font-size:120%; font-weight:bold"), br(),
+                  
+                  box(
+                    width = 7, title = div("Dúvidas sobre o SmartIBRE? Aprenda aqui!", style = "font-weight:bold; font-size:95%"), height = "300px", 
+                    box(width = 4, background = "light-blue", title = div("Tutorial 1", style = "font-weight:bold"), height = "210px"),
+                    box(width = 4, background = "blue", title = div("Tutorial 2", style = "font-weight:bold"), height = "210px"),
+                    box(width = 4, background = "navy", title = div("Tutorial 3", style = "font-weight:bold"), height = "210px")
+                  ),
+                  box(
+                    width = 5, title = div("Notícia do dia", style = "font-weight:bold; font-size:95%"), height = "300px",
+                    div(style = "font-weight:bold", 
+                        "Brasileiro mais animado para gastar no Dia das Crianças "), 
+                    div(style = "color:#707070; font-size:90%", 
+                        "10-10-2017"),
+                    br(),
+                    div(img(src = "http://portalibre.fgv.br/lumis/portal/file/fileDownload.jsp?fileId=8A7C82C544B314F901451A3E03F378CA", height = 80),
+                        style = "text-align:center"), br(),
+                    div(style = "font-size:90%; text-align: justify",
+                        "Os brasileiros estão mais dispostos a desembolsar com os presentes do Dia das Crianças: a média de intenção de gasto ficou em R$ 82,50 este ano, contra R$ 78,60 em 2016. Fonte: Sondagem do Consumidor (FGV IBRE)."),
+                    div(style = "font-size:90%; text-align: justify",
+                        a("Clique aqui", href = "https://goo.gl/iQNeKM", target = "_blank"), "e leia a matéria na íntegra.")
+                  ),
+                  box(
+                    width = 12, title = div("Estimamos preços que você nem imagina", style = "font-weight:bold; font-size:95%"), height = "200px", 
+                    box(width = 2, title = div("Preço 1", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T),
+                    box(width = 2, title = div("Preço 2", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T),
+                    box(width = 2, title = div("Preço 3", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T),
+                    box(width = 2, title = div("Preço 4", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T),
+                    box(width = 2, title = div("Preço 5", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T),
+                    box(width = 2, title = div("Preço 6", style = "font-weight:normal; font-size:80%"), height = "110px", solidHeader = T)
+                  ),
+                  
+                  box(
+                    width = 7, title =  div("Artigo da semana", style = "font-weight:bold; font-size:95%"), height = "300px"
+                    
+                  ),
+                  box(
+                    width = 5, title = div("Conheça a FGV IBRE no Youtube", style = "font-weight:bold; font-size:95%"), height = "300px",
+                    div(HTML('<iframe width="90%" height="200" src="https://www.youtube.com/embed/HvfXgGsJ4TI" frameborder="0" allowfullscreen></iframe>'),
+                        style = "text-align:center; height:100%")
+                  )
               )
       ), # fim do Item: Página inicial
       
