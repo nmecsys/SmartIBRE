@@ -5,8 +5,8 @@ account: pedroferreira
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 221230
-bundleId: 1019759
+bundleId: 1020049
 url: https://pedroferreira.shinyapps.io/smartibre/
-when: 1507660212.13935
+when: 1507669549.99331
 asMultiple: FALSE
 asStatic: FALSE
