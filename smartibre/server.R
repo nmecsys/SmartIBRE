@@ -3,20 +3,68 @@ shinyServer(function(input, output,session){
   
   # PÁGINA INICIAL -------------------------------------------------------------------------
   
-  observeEvent(input$action_pesquisar,{
-    updateTabItems(session, "menu_esquerda", "bd_pesquisar")
+  # observeEvent(input$action_pesquisar,{
+  #   updateTabItems(session, "menu_esquerda", "bd_pesquisar")
+  # })
+  # 
+  # observeEvent(input$action_favoritos,{
+  #   updateTabItems(session, "menu_esquerda", "bd_favoritos")
+  # })
+  # 
+  # observeEvent(input$action_relatorios,{
+  #   updateTabItems(session, "menu_esquerda", "bd_relatorios")
+  # })
+  # 
+  # observeEvent(input$action_parametrico,{
+  #   updateTabItems(session, "menu_esquerda", "mod_param")
+  # })
+
+  output$produto_home1 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[1]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[1]), color = "#5E2612", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#CD9B9B", strokeColor = "#5E2612", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home1") %>%
+      dyAxis("y", axisLabelWidth = 20)
   })
   
-  observeEvent(input$action_favoritos,{
-    updateTabItems(session, "menu_esquerda", "bd_favoritos")
+  output$produto_home2 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[2]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[2]), color = "#CC4E5C", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#FFF0F5", strokeColor = "#CC4E5C", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home2") %>%
+      dyAxis("y", axisLabelWidth = 20)
   })
   
-  observeEvent(input$action_relatorios,{
-    updateTabItems(session, "menu_esquerda", "bd_relatorios")
+  output$produto_home3 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[3]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[3]), color = "#919191", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#F5F5F5", strokeColor = "#919191", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home3") %>%
+      dyAxis("y", axisLabelWidth = 20)
   })
   
-  observeEvent(input$action_parametrico,{
-    updateTabItems(session, "menu_esquerda", "mod_param")
+  output$produto_home4 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[4]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[4]), color = "#659D32", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#F0FFF0", strokeColor = "#659D32", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home4") %>%
+      dyAxis("y", axisLabelWidth = 20)
+  })
+  
+  output$produto_home5 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[5]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[5]), color = "#CC1100", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#FDF5E6", strokeColor = "#CC1100", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home5") %>%
+      dyAxis("y", axisLabelWidth = 20)
+  })
+  
+  output$produto_home6 <- renderDygraph({
+    dygraph(variacao[,produtos$codigo0[6]]) %>%
+      dySeries(name = "V1", label = as.character(produtos$nomes[6]), color = "#62B1F6", strokeWidth = 2) %>%
+      dyRangeSelector(fillColor = "#FDF5E6", strokeColor = "#62B1F6", dateWindow = data_produto_home) %>%
+      dyLegend(show = "always", labelsDiv = "legenda_produto_home6") %>%
+      dyAxis("y", axisLabelWidth = 20)
   })
   
   # NOTIFICAÇÕES PARA O USUÁRIO -------------------------------------------------------------

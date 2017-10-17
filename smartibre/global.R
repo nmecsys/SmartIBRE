@@ -15,6 +15,18 @@ library(shinyjs)
 library(xts)
 library(glmulti)
 
+# gráficos página inicial - preços que vc nem imagina! -------------------------------------------------
+dados_ipc <- readRDS("data/dados_ipc.rds")
+
+nomes <- c("CAFEZINHO","ACADEMIA DE GINÁSTICA","GÁS DE BUJÃO","REMÉDIO PARA DIABETE","PRESERVATIVO E LUBRIFICANTE","REVELAÇÃO DE FOTO")
+codigos <- c("120703","531103","220103","420133","420509","530505")
+produtos <- data.frame(nomes = nomes, codigos = codigos, stringsAsFactors = F)
+produtos$codigo0 <- paste0("cod_",produtos$codigos)
+variacao <- dados_ipc$variacao$subitens[,paste0("cod_",produtos$codigos)]
+
+data_produto_home <- c(tail(as.Date(variacao),18)[1], tail(as.Date(variacao),1))
+
+
 # modelo paramétrico
 # source("funcoes_parametrico.R")
 
@@ -42,7 +54,7 @@ library(glmulti)
 # 
 # }
 
-#deletar nos favoritos
+# deletar nos favoritos
 
 # #delete_fav <-function(code){
 #  # sql = paste0("de")

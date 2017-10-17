@@ -22,67 +22,124 @@ dashboardPage(
       
       # Item: Página inicial ---------------------------------------------------------------------------------------- 
       tabItem(tabName = "home", 
-              div(style = "height: 1000px",
+              div(style = "height: 1450px",
                   box(width = 12, solidHeader = T,
                       hr(), div("Bem-vindo(a) ao SmartIBRE!", style = "text-align:center; font-size:120%; font-weight:bold"), hr(),
+                      
+                      div("Portal IBRE - Notícias da semana", style = "font-weight:bold; background-color:#FCFCFC; font-size:115%; color:#33A1DE; padding-left:20px"), br(),
+                      
                       fluidRow(
-                        column(6,
+                        column(4,
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div("Notícia do dia - Portal IBRE", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
+                                   #div("Notícia do dia - Portal IBRE", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
                                    div(style = "font-weight:bold", "Brasileiro mais animado para gastar no Dia das Crianças "), 
                                    div(style = "color:#707070; font-size:90%", "10-10-2017"),
                                    br(),
                                    fluidRow(
-                                     column(4, div(img(src = "http://portalibre.fgv.br/lumis/portal/file/fileDownload.jsp?fileId=8A7C82C544B314F901451A3E03F378CA", height = 70, style = "border: 1px solid #33A1DE"), style = "text-align:center")),
-                                     column(8, div(style = "font-size:90%; text-align: justify", "Os brasileiros estão mais dispostos a desembolsar com os presentes do Dia das Crianças: a média de intenção de gasto ficou em R$ 82,50 este ano, contra R$ 78,60 em 2016. Fonte: Sondagem do Consumidor (FGV IBRE)."),
+                                     #column(4, div(img(src = "http://portalibre.fgv.br/lumis/portal/file/fileDownload.jsp?fileId=8A7C82C544B314F901451A3E03F378CA", height = 70, style = "border: 1px solid #33A1DE"), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "Os brasileiros estão mais dispostos a desembolsar com os presentes do Dia das Crianças: a média de intenção de gasto ficou em R$ 82,50 este ano, contra R$ 78,60 em 2016. Fonte: Sondagem do Consumidor (FGV IBRE)."),
                                             div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "https://goo.gl/iQNeKM", target = "_blank"), "e leia a matéria na íntegra."))
                                    )
                                )
                         ),
-                        column(6,
+                        column(4,
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div("Estimamos preços que você nem imagina...", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
+                                   #div("Notícia do dia - Portal IBRE", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
+                                   div(style = "font-weight:bold", "Brasileiro mais animado para gastar no Dia das Crianças "), 
+                                   div(style = "color:#707070; font-size:90%", "10-10-2017"),
                                    br(),
-                                   div("Preço 1", style = "font-weight:normal; font-size:80%"),
-                                   div("Preço 2", style = "font-weight:normal; font-size:80%"),
-                                   div("Preço 3", style = "font-weight:normal; font-size:80%"),
-                                   div("Preço 4", style = "font-weight:normal; font-size:80%"),
-                                   div("Preço 5", style = "font-weight:normal; font-size:80%"),
-                                   div("Preço 6", style = "font-weight:normal; font-size:80%")
+                                   fluidRow(
+                                     #column(4, div(img(src = "http://portalibre.fgv.br/lumis/portal/file/fileDownload.jsp?fileId=8A7C82C544B314F901451A3E03F378CA", height = 70, style = "border: 1px solid #33A1DE"), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "Os brasileiros estão mais dispostos a desembolsar com os presentes do Dia das Crianças: a média de intenção de gasto ficou em R$ 82,50 este ano, contra R$ 78,60 em 2016. Fonte: Sondagem do Consumidor (FGV IBRE)."),
+                                            div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "https://goo.gl/iQNeKM", target = "_blank"), "e leia a matéria na íntegra."))
+                                   )
+                               )
+                        ),
+                        column(4,
+                               div(style = "margin-left:20px; margin-right:20px; height:250px",
+                                   #div("Notícia do dia - Portal IBRE", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
+                                   div(style = "font-weight:bold", "Brasileiro mais animado para gastar no Dia das Crianças "), 
+                                   div(style = "color:#707070; font-size:90%", "10-10-2017"),
+                                   br(),
+                                   fluidRow(
+                                     #column(4, div(img(src = "http://portalibre.fgv.br/lumis/portal/file/fileDownload.jsp?fileId=8A7C82C544B314F901451A3E03F378CA", height = 70, style = "border: 1px solid #33A1DE"), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "Os brasileiros estão mais dispostos a desembolsar com os presentes do Dia das Crianças: a média de intenção de gasto ficou em R$ 82,50 este ano, contra R$ 78,60 em 2016. Fonte: Sondagem do Consumidor (FGV IBRE)."),
+                                            div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "https://goo.gl/iQNeKM", target = "_blank"), "e leia a matéria na íntegra."))
+                                   )
                                )
                         )
                       ),
                       hr(),
+                      div("Estimamos preços que você nem imagina...", style = "font-weight:bold; background-color:#FCFCFC; font-size:115%; color:#33A1DE; padding-left:20px"),
+                      
+                      div(style = "margin-left:20px; margin-right:20px; height:270px",
+                          
+                          br(),
+                          fluidRow(
+                            column(2,  div(textOutput("legenda_produto_home1"), style = "font-size:75%;margin-left:30px")),
+                            column(2,  div(textOutput("legenda_produto_home2"), style = "font-size:75%;margin-left:30px")),
+                            column(2,  div(textOutput("legenda_produto_home3"), style = "font-size:75%;margin-left:30px")),
+                            column(2,  div(textOutput("legenda_produto_home4"), style = "font-size:75%;margin-left:30px")),
+                            column(2,  div(textOutput("legenda_produto_home5"), style = "font-size:75%;margin-left:30px")),
+                            column(2,  div(textOutput("legenda_produto_home6"), style = "font-size:75%;margin-left:30px"))
+                          ),
+                          fluidRow(
+                            column(2, dygraphOutput("produto_home1", height = 200, width = "97%")),
+                            column(2, dygraphOutput("produto_home2", height = 200, width = "97%")),
+                            column(2, dygraphOutput("produto_home3", height = 200, width = "97%")),
+                            column(2, dygraphOutput("produto_home4", height = 200, width = "97%")),
+                            column(2, dygraphOutput("produto_home5", height = 200, width = "97%")),
+                            column(2, dygraphOutput("produto_home6", height = 200, width = "97%"))
+                          )
+                        
+                      ),
+                      hr(),
+                      div("Blog do IBRE", style = "font-weight:bold; background-color:#FCFCFC; font-size:115%; color:#33A1DE; padding-left:20px"), br(),
                       fluidRow(
-                        column(6, 
+                        column(4, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div("Artigo da semana - Blog do IBRE", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
-                                   div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
+                                                    div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
                                    div(style = "color:#707070; font-size:90%", "05-10-2017"),
                                    br(),
                                    fluidRow(
-                                     column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
-                                     column(8, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                     #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
                                             div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
                                    )
                                )
                         ),
-                        column(6,
+                        column(4, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div("FGV IBRE no Youtube", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
-                                   div(style = "font-weight:bold", "FGV/IBRE – 2º Seminário de Análise Conjuntural do IBRE (jun/16)"), 
-                                   div(style = "color:#707070; font-size:90%", "jun/2016"),
+                                   div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
+                                   div(style = "color:#707070; font-size:90%", "05-10-2017"),
                                    br(),
-                                   div(HTML('<iframe width="70%" height="170" src="https://www.youtube.com/embed/HvfXgGsJ4TI" frameborder="0" allowfullscreen></iframe>'),
-                                       style = "text-align:center; height:100%")
+                                   fluidRow(
+                                     #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                            div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
+                                   )
+                               )
+                        ),
+                        column(4, 
+                               div(style = "margin-left:20px; margin-right:20px; height:250px",
+                                   div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
+                                   div(style = "color:#707070; font-size:90%", "05-10-2017"),
+                                   br(),
+                                   fluidRow(
+                                     #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
+                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                            div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
+                                   )
                                )
                         )
+                        
                       ),
                       hr(),
+                      div("Dúvidas sobre como usar o SmartIBRE? Aprenda aqui!", style = "font-weight:bold; background-color:#FCFCFC; font-size:115%; color:#33A1DE; padding-left:20px"), br(),
+                      
                       fluidRow(
                         column(12, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div("Dúvidas sobre o SmartIBRE? Aprenda aqui!", style = "font-weight:bold; font-size:115%; color:#33A1DE"),
                                    div("Tutorial 1", style = "font-weight:bold"),
                                    div("Tutorial 2", style = "font-weight:bold"),
                                    div("Tutorial 3", style = "font-weight:bold")
