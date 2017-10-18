@@ -620,3 +620,58 @@ indparam_fixo = function(serie_original, coef, covar=covar_aux){
                  Coeficientes = coef_aux)
   return(results)
 }
+
+
+#Noticias do blog do ibre, pegando as 3 mais atuais
+
+portal_ibre = "http://portalibre.fgv.br/"
+blog_ibre_feed = "http://blogdoibre.fgv.br/rss/posts/posts-rss.xml"
+
+connection = function(){
+  conn = dbConnect(MySQL(),db="smartibredb",user="smartibre_user",password="123456",host="200.20.164.178",port=3306)
+}
+
+cleanFun <- function(htmlString) {
+  return(gsub("<.*?>", "", htmlString))
+}
+
+
+crawler_blog_ibre <- function(){
+  url_base <- "http://blogdoibre.fgv.br/rss/posts/posts-rss.xml"
+  html<-read_html(x = url_base)
+  feeds_link <- html %>% html_nodes(css = "article .h4 a") %>% html_attr(name = "href")
+  
+  
+  df<-data.frame(link=character(),
+                 manchete=character(),
+                 descricao=character(),
+                 date=character(),
+                 stringsAsFactors = FALSE
+  )
+  
+  
+  
+  xml  <- read_xml(x = url_base,encoding = "UTF-8")
+  link <- xml %>% html_nodes("item link") %>% html_text(trim = T)
+  manchete <- xml %>% html_nodes("item title") %>% html_text(trim=T) 
+  descricao <- xml %>% html_nodes("item description") %>% html_text(trim=T) %>% cleanFun()
+  date <- xml %>% html_nodes("item pubDate") %>% html_text(trim=T) %>% cleanFun()
+  date <- strptime(as.character(date), "%d/%m/%Y")
+  novo_df <- data.frame(link = link,
+                        manchete = manchete,
+                        descricao = descricao,
+                        date = date,
+                        stringsAsFactors = TRUE
+  )
+  df<- rbind(df,novo_df)
+  conn = connection()
+  message("Adicionando novas noticias no banco")
+  DBI::dbWriteTable(conn,name = "noticiasBI",df)
+  
+}
+
+
+conn = connection()
+noticias_bi = DBI::dbGetQuery(conn,"Select * from noticiasBI order by date desc limit 3")
+invisible(dbDisconnect(conn))  
+
