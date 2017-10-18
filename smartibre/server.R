@@ -473,6 +473,31 @@ shinyServer(function(input, output,session){
   
   # MENU RELATÓRIOS ----------------------------------------
   
+  # # parâmetros
+  # observe({
+  #   toggleState("esp_code_ts", input$code_ts == "Specify")
+  #   toggleState("esp_lag_max", input$lag_max == "Specify")
+  #   toggleState("esp_n_ahead", input$n_ahead == "Specify")
+  # })
+  # 
+  # code_ts <- reactive({
+  #     return(list(model = input$esp_code_ts))
+  # })
+  # 
+  # lag_max <- reactive({
+  #   return(list(model = input$esp_lag_max))
+  # })
+  # 
+  # n_ahead <- reactive({
+  #   return(list(model = input$esp_n_ahead))
+  # })
+  # 
+  # codigo_ts <- observeEvent(input$action_espec_code, {
+  #   BETS_search$data <- tryCatch(BETS.search(code = input$espec_code, view = F), error = function(e) NULL)
+  # })
+  
+  
+  
   # MENU MODELO PARAMÉTRICO ----------------------------------------
   
   # download das séries 
