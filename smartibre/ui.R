@@ -91,43 +91,43 @@ dashboardPage(
                             column(2, dygraphOutput("produto_home5", height = 200, width = "97%")),
                             column(2, dygraphOutput("produto_home6", height = 200, width = "97%"))
                           )
-                        
+                          
                       ),
                       hr(),
                       div("Blog do IBRE", style = "font-weight:bold; background-color:#FCFCFC; font-size:115%; color:#33A1DE; padding-left:20px"), br(),
                       fluidRow(
                         column(4, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                                    div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
-                                   div(style = "color:#707070; font-size:90%", "05-10-2017"),
+                                   div(style = "font-weight:bold", textOutput("bi_noticia1_manc")), 
+                                   div(style = "color:#707070; font-size:90%", textOutput("bi_noticia1_date")),
                                    br(),
                                    fluidRow(
                                      #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
-                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                     column(12, div(style = "font-size:90%; text-align: justify", textOutput("bi_noticia1_desc")),
                                             div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
                                    )
                                )
                         ),
                         column(4, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
-                                   div(style = "color:#707070; font-size:90%", "05-10-2017"),
+                                   div(style = "font-weight:bold", textOutput("bi_noticia2_manc")), 
+                                   div(style = "color:#707070; font-size:90%", textOutput("bi_noticia2_date")),
                                    br(),
                                    fluidRow(
                                      #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
-                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                     column(12, div(style = "font-size:90%; text-align: justify", textOutput("bi_noticia2_desc")),
                                             div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
                                    )
                                )
                         ),
                         column(4, 
                                div(style = "margin-left:20px; margin-right:20px; height:250px",
-                                   div(style = "font-weight:bold", "O debate econômico não precisa de espantalhos"), 
-                                   div(style = "color:#707070; font-size:90%", "05-10-2017"),
+                                   div(style = "font-weight:bold", textOutput("bi_noticia3_manc")), 
+                                   div(style = "color:#707070; font-size:90%", textOutput("bi_noticia3_date")),
                                    br(),
                                    fluidRow(
                                      #column(4, div(img(src = "http://blogdoibre.fgv.br/sites/blogdoibre.fgv.br/themes/libre/logo.png", height = 40), style = "text-align:center")),
-                                     column(12, div(style = "font-size:90%; text-align: justify", "O principal trabalho de um economista é buscar a dimensão correta das questões econômicas envolvidas em um determinado problema. Uma contribuição recente dentro desse espírito foi realizada por Bráulio Borges do IBRE que fez um exercício para avaliar qual o efeito das..."),
+                                     column(12, div(style = "font-size:90%; text-align: justify",textOutput("bi_noticia3_desc")),
                                             div(style = "font-size:90%; text-align: justify", a("Clique aqui", href = "http://blogdoibre.fgv.br/posts/o-debate-economico-nao-precisa-de-espantalhos", target = "_blank"), "e leia o artigo completo."))
                                    )
                                )

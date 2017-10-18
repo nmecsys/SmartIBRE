@@ -14,7 +14,15 @@ library(zoo)
 library(shinyjs)
 library(xts)
 library(glmulti)
- #oi
+library(xml2)
+library(XML)
+library(rvest)
+library(RCurl)
+#chat uol
+#oi - bianquinha
+#Olá - Daiane 
+
+
 # gráficos página inicial - preços que vc nem imagina! -------------------------------------------------
 dados_ipc <- readRDS("data/dados_ipc.rds")
 
@@ -635,19 +643,11 @@ cleanFun <- function(htmlString) {
   return(gsub("<.*?>", "", htmlString))
 }
 
-
+# jogar as noticias tudo no banco
 crawler_blog_ibre <- function(){
   url_base <- "http://blogdoibre.fgv.br/rss/posts/posts-rss.xml"
   html<-read_html(x = url_base)
   feeds_link <- html %>% html_nodes(css = "article .h4 a") %>% html_attr(name = "href")
-  
-  
-  df<-data.frame(link=character(),
-                 manchete=character(),
-                 descricao=character(),
-                 date=character(),
-                 stringsAsFactors = FALSE
-  )
   
   
   
@@ -656,22 +656,35 @@ crawler_blog_ibre <- function(){
   manchete <- xml %>% html_nodes("item title") %>% html_text(trim=T) 
   descricao <- xml %>% html_nodes("item description") %>% html_text(trim=T) %>% cleanFun()
   date <- xml %>% html_nodes("item pubDate") %>% html_text(trim=T) %>% cleanFun()
-  date <- strptime(as.character(date), "%d/%m/%Y")
+  manchete  = iconv(manchete,from="UTF-8",to="latin1")
+  descricao = iconv(descricao,from="UTF-8",to="latin1")
   novo_df <- data.frame(link = link,
                         manchete = manchete,
                         descricao = descricao,
                         date = date,
                         stringsAsFactors = TRUE
   )
-  df<- rbind(df,novo_df)
   conn = connection()
   message("Adicionando novas noticias no banco")
-  DBI::dbWriteTable(conn,name = "noticiasBI",df)
+  if("noticiasbi" %in% DBI::dbListTables(conn)){
+    dbSendQuery(conn,"drop table noticiasBI")
+  }
+  DBI::dbWriteTable(conn,name = "noticiasBI",novo_df,overwrite = TRUE)
   
+  invisible(dbDisconnect(conn)) 
 }
 
 
+crawler_blog_ibre()
+
 conn = connection()
-noticias_bi = DBI::dbGetQuery(conn,"Select * from noticiasBI order by date desc limit 3")
+noticias_bi = DBI::dbGetQuery(conn,"Select link,manchete,descricao,date from noticiasBI order by date desc limit 10")
+noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
+noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
+noticias_bi = unique(noticias_bi)
+noticias_bi$descricao[1] <- paste0(strsplit(noticias_bi$descricao, " ")[[1]][1:50], collapse = " ")
+noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao, " ")[[2]][1:50], collapse = " ")
+noticias_bi$descricao[3] <- paste0(strsplit(noticias_bi$descricao, " ")[[3]][1:50], collapse = " ")
 invisible(dbDisconnect(conn))  
+
 
