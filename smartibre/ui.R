@@ -252,6 +252,38 @@ dashboardPage(
               
               "RELATORIZE"
               
+              # wellPanel(style = "background-color:#F7F7F7;",
+              #           div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
+              #           "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório."),
+              # 
+              # sidebarLayout(
+              #   sidebarPanel(width = 2,style = "background-color:#F7F7F7;",
+              #                textInput("code_ts",label = "Código da série:", value = "", width = "90%"),
+              #                hr(),
+              #                selectInput("mode", label = "Tipo da análise:", multiple = F, width = "90%",
+              #                            choices = c("Selecione"="", "SARIMA", "GRNN", "HOLT-WINTERS")),
+              #                hr(),
+              #                numericInput("lag_max", label = "Lag máximo:", value = "", width = "90%"),
+              #                hr(),
+              #                numericInput("n_ahead", label = "Horizonte de previsão:", value = "", width = "90%"),
+              #                div(align = "center",
+              #                bsButton("run_parametros", "RUN", value = F, style = "primary"))
+              #   
+              #  ),
+              #   mainPanel(width = 9
+              #         
+              #             
+              #             
+              #   )
+              # ),
+              # 
+              # 
+              # hr()
+
+              
+              
+              
+              
       ), # fim do Item: Banco de séries temporais - Relatório
       
       

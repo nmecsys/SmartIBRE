@@ -648,12 +648,12 @@ crawler_blog_ibre <- function(){
   url_base <- "http://blogdoibre.fgv.br/rss/posts/posts-rss.xml"
   html<-read_html(x = url_base)
   feeds_link <- html %>% html_nodes(css = "article .h4 a") %>% html_attr(name = "href")
-  
-  
-  
+
+
+
   xml  <- read_xml(x = url_base,encoding = "UTF-8")
   link <- xml %>% html_nodes("item link") %>% html_text(trim = T)
-  manchete <- xml %>% html_nodes("item title") %>% html_text(trim=T) 
+  manchete <- xml %>% html_nodes("item title") %>% html_text(trim=T)
   descricao <- xml %>% html_nodes("item description") %>% html_text(trim=T) %>% cleanFun()
   date <- xml %>% html_nodes("item pubDate") %>% html_text(trim=T) %>% cleanFun()
   manchete  = iconv(manchete,from="UTF-8",to="latin1")
@@ -670,8 +670,8 @@ crawler_blog_ibre <- function(){
     dbSendQuery(conn,"drop table noticiasBI")
   }
   DBI::dbWriteTable(conn,name = "noticiasBI",novo_df,overwrite = TRUE)
-  
-  invisible(dbDisconnect(conn)) 
+
+  invisible(dbDisconnect(conn))
 }
 
 
@@ -685,6 +685,6 @@ noticias_bi = unique(noticias_bi)
 noticias_bi$descricao[1] <- paste0(strsplit(noticias_bi$descricao, " ")[[1]][1:50], collapse = " ")
 noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao, " ")[[2]][1:50], collapse = " ")
 noticias_bi$descricao[3] <- paste0(strsplit(noticias_bi$descricao, " ")[[3]][1:50], collapse = " ")
-invisible(dbDisconnect(conn))  
+invisible(dbDisconnect(conn))
 
 

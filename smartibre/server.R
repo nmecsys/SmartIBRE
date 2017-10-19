@@ -489,11 +489,16 @@ shinyServer(function(input, output,session){
   
   # MENU RELATÓRIOS ----------------------------------------
   
-  # # parâmetros
+  # #parâmetros
   # observe({
+  #   toggleState("esp_mode", input$mode_ts == "Specify")
   #   toggleState("esp_code_ts", input$code_ts == "Specify")
   #   toggleState("esp_lag_max", input$lag_max == "Specify")
   #   toggleState("esp_n_ahead", input$n_ahead == "Specify")
+  # })
+  # 
+  # mode <- reactive({
+  #   return(list(model = input$esp_mode))
   # })
   # 
   # code_ts <- reactive({
@@ -508,10 +513,11 @@ shinyServer(function(input, output,session){
   #   return(list(model = input$esp_n_ahead))
   # })
   # 
-  # codigo_ts <- observeEvent(input$action_espec_code, {
-  #   BETS_search$data <- tryCatch(BETS.search(code = input$espec_code, view = F), error = function(e) NULL)
+  # 
+  # relatorio <- reactive({
+  #   BETS.report(mode = mode(), ts = code_ts(), parameters = list(lag_max(), n_ahead()))
   # })
-  
+  # 
   
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
