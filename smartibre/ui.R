@@ -13,7 +13,11 @@ dashboardPage(
                          menuSubItem("Gerenciar Favoritos", tabName = "bd_favoritos"),
                          menuSubItem("Relatórios", tabName = "bd_relatorios")
                 ),
-                menuItem("Modelo Paramétrico", tabName = "mod_param", icon = icon("dashboard"))
+                menuItem("Modelo Paramétrico", tabName = "bd_relatorios", icon = icon("dashboard")),
+                menuItem("Relatórios", tabName = "mod_param", icon = icon("file"), startExpanded = T,
+                                  menuSubItem("Gerar", tabName = "bd_relatorios")
+                                  
+                         )
     )
   ),
   body = dashboardBody(#style = "background-color:#FFFFFF",
@@ -257,11 +261,13 @@ dashboardPage(
                         "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório."),
 
               sidebarLayout(
-                sidebarPanel(width = 2,style = "background-color:#F7F7F7;",
+                sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
                              textInput("code_ts",label = "Código da série:", value = "", width = "90%"),
+                              
                              hr(),
                              selectInput("mode", label = "Tipo da análise:", multiple = F, width = "90%",
                                          choices = c("Selecione"="", "SARIMA", "GRNN", "HOLT-WINTERS")),
+
                              hr(),
                              numericInput("lag_max", label = "Lag máximo:", value = "", width = "90%"),
                              hr(),
@@ -270,10 +276,9 @@ dashboardPage(
                              bsButton("run_parametros", "RUN", value = F, style = "primary"))
 
                ),
-                mainPanel(width = 9
-
-
-
+                mainPanel(width = 8,
+                          Sys.sleep(time = 0.5),
+                          shiny::includeHTML(path="data/teste_includeHTML.html")
                 )
               ),
 
