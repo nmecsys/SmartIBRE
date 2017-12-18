@@ -490,34 +490,34 @@ shinyServer(function(input, output,session){
   # MENU RELATÓRIOS ----------------------------------------
   
   # #parâmetros
-  # observe({
-  #   toggleState("esp_mode", input$mode_ts == "Specify")
-  #   toggleState("esp_code_ts", input$code_ts == "Specify")
-  #   toggleState("esp_lag_max", input$lag_max == "Specify")
-  #   toggleState("esp_n_ahead", input$n_ahead == "Specify")
-  # })
-  # 
-  # mode <- reactive({
-  #   return(list(model = input$esp_mode))
-  # })
-  # 
-  # code_ts <- reactive({
-  #     return(list(model = input$esp_code_ts))
-  # })
-  # 
-  # lag_max <- reactive({
-  #   return(list(model = input$esp_lag_max))
-  # })
-  # 
-  # n_ahead <- reactive({
-  #   return(list(model = input$esp_n_ahead))
-  # })
-  # 
-  # 
-  # relatorio <- reactive({
-  #   BETS.report(mode = mode(), ts = code_ts(), parameters = list(lag_max(), n_ahead()))
-  # })
-  # 
+  observe({
+    toggleState("esp_mode", input$mode_ts == "Specify")
+    toggleState("esp_code_ts", input$code_ts == "Specify")
+    toggleState("esp_lag_max", input$lag_max == "Specify")
+    toggleState("esp_n_ahead", input$n_ahead == "Specify")
+  })
+
+  mode <- reactive({
+    return(list(model = input$esp_mode))
+  })
+
+  code_ts <- reactive({
+      return(list(model = input$esp_code_ts))
+  })
+
+  lag_max <- reactive({
+    return(list(model = input$esp_lag_max))
+  })
+
+  n_ahead <- reactive({
+    return(list(model = input$esp_n_ahead))
+  })
+
+
+  relatorio <- reactive({
+    BETS.report(mode = mode(), ts = code_ts(), parameters = list(lag_max(), n_ahead()))
+  })
+
   
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
