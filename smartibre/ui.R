@@ -290,11 +290,11 @@ dashboardPage(
                                        buttonLabel = "Upload", placeholder = "Arquivo .png/jpg"),
                              hr(),
                              div(align = "center",
-                                 bsButton("run_parametros", "RUN", value = F, style = "primary"))
+                                 bsButton("run_parametros_dashboard", "RUN", value = F, style = "primary"))
                            
                 ),
                 sidebarPanel(width = 9,
-                             shiny::htmlOutput(outputId = "")
+                             shiny::htmlOutput(outputId = "reltorio")
                 )
                 
                 
@@ -348,7 +348,7 @@ dashboardPage(
                                            resize = NULL),
                              hr(),
                              div(align = "center",
-                                 bsButton("run_parametros", "RUN", value = F, style = "primary"))
+                                 bsButton("run_parametros_relatorio", "RUN", value = F, style = "primary"))
                              
                     
                              

@@ -592,9 +592,33 @@ shinyServer(function(input, output,session){
   
 
   #definindo os pâmetros principais
-  observeEvent(input$run_parametros, {
-    aux_repost = BETS::BETS.report(mode = input$mode, code  = input$code_ts,report.file=name_file_aux)
+  observeEvent(input$run_parametros_reltorio, {
+     aux = BETS::BETS.report(report.file = "data/relatoriosmartibre")
+     aux1= as.vector(list.files("data/"))
+     for(i in 1:length(aux1)){
+       if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
+         output$relatorio = aux1[i]
+         break
+       }
+     }
+      
   })
+  
+  # observeEvent(input$run_parametros_dashboard, {
+  #  
+  #   aux2 = BETS::BETS.dashboard(report.file = "data/dashboardsmartibre")
+  #   aux3= as.vector(list.files("data/"))
+  #   for(i in 1:length(aux3)){
+  #     if("dashboardsmartibre" %in% stringr::str_split(aux3[i],pattern = "_")[[1]]){
+  #       output$dasboard = aux3[i]
+  #       break()
+  #     }
+  #   }
+    
+    
+  })
+  
+  
   
   # Dashboards ----------------------------------------------------------------------------------------------------
   # name_file = paste0("default_",input$code_ts,".html")
