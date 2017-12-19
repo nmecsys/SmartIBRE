@@ -14,8 +14,9 @@ dashboardPage(
                         
                 ),
                 menuItem("Modelo Paramétrico", tabName = "bd_relatorios", icon = icon("dashboard")),
-                menuItem("Relatórios", tabName = "mod_param", icon = icon("file"), startExpanded = T,
-                                  menuSubItem("Gerar", tabName = "bd_relatorios")
+                menuItem("Documentos Dinâmicos", tabName = "documentos_dinamicos", icon = icon("file"), startExpanded = T,
+                                  menuSubItem("Relatórios", tabName = "bd_relatorios"),
+                                  menuSubItem("Dashboards", tabName = "bd_dashboards")
                                   
                          )
     )
@@ -252,13 +253,52 @@ dashboardPage(
       
       
       # Item: Banco de séries temporais - Relatório ----------------------------------------------------------------- 
-      tabItem(tabName = "bd_relatorios",
+     
+      
+      # tabItem(tabName = "documentos_dinamicos"
+      #         
+      #         ),
+      
+      
+      
+      # Item: Documentos dinâmicos - Dashboards
+      
+      tabItem(tabName = "bd_dashboards",
               
               
               
               wellPanel(style = "background-color:#F7F7F7;",
                         div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
                         "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório."),
+              
+              sidebarLayout(
+                sidebarPanel(width = 3,style = "background-color:#F7F7F7;"
+                           
+                ),
+                sidebarPanel(width = 9,
+                             shiny::htmlOutput(outputId = "")
+                )
+                
+                
+              ),
+              
+              
+              
+              
+              hr()
+              
+              
+      ),
+      
+      # Item: Documentos dinâmicos - Relatórios
+      
+       tabItem(tabName = "bd_relatorios",
+              
+              
+              
+              wellPanel(style = "background-color:#F7F7F7;",
+                        div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
+                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do dashboard"),
 
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
@@ -292,6 +332,8 @@ dashboardPage(
               ),
 
 
+              
+              
               hr()
 
               
