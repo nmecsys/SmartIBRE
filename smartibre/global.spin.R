@@ -673,13 +673,13 @@ crawler_blog_ibre <- function(){
   descricao <- xml %>% html_nodes("item description") %>% html_text(trim=T) %>% cleanFun()
   date <- xml %>% html_nodes("item pubDate") %>% html_text(trim=T) %>% cleanFun()
   
-  manchete= iconv(manchete,from="UTF-8",to="latin1")
-  #descricao = iconv(descricao,from="UTF-8",to="latin1") 
+  manchete  = iconv(manchete,from="UTF-8",to="latin1")
+  #descricao = iconv(descricao,from="UTF-8",to="latin1")
   novo_df <- data.frame(link = link,
                         manchete = manchete,
                         descricao = descricao,
                         date = date,
-                        stringsAsFactors = TRUE
+                        stringsAsFactors = FALSE
   )
   conn = connection()
   message("Adicionando novas noticias no banco")
@@ -696,8 +696,8 @@ crawler_blog_ibre()
 
 conn = connection()
 noticias_bi = DBI::dbGetQuery(conn,"Select link,manchete,descricao,date from noticiasBI order by date desc limit 10")
-# noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
-# noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
+noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
+noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
 noticias_bi = unique(noticias_bi)
 noticias_bi$descricao[1] <- paste0(strsplit(noticias_bi$descricao, " ")[[1]][1:50], collapse = " ")
 noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao, " ")[[2]][1:50], collapse = " ")

@@ -276,12 +276,21 @@ dashboardPage(
                              selectInput("type", label = "Tipo do dashboard:", multiple = F, width = "90%",
                                          choices = c("Selecione"="", "Macro Situation", "Customizado")),
                              
+                             
+                             hr(),
+                             
+                             div(align ='center',
+                                 helpText("Parâmetros adicionais:")),
+                             checkboxInput("param_add", "Incluir", FALSE),
+                             textInput("dashboard_autor", "Autor", value = "", width = NULL, placeholder = NULL),
+                             textInput("dashboard_url", "URL", value = "", width = NULL, placeholder = NULL),
+                             fileInput("dashboard_txt", "Texto Personalizado", multiple = FALSE, accept = NULL, width = NULL,
+                                       buttonLabel = "Upload", placeholder = "Arquivo .txt"),
+                             fileInput("dashboard_logo", "Sua Logo", multiple = FALSE, accept = NULL, width = NULL,
+                                       buttonLabel = "Upload", placeholder = "Arquivo .png/jpg"),
                              hr(),
                              div(align = "center",
-                                 bsButton("run_parametros", "RUN", value = F, style = "primary")),
-                             hr(),
-                             div(align ='center',
-                                 helpText("Parâmetros adicionais:"))
+                                 bsButton("run_parametros", "RUN", value = F, style = "primary"))
                            
                 ),
                 sidebarPanel(width = 9,
@@ -311,18 +320,17 @@ dashboardPage(
 
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
-                             textInput("code_ts",label = "Código da série:", value = "", width = "90%"),
+                             textInput("code_ts",label = "Código da série:", value = "Ex: 21864", width = "90%"),
                               
                              hr(),
                              selectInput("mode", label = "Tipo da análise:", multiple = F, width = "90%",
                                          choices = c("Selecione"="", "SARIMA", "GRNN", "HOLT-WINTERS")),
 
                              hr(),
-                             numericInput("lag_max", label = "Lag máximo:", value = "", width = "90%"),
+                             numericInput("lag_max", label = "Lag máximo:", value = "48", width = "90%"),
                              hr(),
-                             numericInput("n_ahead", label = "Horizonte de previsão:", value = "", width = "90%"),
-                             div(align = "center",
-                             bsButton("run_parametros", "RUN", value = F, style = "primary")),
+                             numericInput("n_ahead", label = "Horizonte de previsão:", value = "12", width = "90%"),
+                            
                              hr(),
                              div(align ='center',
                              helpText("Parâmetros adicionais:")),
@@ -331,8 +339,19 @@ dashboardPage(
                                        language = "en", width = ),
                              dateInput("window_fim", "Janela Fim", value = ontem, min = NULL, max = NULL,
                                        format = "yyyy-mm-dd", startview = "month", weekstart = 0,
-                                       language = "en", width = )
-                            
+                                       language = "en", width = ),
+                             textInput("relatorio_ur.test", "Aplicar o Ur.test", value = "Ex: list(mode = 'ADF', type = 'drift', lags = 11, selectlags = 'BIC', level = '5pct')", width = NULL, placeholder = NULL),
+                             textInput("relatorio_box.test", "Aplicar o Box.test", value = "Ex: list(lag = 2)", width = NULL, placeholder = NULL),
+                             textAreaInput("relatorio_dummy", "Variável Dummy", value = "start = NULL, end = NULL, frequency = 12, year = NULL, 
+                                           month = NULL, quarter = NULL,  date = NULL, from = NULL, to = NULL", 
+                                           width = NULL, height = 200,cols = NULL, rows = NULL, placeholder = NULL, 
+                                           resize = NULL),
+                             hr(),
+                             div(align = "center",
+                                 bsButton("run_parametros", "RUN", value = F, style = "primary"))
+                             
+                    
+                             
 
                ),
                sidebarPanel(width = 9,
