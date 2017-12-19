@@ -10,8 +10,8 @@ dashboardPage(
                 menuItem("Página Inicial", tabName = "home", icon = icon("home")),
                 menuItem("Banco de séries temporais", icon = icon("database"), startExpanded = T,
                          menuSubItem("Pesquisar", tabName = "bd_pesquisar"),
-                         menuSubItem("Gerenciar Favoritos", tabName = "bd_favoritos"),
-                         menuSubItem("Relatórios", tabName = "bd_relatorios")
+                         menuSubItem("Gerenciar Favoritos", tabName = "bd_favoritos")
+                        
                 ),
                 menuItem("Modelo Paramétrico", tabName = "bd_relatorios", icon = icon("dashboard")),
                 menuItem("Relatórios", tabName = "mod_param", icon = icon("file"), startExpanded = T,
@@ -277,8 +277,10 @@ dashboardPage(
 
                ),
                 mainPanel(width = 8,
-                          Sys.sleep(time = 0.5),
-                          shiny::includeHTML(path="data/teste_includeHTML.html")
+                          wellPanel(width = 200,
+                            shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
+                          )##fim sidebarPanel
+                          
                 )
               ),
 
