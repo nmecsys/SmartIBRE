@@ -23,6 +23,13 @@ library(RCurl)
 #Olá - Daiane 
 
 
+##### Constantes
+
+hoje = Sys.Date()
+####
+
+
+
 # gráficos página inicial - preços que vc nem imagina! -------------------------------------------------
 dados_ipc <- readRDS("data/dados_ipc.rds")
 

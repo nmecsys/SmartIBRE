@@ -581,4 +581,22 @@ shinyServer(function(input, output,session){
     toggleState(id = "def_y", condition = input$param_tipo == "Regressão")
   })
 
+  # Relatórios ----------------------------------------------------------------------------------------------------
+  
+  # name_file = paste0("default_",input$code_ts,".html")
+  # name_file_aux = "default"
+  # #lista de parametros adicionais
+  # paramns = vector()
+  # i = 1
+  # 
+  
+  #definindo os pâmetros principais
+  observeEvent(input$run_parametros, {
+    aux = BETS::BETS.report(mode = input$mode, code  = input$code_ts,report.file=name_file_aux)
+  })
+  
+  #output$relatorio_html 
+  
+  
+  
 })

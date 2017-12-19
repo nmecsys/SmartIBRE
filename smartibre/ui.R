@@ -273,15 +273,22 @@ dashboardPage(
                              hr(),
                              numericInput("n_ahead", label = "Horizonte de previsão:", value = "", width = "90%"),
                              div(align = "center",
-                             bsButton("run_parametros", "RUN", value = F, style = "primary"))
+                             bsButton("run_parametros", "RUN", value = F, style = "primary")),
+                             hr(),
+                             div(align ='center',
+                             helpText("Parâmetros adicionais:")),
+                             dateInput("window_inicio", "Janela Início", value = hoje, min = NULL, max = NULL,
+                                       format = "yyyy-mm-dd", startview = "month", weekstart = 0,
+                                       language = "en", width = )
+                            
 
                ),
-                mainPanel(width = 8,
-                          wellPanel(width = 200,
-                            shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
+               sidebarPanel(width = 9,
+                            shiny::htmlOutput(outputId = "relatorio_html")
+                            #shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
                           )##fim sidebarPanel
                           
-                )
+                
               ),
 
 
