@@ -272,7 +272,16 @@ dashboardPage(
                         "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório."),
               
               sidebarLayout(
-                sidebarPanel(width = 3,style = "background-color:#F7F7F7;"
+                sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
+                             selectInput("type", label = "Tipo do dashboard:", multiple = F, width = "90%",
+                                         choices = c("Selecione"="", "Macro Situation", "Customizado")),
+                             
+                             hr(),
+                             div(align = "center",
+                                 bsButton("run_parametros", "RUN", value = F, style = "primary")),
+                             hr(),
+                             div(align ='center',
+                                 helpText("Parâmetros adicionais:"))
                            
                 ),
                 sidebarPanel(width = 9,
@@ -318,6 +327,9 @@ dashboardPage(
                              div(align ='center',
                              helpText("Parâmetros adicionais:")),
                              dateInput("window_inicio", "Janela Início", value = hoje, min = NULL, max = NULL,
+                                       format = "yyyy-mm-dd", startview = "month", weekstart = 0,
+                                       language = "en", width = ),
+                             dateInput("window_fim", "Janela Fim", value = ontem, min = NULL, max = NULL,
                                        format = "yyyy-mm-dd", startview = "month", weekstart = 0,
                                        language = "en", width = )
                             

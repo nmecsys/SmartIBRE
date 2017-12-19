@@ -26,6 +26,7 @@ library(RCurl)
 ##### Constantes
 
 hoje = Sys.Date()
+ontem = Sys.Date()-1
 ####
 
 

@@ -593,11 +593,22 @@ shinyServer(function(input, output,session){
 
   #definindo os pâmetros principais
   observeEvent(input$run_parametros, {
-    aux = BETS::BETS.report(mode = input$mode, code  = input$code_ts,report.file=name_file_aux)
+    aux_repost = BETS::BETS.report(mode = input$mode, code  = input$code_ts,report.file=name_file_aux)
   })
   
+  # Dashboards ----------------------------------------------------------------------------------------------------
+  # name_file = paste0("default_",input$code_ts,".html")
+  # name_file_aux = "default"
+  # #lista de parametros adicionais
+  # paramns = vector()
+  # i = 1
   
   
+  
+  #definindo os pâmetros principais
+  observeEvent(input$run_parametros, {
+    aux_dashboards = BETS::BETS.dashboard(type = ,charts = charts ,parameters = parameters)
+  })
   
   
 })
