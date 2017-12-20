@@ -1,4 +1,4 @@
-shinyServer(function(input, output,session){
+ shinyServer(function(input, output,session){
   
   
   # PÁGINA INICIAL -------------------------------------------------------------------------
@@ -522,7 +522,6 @@ shinyServer(function(input, output,session){
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
   
-  
   # download das séries 
   series_param <- reactive({
     input$action_param
@@ -657,28 +656,6 @@ shinyServer(function(input, output,session){
     toggleState(id = "def_y", condition = input$paramTipo == "Regressao")
   })
   
-  # download indicador
-  output$download_reg_param <- downloadHandler(
-    filename = "regressao_parametrica.csv",
-    content = function(file){ 
-      x <- cbind( reg_param()$preco_acumulado, reg_param()$serie_ajustada)
-      x <- data.frame(data = as.Date(x), x)
-      colnames(x) <- c("data","Y","indicador")
-      write.csv2(x, file, row.names = F, na = "")
-    }
-  )
-  
-  output$download_ind_param <- downloadHandler(
-    filename = "ind_parametrico.csv",
-    content = function(file){ 
-      x <- cbind(ind_param()$Preco_Transformador,ind_param()$PrecoParametrico_acumulado)
-      x <- data.frame(data = as.Date(x), x)
-      colnames(x) <- c("data","Y","indicador")
-      write.csv2(x, file, row.names = F, na = "")
-    }
-  )
-  
-  
   # Relatórios ----------------------------------------------------------------------------------------------------
   
   # name_file = paste0("default_",input$code_ts,".html")
@@ -690,17 +667,40 @@ shinyServer(function(input, output,session){
   
   
   #definindo os pâmetros principais
-  # observeEvent(input$run_parametros_reltorio, {
-  #    aux = BETS::BETS.report(report.file = "data/relatoriosmartibre")
-  #    aux1= as.vector(list.files("data/"))
-  #    for(i in 1:length(aux1)){
-  #      if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
-  #        output$relatorio = aux1[i]
-  #        break
-  #      }
-  #    }
+  
+  # observeEvent(input$run_parametros_relatorio, {
+  #   withProgress(message = 'Making plot', value = 0, {
+  #     # Number of times we'll go through the loop
+  #     n <- 500
   #     
+  #     for (i in 1:n) {
+  #       # Each time through the loop, add another row of data. This is
+  #       # a stand-in for a long-running computation.
+  #       # Increment the progress bar, and update the detail text.
+  #       incProgress(1/n, detail = paste("Doing part", i))
+  #       # Pause for 0.1 seconds to simulate a long computation.
+  #       Sys.sleep(0.1)
+  #     }
+  #   })
   # })
+  
+  
+  
+  observeEvent(input$run_parametros_relatorio, {
+    BETS::BETS.report(report.file = "data/relatoriosmartibre")
+     aux1= as.vector(list.files("data/"))
+     # for(i in 1:length(aux1)){
+     #   if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
+         output$relatorio = renderUI({
+           shiny::includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
+           # }
+         #break
+       # }
+     })
+})
+  
+  
+  
   
   # observeEvent(input$run_parametros_dashboard, {
   #  
