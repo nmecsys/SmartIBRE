@@ -522,6 +522,7 @@ shinyServer(function(input, output,session){
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
   
+  
   # download das séries 
   series_param <- reactive({
     input$action_param
@@ -655,6 +656,28 @@ shinyServer(function(input, output,session){
     toggleState(id = "def_x", condition = input$paramTipo == "Regressao")
     toggleState(id = "def_y", condition = input$paramTipo == "Regressao")
   })
+  
+  # download indicador
+  output$download_reg_param <- downloadHandler(
+    filename = "regressao_parametrica.csv",
+    content = function(file){ 
+      x <- cbind( reg_param()$preco_acumulado, reg_param()$serie_ajustada)
+      x <- data.frame(data = as.Date(x), x)
+      colnames(x) <- c("data","Y","indicador")
+      write.csv2(x, file, row.names = F, na = "")
+    }
+  )
+  
+  output$download_ind_param <- downloadHandler(
+    filename = "ind_parametrico.csv",
+    content = function(file){ 
+      x <- cbind(ind_param()$Preco_Transformador,ind_param()$PrecoParametrico_acumulado)
+      x <- data.frame(data = as.Date(x), x)
+      colnames(x) <- c("data","Y","indicador")
+      write.csv2(x, file, row.names = F, na = "")
+    }
+  )
+  
   
   # Relatórios ----------------------------------------------------------------------------------------------------
   

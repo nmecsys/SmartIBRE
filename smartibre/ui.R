@@ -408,14 +408,16 @@ dashboardPage(
                                     conditionalPanel("input.paramTipo == 'Regressao'",
                                     div(tags$b("Custo Paramétrico")), br(),
                                                      fluidRow(
-                                                       column(10, br(), dygraphOutput("reg_param")),
+                                                       column(10, br(), dygraphOutput("reg_param"), br(),
+                                                              downloadButton("download_reg_param", 'Exportar Indicador')),
                                                        column(2, br(), textOutput("legenda_grafico_reg_param"))
                                                      )
                                     ),
                                     conditionalPanel("input.paramTipo == 'Indice'",
                                                      div(tags$b("Custo Paramétrico")), br(),
                                                      fluidRow(
-                                                       column(10, br(), dygraphOutput("ind_param")),
+                                                       column(10, br(), dygraphOutput("ind_param"), br(),
+                                                              downloadButton("download_ind_param", 'Exportar Indicador')),
                                                        column(2, br(), textOutput("legenda_grafico_ind_param"))
                                                      )
                                     )
