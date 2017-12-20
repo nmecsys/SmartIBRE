@@ -13,7 +13,7 @@ dashboardPage(
                          menuSubItem("Gerenciar Favoritos", tabName = "bd_favoritos")
                         
                 ),
-                menuItem("Modelo Paramétrico", tabName = "bd_relatorios", icon = icon("dashboard")),
+                menuItem("Modelo Paramétrico", tabName = "mod_param", icon = icon("dashboard")),
                 menuItem("Documentos Dinâmicos", tabName = "documentos_dinamicos", icon = icon("file"), startExpanded = T,
                                   menuSubItem("Relatórios", tabName = "bd_relatorios"),
                                   menuSubItem("Dashboards", tabName = "bd_dashboards")
@@ -380,26 +380,40 @@ dashboardPage(
               
               wellPanel(style = "background-color:#F7F7F7;",
                         div("Custos Paramétricos", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
-                        "Estima automaticamente um modelo paramétrico."),
+                        "Objetivo: estimar parametricamente a variação dos custos de um produto/serviço de acordo com suas as “características”."),
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
-                             radioButtons("param_tipo", label = "Custo Paramétrico", choices = c("Regressão","Índice"), inline = T),
+                             radioButtons("paramTipo", label = "Custo Paramétrico", choices = c("Regressao","Indice"), inline = T),
                              textInput("param_y", label = "Y - série resposta (código):", value = "4189", width = "90%"),
                              textInput("param_x", label = "X - séries explicativas (códigos):", value = "433,7832", width = "90%"),
                              numericInput("def_y", label = "Defasagem Y:", value = 0, min = 0, step = 1, width = "90%"),
-                             numericInput("def_x", label = "Defasagem X:", value = 1, min = 1, step = 1, width = "90%"),
+                             numericInput("def_x", label = "Defasagem X:", value = 0, min = 0, step = 1, width = "90%"),
                              textInput("param_coefs", label = "Coeficientes covariáveis:", value = "0.7,0.3", width = "90%"),
-                             bsButton("action_param", label = span("Executar", style = "font-weight:bold"), icon = icon("check"), style = "primary")
+                             div(bsButton("action_param", label = span("Executar", style = "font-weight:bold"), style = "primary"), style = "text-align:center")
                 ),
                 mainPanel(width = 9,
                           wellPanel(style = "background-color:#F7F7F7;",
-                                    conditionalPanel("input.param_tipo == 'Regressão'",
+                                    
+                                    div(tags$b("Especificações do modelo")), br(),
+                                    tags$ul(
+                                      tags$li("Equação geral:",textOutput("especificacoes", inline = T)),
+                                      tags$li("Variáveis:",div(tableOutput("series_names"), style = "font-size:90%")),
+                                      tags$li("Modelo final:", textOutput("reg_param_mod_final", inline = T))
+                                    )
+                          ),
+                         
+                          wellPanel(style = "background-color:#F7F7F7;",
+                                    
+      
+                                    conditionalPanel("input.paramTipo == 'Regressao'",
+                                    div(tags$b("Índice")), br(),
                                                      fluidRow(
                                                        column(10, br(), dygraphOutput("reg_param")),
                                                        column(2, br(), textOutput("legenda_grafico_reg_param"))
                                                      )
                                     ),
-                                    conditionalPanel("input.param_tipo == 'Índice'",
+                                    conditionalPanel("input.paramTipo == 'Indice'",
+                                                     div(tags$b("Ajuste")), br(),
                                                      fluidRow(
                                                        column(10, br(), dygraphOutput("ind_param")),
                                                        column(2, br(), textOutput("legenda_grafico_ind_param"))

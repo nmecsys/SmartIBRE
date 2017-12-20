@@ -18,7 +18,7 @@ shinyServer(function(input, output,session){
   # observeEvent(input$action_parametrico,{
   #   updateTabItems(session, "menu_esquerda", "mod_param")
   # })
-
+  
   output$produto_home1 <- renderDygraph({
     dygraph(variacao[,produtos$codigo0[1]]) %>%
       dySeries(name = "V1", label = as.character(produtos$nomes[1]), color = "#5E2612", strokeWidth = 2) %>%
@@ -81,7 +81,7 @@ shinyServer(function(input, output,session){
   output$bi_noticia1_link <- renderText({noticias_bi$link[1]})
   output$bi_noticia2_link <- renderText({noticias_bi$link[2]})
   output$bi_noticia3_link <- renderText({noticias_bi$link[3]})
-
+  
   
   # NOTIFICAÇÕES PARA O USUÁRIO -------------------------------------------------------------
   
@@ -496,28 +496,28 @@ shinyServer(function(input, output,session){
     toggleState("esp_lag_max", input$lag_max == "Specify")
     toggleState("esp_n_ahead", input$n_ahead == "Specify")
   })
-
+  
   mode <- reactive({
     return(list(model = input$esp_mode))
   })
-
+  
   code_ts <- reactive({
-      return(list(model = input$esp_code_ts))
+    return(list(model = input$esp_code_ts))
   })
-
+  
   lag_max <- reactive({
     return(list(model = input$esp_lag_max))
   })
-
+  
   n_ahead <- reactive({
     return(list(model = input$esp_n_ahead))
   })
-
-
+  
+  
   relatorio <- reactive({
     BETS.report(mode = mode(), ts = code_ts(), parameters = list(lag_max(), n_ahead()))
   })
-
+  
   
   
   # MENU MODELO PARAMÉTRICO ----------------------------------------
@@ -527,7 +527,7 @@ shinyServer(function(input, output,session){
     input$action_param
     isolate({
       codigo_y <- input$param_y
-      codigo_x <- strsplit(input$param_x, ",")[[1]]
+      codigo_x <-  strsplit(input$param_x, ",")[[1]]
       baixar.list <- lapply(c(codigo_y,codigo_x), FUN = BETS.get, data.frame = T)
       st <- na.omit(do.call(cbind, lapply(baixar.list, FUN = function(x) xts(x[,2],x[,1]))))
       frame <- data.frame(data = as.character(index(st)), st)
@@ -538,9 +538,41 @@ shinyServer(function(input, output,session){
     })
   })
   
+  output$series_names <- renderTable({
+    data <- data.frame(t(sapply(c(input$param_y,strsplit(input$param_x, ",")[[1]]), FUN = function(x){BETS.search(code = x, view = F)})))
+    data0 <- data.frame(rótulo = c("Y", paste0("X",1:(nrow(data)-1))), nomes = unlist(data[,"description"]))
+    data0
+  }, striped = T, rownames = F, bordered = T)
+  
+  output$especificacoes <- renderText({
+    input$action_param
+    isolate({
+      data <- data.frame(t(sapply(c(input$param_y,strsplit(input$param_x, ",")[[1]]), FUN = function(x){BETS.search(code = x, view = F)})))
+      componentes <- c("Y", paste0("X",1:(nrow(data)-1)))
+      if(input$def_x == 0){
+        defasagemX <- paste0(componentes[-1], "{t}")
+      }else{
+        defasagemX <- c(paste0(componentes[-1], "{t}"),paste0(rep(componentes[-1], each = input$def_x), "{t-",1:input$def_x,"}"))
+      }
+      if(input$def_y == 0){
+        equacao <- paste0("Y ~ const + ", paste0(defasagemX, collapse = " + "))
+      }else{
+        defasagemY <- c(paste0(rep(componentes[1], each = input$def_y), "{t-",1:input$def_y,"}"))
+        equacao <- paste0("Y ~ const + ", paste0(paste0(defasagemY, collapse = " + "), " + ", paste0(defasagemX, collapse = " + ")))
+      }
+      equacao
+    })
+    
+  })
+  
+  
+  
   # regressão paramétrica
   reg_param <- reactive({
-    regressao_parametrica(series_param(), defx=input$def_x, defy=input$def_y, auto=TRUE)
+    input$action_param
+    isolate({
+      regressao_parametrica(series_param(), defx=input$def_x, defy=input$def_y, auto=TRUE)
+    })
   })
   
   # índice paramétrico
@@ -552,13 +584,56 @@ shinyServer(function(input, output,session){
     })
   })
   
+  
+  # equação final
+  
+  output$reg_param_mod_final <- renderText({ 
+    
+    mod_final <- reg_param()$resumo_modelo$coefficients
+    codigo_y <- input$param_y # 4189
+    codigo_x <-  strsplit(input$param_x, ",")[[1]] # c(433,7832)
+    
+    geralx <- paste0("x_",codigo_x)
+    defx <- paste0("x_",codigo_x,"_def",rep(1:input$def_x,each = length(codigo_x)))
+    defxok <- paste0("X", 1:length(codigo_x),"{t-",rep(1:input$def_x,each = length(codigo_x)),"}")
+    defy <- paste0("Y_def",1:input$def_y)
+    defyok <- paste0("Y{t-", 1:input$def_y,"}")
+    
+    const <- round(mod_final[1,1],2)
+    tempoxt <- paste0("X",which(geralx %in% rownames(mod_final)),"{t}")
+    coefxt <- round(mod_final[which(rownames(mod_final) %in% geralx),1],2)
+    tempodefx <- defxok[which(defx %in% rownames(mod_final))]
+    coefdefx <- round(mod_final[which(rownames(mod_final) %in% defx),1],2)
+    tempodefy <- defyok[which(defy %in% rownames(mod_final))]
+    coefdefy <- round(mod_final[which(rownames(mod_final) %in% defy),1],2)
+    
+    
+    coefs <- data.frame(nomes = c(coefdefy, coefxt, coefdefx), y = c(tempodefy, tempoxt, tempodefx), row.names = NULL)
+    
+    paste0("Y ~ ", const, " + ", paste0(coefs[,1], " * ", coefs[,2], collapse = " + "))
+    
+  })
+  
+  output$print <- renderPrint({ 
+    
+    
+    
+    
+    # defx <- paste0("x_",codigo_x,"_def",rep(1:def_x,each = length(codigo_x)))
+    # defxok <- paste0("X", 1:length(codigo_x),"{t-",rep(1:def_x,each = length(codigo_x)),"}")
+    # defy <- paste0("Y_def",1:def_y)
+    # defyok <- paste0("Y{t-", 1:def_y,"}")
+    
+    
+  })
+  
   # gráfico da regressão paramétrica
   output$reg_param <- renderDygraph({
-    x <- cbind(reg_param()$serie_acumulada[,1], reg_param()$serie_ajustada)
-    colnames(x) <- c("y","fit.y")
+    x <- cbind(reg_param()$serie_ajustada, reg_param()$preco_acumulado)
+    colnames(x) <- c("indicador","Y")
     dygraph(x) %>%
-      dySeries("y", color = "#000000", strokePattern = "dotted") %>%
-      dySeries("fit.y", color = "#3299CC", strokeWidth = 2) %>%
+      dySeries("Y", color = "#000000", strokePattern = "dotted") %>%
+      dySeries("indicador", color = "#3299CC", strokeWidth = 2) %>%
       dyRangeSelector(fillColor = "#F7F7F7") %>%
       dyLegend(labelsDiv = "legenda_grafico_reg_param", show = "always")
   })
@@ -566,21 +641,21 @@ shinyServer(function(input, output,session){
   # gráfico do índice paramétrico
   output$ind_param <- renderDygraph({
     x <- cbind(ind_param()$Preco_Transformador,ind_param()$PrecoParametrico_acumulado)
-    colnames(x) <- c("y","fit.y")
+    colnames(x) <- c("Y","indicador")
     dygraph(x) %>%
-      dySeries("y", color = "#000000", strokePattern = "dotted") %>%
-      dySeries("fit.y", color = "#3299CC", strokeWidth = 2) %>%
+      dySeries("Y", color = "#000000", strokePattern = "dotted") %>%
+      dySeries("indicador", color = "#3299CC", strokeWidth = 2) %>%
       dyRangeSelector(fillColor = "#F7F7F7") %>%
       dyLegend(labelsDiv = "legenda_grafico_ind_param", show = "always")
   })
   
   # habilitar/desabilitar inputs dependendo da escolha reg ou ind
   observe({
-    toggleState(id = "param_coefs", condition = input$param_tipo == "Índice")
-    toggleState(id = "def_x", condition = input$param_tipo == "Regressão")
-    toggleState(id = "def_y", condition = input$param_tipo == "Regressão")
+    toggleState(id = "param_coefs", condition = input$paramTipo == "Indice")
+    toggleState(id = "def_x", condition = input$paramTipo == "Regressao")
+    toggleState(id = "def_y", condition = input$paramTipo == "Regressao")
   })
-
+  
   # Relatórios ----------------------------------------------------------------------------------------------------
   
   # name_file = paste0("default_",input$code_ts,".html")
@@ -588,21 +663,21 @@ shinyServer(function(input, output,session){
   # #lista de parametros adicionais
   # paramns = vector()
   # i = 1
-
   
-
+  
+  
   #definindo os pâmetros principais
-  observeEvent(input$run_parametros_reltorio, {
-     aux = BETS::BETS.report(report.file = "data/relatoriosmartibre")
-     aux1= as.vector(list.files("data/"))
-     for(i in 1:length(aux1)){
-       if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
-         output$relatorio = aux1[i]
-         break
-       }
-     }
-      
-  })
+  # observeEvent(input$run_parametros_reltorio, {
+  #    aux = BETS::BETS.report(report.file = "data/relatoriosmartibre")
+  #    aux1= as.vector(list.files("data/"))
+  #    for(i in 1:length(aux1)){
+  #      if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
+  #        output$relatorio = aux1[i]
+  #        break
+  #      }
+  #    }
+  #     
+  # })
   
   # observeEvent(input$run_parametros_dashboard, {
   #  
@@ -614,9 +689,9 @@ shinyServer(function(input, output,session){
   #       break()
   #     }
   #   }
-    
-    
-  })
+  #   
+  #   
+  # })
   
   
   
