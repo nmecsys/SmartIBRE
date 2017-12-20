@@ -294,7 +294,7 @@ dashboardPage(
                            
                 ),
                 sidebarPanel(width = 9,
-                             shiny::htmlOutput(outputId = "dashboard")
+                             tags$iframe(src = "business_cycle_dashboard.pdf",width = "100%", height = "1021",style="border: 0px")
                 )
                 
                 

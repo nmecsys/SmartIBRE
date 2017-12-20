@@ -679,6 +679,10 @@ crawler_blog_ibre <- function(){
 noticias = crawler_blog_ibre()
 noticias_bi = noticias[1:3,]
 
+noticias_bi$descricao[1] <- paste0(strsplit(as.character(noticias_bi$descricao[1]), " ")[[1]][1:50], collapse = " ")
+noticias_bi$descricao[2] <- paste0(strsplit(as.character(noticias_bi$descricao[2]), " ")[[2]][1:50], collapse = " ")
+noticias_bi$descricao[3] <- paste0(strsplit(as.character(noticias_bi$descricao[3]), " ")[[3]][1:50], collapse = " ")
+
 
 # #Noticias do blog do ibre, pegando as 3 mais atuais
 # connection = function(){
@@ -689,9 +693,6 @@ noticias_bi = noticias[1:3,]
  #noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
  #noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
 #  noticias_bi = unique(noticias_bi)
- # noticias_bi$descricao[1] <- paste0(strsplit(as.vector(noticias_bi$descricao[1]), " ")[[1]][1:50], collapse = " ")
- # noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao[2], " ")[[2]][1:50], collapse = " ")
- # noticias_bi$descricao[3] <- paste0(strsplit(noticias_bi$descricao[3], " ")[[3]][1:50], collapse = " ")
 #  invisible(dbDisconnect(conn))
 
 

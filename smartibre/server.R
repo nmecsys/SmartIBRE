@@ -69,21 +69,21 @@
   
   # Blog do IBRE
   
-  output$bi_noticia1_manc <- renderText({noticias_bi$manchete[1]})
-  output$bi_noticia2_manc <- renderText({noticias_bi$manchete[2]})
-  output$bi_noticia3_manc <- renderText({noticias_bi$manchete[3]})
+  output$bi_noticia1_manc <- renderText({as.character(noticias_bi$manchete[1])})
+  output$bi_noticia2_manc <- renderText({as.character(noticias_bi$manchete[2])})
+  output$bi_noticia3_manc <- renderText({as.character(noticias_bi$manchete[3])})
   
-  output$bi_noticia1_desc <- renderText({noticias_bi$descricao[1]})
-  output$bi_noticia2_desc <- renderText({noticias_bi$descricao[2]})
-  output$bi_noticia3_desc <- renderText({noticias_bi$descricao[3]})
+  output$bi_noticia1_desc <- renderText({as.character(noticias_bi$descricao[1])})
+  output$bi_noticia2_desc <- renderText({as.character(noticias_bi$descricao[2])})
+  output$bi_noticia3_desc <- renderText({as.character(noticias_bi$descricao[3])})
   
-  output$bi_noticia1_date <- renderText({noticias_bi$date[1]})
-  output$bi_noticia2_date <- renderText({noticias_bi$date[2]})
-  output$bi_noticia3_date <- renderText({noticias_bi$date[3]})
+  output$bi_noticia1_date <- renderText({as.character(noticias_bi$date[1])})
+  output$bi_noticia2_date <- renderText({as.character(noticias_bi$date[2])})
+  output$bi_noticia3_date <- renderText({as.character(noticias_bi$date[3])})
   
-  output$bi_noticia1_link <- renderText({noticias_bi$link[1]})
-  output$bi_noticia2_link <- renderText({noticias_bi$link[2]})
-  output$bi_noticia3_link <- renderText({noticias_bi$link[3]})
+  output$bi_noticia1_link <- renderText({as.character(noticias_bi$link[1])})
+  output$bi_noticia2_link <- renderText({as.character(noticias_bi$link[2])})
+  output$bi_noticia3_link <- renderText({as.character(noticias_bi$link[3])})
   
   
   # NOTIFICAÇÕES PARA O USUÁRIO -------------------------------------------------------------
