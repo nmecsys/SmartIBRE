@@ -269,7 +269,7 @@ dashboardPage(
               
               wellPanel(style = "background-color:#F7F7F7;",
                         div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
-                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório."),
+                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do dashboard."),
               
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
@@ -294,7 +294,7 @@ dashboardPage(
                            
                 ),
                 sidebarPanel(width = 9,
-                             shiny::htmlOutput(outputId = "reltorio")
+                             shiny::htmlOutput(outputId = "dashboard")
                 )
                 
                 
@@ -316,7 +316,7 @@ dashboardPage(
               
               wellPanel(style = "background-color:#F7F7F7;",
                         div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
-                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do dashboard"),
+                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do relatório"),
 
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
@@ -355,7 +355,7 @@ dashboardPage(
 
                ),
                sidebarPanel(width = 9,
-                            shiny::htmlOutput(outputId = "relatorio_html")
+                            uiOutput("relatorio")
                             #shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
                           )##fim sidebarPanel
                           
@@ -406,18 +406,16 @@ dashboardPage(
                                     
       
                                     conditionalPanel("input.paramTipo == 'Regressao'",
-                                    div(tags$b("Custo Paramétrico")), br(),
+                                    div(tags$b("Índice")), br(),
                                                      fluidRow(
-                                                       column(10, br(), dygraphOutput("reg_param"), br(),
-                                                              downloadButton("download_reg_param", 'Exportar Indicador')),
+                                                       column(10, br(), dygraphOutput("reg_param")),
                                                        column(2, br(), textOutput("legenda_grafico_reg_param"))
                                                      )
                                     ),
                                     conditionalPanel("input.paramTipo == 'Indice'",
-                                                     div(tags$b("Custo Paramétrico")), br(),
+                                                     div(tags$b("Ajuste")), br(),
                                                      fluidRow(
-                                                       column(10, br(), dygraphOutput("ind_param"), br(),
-                                                              downloadButton("download_ind_param", 'Exportar Indicador')),
+                                                       column(10, br(), dygraphOutput("ind_param")),
                                                        column(2, br(), textOutput("legenda_grafico_ind_param"))
                                                      )
                                     )
