@@ -18,6 +18,7 @@ library(xml2)
 library(XML)
 library(rvest)
 library(RCurl)
+library(rJava)
 #chat uol
 #oi - bianquinha
 #Olá - Daiane 
@@ -638,22 +639,10 @@ indparam_fixo = function(serie_original, coef, covar=covar_aux){
 }
 
 
-#Noticias do blog do ibre, pegando as 3 mais atuais
-# 
-# portal_ibre = "http://portalibre.fgv.br/"
-# blog_ibre_feed = "http://blogdoibre.fgv.br/rss/posts/posts-rss.xml"
-# 
-connection = function(){
-  conn = dbConnect(MySQL(),db="smartibredb",user="smartibre_user",password="123456",host="200.20.164.178",port=3306)
-}
 
 cleanFun <- function(htmlString) {
   return(gsub("<.*?>", "", htmlString))
 }
-
-#jogar as noticias tudo no banco
-
-
 
 
 crawler_blog_ibre <- function(){
@@ -662,43 +651,47 @@ crawler_blog_ibre <- function(){
   # feeds_link <- html %>% html_nodes(css = "item")
   # aux <- stringr::str_extract(string =feeds_link,pattern = "<link>.*")
   # links <- stringr::str_replace(string = aux,pattern = "<link>",replacement ="")
-
-
+  
+  
   xml  <- read_xml(x = url_base,encoding = "UTF-8")
   link <- xml %>% html_nodes("item link") %>% html_text(trim = T)
   manchete <- xml %>% html_nodes("item title") %>% html_text(trim=T)
   descricao <- xml %>% html_nodes("item description") %>% html_text(trim=T) %>% cleanFun()
   date <- xml %>% html_nodes("item pubDate") %>% html_text(trim=T) %>% cleanFun()
-
+  
   manchete= iconv(manchete,from="UTF-8",to="latin1")
-  #descricao = iconv(descricao,from="UTF-8",to="latin1")
+  descricao = iconv(descricao,from="UTF-8",to="latin1")
   novo_df <- data.frame(link = link,
                         manchete = manchete,
                         descricao = descricao,
                         date = date,
                         stringsAsFactors = TRUE
   )
-  conn = connection()
-  message("Adicionando novas noticias no banco")
-  if("noticiasbi" %in% DBI::dbListTables(conn)){
-    dbSendQuery(conn,"drop table noticiasBI")
-  }
-  DBI::dbWriteTable(conn,name = "noticiasBI",novo_df,overwrite = TRUE)
-
-  invisible(dbDisconnect(conn))
+  #conn = connection()
+  #message("Adicionando novas noticias no banco")
+  #
+  #DBI::dbWriteTable(conn,name = "noticiasBI",novo_df,overwrite = TRUE)
+  
+  #invisible(dbDisconnect(conn))
+  return(novo_df)
 }
-# 
-# 
- crawler_blog_ibre()
-# 
- conn = connection()
- noticias_bi = DBI::dbGetQuery(conn,"Select link,manchete,descricao,date from noticiasBI order by date desc limit 10")
-# # noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
-# # noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
- noticias_bi = unique(noticias_bi)
- noticias_bi$descricao[1] <- paste0(strsplit(noticias_bi$descricao, " ")[[1]][1:50], collapse = " ")
-  noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao, " ")[[2]][1:50], collapse = " ")
-  noticias_bi$descricao[3] <- paste0(strsplit(noticias_bi$descricao, " ")[[3]][1:50], collapse = " ")
-  invisible(dbDisconnect(conn))
+
+noticias = crawler_blog_ibre()
+noticias_bi = noticias[1:3,]
+
+
+# #Noticias do blog do ibre, pegando as 3 mais atuais
+# connection = function(){
+#   conn = dbConnect(MySQL(),db="smartibredb",user="smartibre_user",password="123456",host="200.20.164.178",port=3306)
+# }
+#   conn = connection()
+#   noticias_bi = DBI::dbGetQuery(conn,"Select link,manchete,descricao,date from noticiasBI order by date desc limit 10")
+ #noticias_bi$manchete = iconv(noticias_bi$manchete,from="UTF-8",to="latin1")
+ #noticias_bi$descricao = iconv(noticias_bi$descricao,from="UTF-8",to="latin1")
+#  noticias_bi = unique(noticias_bi)
+ # noticias_bi$descricao[1] <- paste0(strsplit(as.vector(noticias_bi$descricao[1]), " ")[[1]][1:50], collapse = " ")
+ # noticias_bi$descricao[2] <- paste0(strsplit(noticias_bi$descricao[2], " ")[[2]][1:50], collapse = " ")
+ # noticias_bi$descricao[3] <- paste0(strsplit(noticias_bi$descricao[3], " ")[[3]][1:50], collapse = " ")
+#  invisible(dbDisconnect(conn))
 
 

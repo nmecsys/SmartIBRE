@@ -72,12 +72,15 @@
   output$bi_noticia1_manc <- renderText({noticias_bi$manchete[1]})
   output$bi_noticia2_manc <- renderText({noticias_bi$manchete[2]})
   output$bi_noticia3_manc <- renderText({noticias_bi$manchete[3]})
+  
   output$bi_noticia1_desc <- renderText({noticias_bi$descricao[1]})
   output$bi_noticia2_desc <- renderText({noticias_bi$descricao[2]})
   output$bi_noticia3_desc <- renderText({noticias_bi$descricao[3]})
+  
   output$bi_noticia1_date <- renderText({noticias_bi$date[1]})
   output$bi_noticia2_date <- renderText({noticias_bi$date[2]})
   output$bi_noticia3_date <- renderText({noticias_bi$date[3]})
+  
   output$bi_noticia1_link <- renderText({noticias_bi$link[1]})
   output$bi_noticia2_link <- renderText({noticias_bi$link[2]})
   output$bi_noticia3_link <- renderText({noticias_bi$link[3]})
@@ -686,19 +689,27 @@
   
   
   
-  observeEvent(input$run_parametros_relatorio, {
-    BETS::BETS.report(report.file = "data/relatoriosmartibre")
-     aux1= as.vector(list.files("data/"))
+  # observeEvent(input$run_parametros_relatorio, {
+    # BETS::BETS.report(report.file = "data/relatoriosmartibre")
+    #  aux1= as.vector(list.files("data/"))
      # for(i in 1:length(aux1)){
      #   if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
-         output$relatorio = renderUI({
-           shiny::includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
-           # }
-         #break
-       # }
-     })
-})
+      #    output$relatorio = renderUI({
+      #      shiny::includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
+      #      # }
+      #    #break
   
+      #  # }
+      # })
+# })
+  
+  
+  
+  # getPage<-function() {
+  #   return(includeHTML("www/relatoriosmartibre_SARIMA_21864.html"))
+  # }
+  # output$inc<-renderUI({getPage()})
+
   
   
   

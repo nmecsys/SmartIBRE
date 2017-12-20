@@ -355,7 +355,9 @@ dashboardPage(
 
                ),
                sidebarPanel(width = 9,
-                            uiOutput("relatorio")
+                            
+                            tags$iframe(src = "relatoriosmartibre_SARIMA_21864.html",width = "100%", height = "1021",style="border: 0px")
+                             #includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
                             #shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
                           )##fim sidebarPanel
                           
