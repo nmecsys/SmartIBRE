@@ -406,14 +406,14 @@ dashboardPage(
                                     
       
                                     conditionalPanel("input.paramTipo == 'Regressao'",
-                                    div(tags$b("Índice")), br(),
+                                    div(tags$b("Custo Paramétrico")), br(),
                                                      fluidRow(
                                                        column(10, br(), dygraphOutput("reg_param")),
                                                        column(2, br(), textOutput("legenda_grafico_reg_param"))
                                                      )
                                     ),
                                     conditionalPanel("input.paramTipo == 'Indice'",
-                                                     div(tags$b("Ajuste")), br(),
+                                                     div(tags$b("Custo Paramétrico")), br(),
                                                      fluidRow(
                                                        column(10, br(), dygraphOutput("ind_param")),
                                                        column(2, br(), textOutput("legenda_grafico_ind_param"))
