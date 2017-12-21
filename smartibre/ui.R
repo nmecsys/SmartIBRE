@@ -15,8 +15,8 @@ dashboardPage(
                 ),
                 menuItem("Modelo Paramétrico", tabName = "mod_param", icon = icon("dashboard")),
                 menuItem("Documentos Dinâmicos", tabName = "documentos_dinamicos", icon = icon("file"), startExpanded = T,
-                                  menuSubItem("Relatórios", tabName = "bd_relatorios"),
-                                  menuSubItem("Dashboards", tabName = "bd_dashboards")
+                                  menuSubItem("Relatórios", tabName = "bd_relatorios")
+                                  # menuSubItem("Dashboards", tabName = "bd_dashboards")
                                   
                          )
     )
@@ -263,50 +263,50 @@ dashboardPage(
       
       # Item: Documentos dinâmicos - Dashboards
       
-      tabItem(tabName = "bd_dashboards",
-              
-              
-              
-              wellPanel(style = "background-color:#F7F7F7;",
-                        div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
-                        "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do dashboard."),
-              
-              sidebarLayout(
-                sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
-                             selectInput("type", label = "Tipo do dashboard:", multiple = F, width = "90%",
-                                         choices = c("Selecione"="", "Macro Situation", "Customizado")),
-                             
-                             
-                             hr(),
-                             
-                             div(align ='center',
-                                 helpText("Parâmetros adicionais:")),
-                             checkboxInput("param_add", "Incluir", FALSE),
-                             textInput("dashboard_autor", "Autor", value = "", width = NULL, placeholder = NULL),
-                             textInput("dashboard_url", "URL", value = "", width = NULL, placeholder = NULL),
-                             fileInput("dashboard_txt", "Texto Personalizado", multiple = FALSE, accept = NULL, width = NULL,
-                                       buttonLabel = "Upload", placeholder = "Arquivo .txt"),
-                             fileInput("dashboard_logo", "Sua Logo", multiple = FALSE, accept = NULL, width = NULL,
-                                       buttonLabel = "Upload", placeholder = "Arquivo .png/jpg"),
-                             hr(),
-                             div(align = "center",
-                                 bsButton("run_parametros_dashboard", "RUN", value = F, style = "primary"))
-                           
-                ),
-                sidebarPanel(width = 9,
-                             tags$iframe(src = "business_cycle_dashboard.pdf",width = "100%", height = "1021",style="border: 0px")
-                )
-                
-                
-              ),
-              
-              
-              
-              
-              hr()
-              
-              
-      ),
+      # tabItem(tabName = "bd_dashboards",
+      #         
+      #         
+      #         
+      #         wellPanel(style = "background-color:#F7F7F7;",
+      #                   div("PARÂMETROS", style = "font-weight:bold; color:#4D8AB2; font-size:120%"),
+      #                   "Utilize os campos a seguir para determinar os parâmetros necessários para a criação do dashboard."),
+      #         
+      #         sidebarLayout(
+      #           sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
+      #                        selectInput("type", label = "Tipo do dashboard:", multiple = F, width = "90%",
+      #                                    choices = c("Selecione"="", "Macro Situation", "Customizado")),
+      #                        
+      #                        
+      #                        hr(),
+      #                        
+      #                        div(align ='center',
+      #                            helpText("Parâmetros adicionais:")),
+      #                        checkboxInput("param_add", "Incluir", FALSE),
+      #                        textInput("dashboard_autor", "Autor", value = "", width = NULL, placeholder = NULL),
+      #                        textInput("dashboard_url", "URL", value = "", width = NULL, placeholder = NULL),
+      #                        fileInput("dashboard_txt", "Texto Personalizado", multiple = FALSE, accept = NULL, width = NULL,
+      #                                  buttonLabel = "Upload", placeholder = "Arquivo .txt"),
+      #                        fileInput("dashboard_logo", "Sua Logo", multiple = FALSE, accept = NULL, width = NULL,
+      #                                  buttonLabel = "Upload", placeholder = "Arquivo .png/jpg"),
+      #                        hr(),
+      #                        div(align = "center",
+      #                            bsButton("run_parametros_dashboard", "RUN", value = F, style = "primary"))
+      #                      
+      #           ),
+      #           sidebarPanel(width = 9,
+      #                        tags$iframe(src = "business_cycle_dashboard.pdf",width = "100%", height = "1021",style="border: 0px")
+      #           )
+      #           
+      #           
+      #         ),
+      #         
+      #         
+      #         
+      #         
+      #         hr()
+      #         
+      #         
+      # ),
       
       # Item: Documentos dinâmicos - Relatórios
       
@@ -320,11 +320,11 @@ dashboardPage(
 
               sidebarLayout(
                 sidebarPanel(width = 3,style = "background-color:#F7F7F7;",
-                             textInput("code_ts",label = "Código da série:", value = "Ex: 21864", width = "90%"),
+                             textInput("code_ts",label = "Código da série:", value = "21864", width = "90%"),
                               
                              hr(),
-                             selectInput("mode", label = "Tipo da análise:", multiple = F, width = "90%",
-                                         choices = c("Selecione"="", "SARIMA", "GRNN", "HOLT-WINTERS")),
+                             selectInput("mode", label = "Tipo da análise:"  ,multiple = F, width = "90%",
+                                         choices = c("SARIMA", "GRNN", "HOLT-WINTERS")),
 
                              hr(),
                              numericInput("lag_max", label = "Lag máximo:", value = "48", width = "90%"),
@@ -355,11 +355,18 @@ dashboardPage(
 
                ),
                sidebarPanel(width = 9,
-                            
-                            tags$iframe(src = "relatoriosmartibre_SARIMA_21864.html",width = "100%", height = "1021",style="border: 0px")
+                            conditionalPanel("input.run_parametros_relatorio == 0",
+                            tags$iframe(src = "relatoriosmartibre_SARIMA_21864.html" ,width = "100%", height = "1021",style="border: 0px")
                              #includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
                             #shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
-                          )##fim sidebarPanel
+                          ),
+                          conditionalPanel("input.run_parametros_relatorio != 0",
+                                           tags$iframe(src = textOutput("algumnome") ,width = "100%", height = "1021",style="border: 0px")
+                                           #includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
+                                           #shiny::includeHTML(path="data/teste_SARIMA_21864.html")  
+                          )#
+                          
+               )
                           
                 
               ),

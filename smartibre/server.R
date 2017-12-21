@@ -661,71 +661,18 @@
   
   # Relatórios ----------------------------------------------------------------------------------------------------
   
-  # name_file = paste0("default_",input$code_ts,".html")
-  # name_file_aux = "default"
-  # #lista de parametros adicionais
-  # paramns = vector()
-  # i = 1
+    observe({ toggleState("run_parametros_relatorio",condition = input$code_ts != "" 
+                          )   
+                 })
   
-  
-  
-  #definindo os pâmetros principais
-  
-  # observeEvent(input$run_parametros_relatorio, {
-  #   withProgress(message = 'Making plot', value = 0, {
-  #     # Number of times we'll go through the loop
-  #     n <- 500
-  #     
-  #     for (i in 1:n) {
-  #       # Each time through the loop, add another row of data. This is
-  #       # a stand-in for a long-running computation.
-  #       # Increment the progress bar, and update the detail text.
-  #       incProgress(1/n, detail = paste("Doing part", i))
-  #       # Pause for 0.1 seconds to simulate a long computation.
-  #       Sys.sleep(0.1)
-  #     }
-  #   })
-  # })
-  
-  
-  
-  # observeEvent(input$run_parametros_relatorio, {
-    # BETS::BETS.report(report.file = "data/relatoriosmartibre")
-    #  aux1= as.vector(list.files("data/"))
-     # for(i in 1:length(aux1)){
-     #   if("relatoriosmartibre" %in% stringr::str_split(aux1[i],pattern = "_")[[1]]){
-      #    output$relatorio = renderUI({
-      #      shiny::includeHTML(path = "data/relatoriosmartibre_SARIMA_21864.html")
-      #      # }
-      #    #break
-  
-      #  # }
-      # })
-# })
-  
-  
-  
-  # getPage<-function() {
-  #   return(includeHTML("www/relatoriosmartibre_SARIMA_21864.html"))
-  # }
-  # output$inc<-renderUI({getPage()})
-
-  
-  
-  
-  # observeEvent(input$run_parametros_dashboard, {
-  #  
-  #   aux2 = BETS::BETS.dashboard(report.file = "data/dashboardsmartibre")
-  #   aux3= as.vector(list.files("data/"))
-  #   for(i in 1:length(aux3)){
-  #     if("dashboardsmartibre" %in% stringr::str_split(aux3[i],pattern = "_")[[1]]){
-  #       output$dasboard = aux3[i]
-  #       break()
-  #     }
-  #   }
-  #   
-  #   
-  # })
+   observeEvent(input$run_parametros_relatorio, {
+     BETS.report(ts = as.numeric(input$code_ts),report.file = "data/relatoriosmartibre")
+     aux = paste("relatoriosmartibre_SARIMA_",input$code_ts,".html")
+     output$algumnome = renderText(expr = aux)
+     
+      
+   })
+    
   
   
   
@@ -739,9 +686,9 @@
   
   
   #definindo os pâmetros principais
-  observeEvent(input$run_parametros, {
-    aux_dashboards = BETS::BETS.dashboard(type = ,charts = charts ,parameters = parameters)
-  })
-  
+  # observeEvent(input$run_parametros, {
+  #   aux_dashboards = BETS::BETS.dashboard(type = ,charts = charts ,parameters = parameters)
+  # })
+  # 
   
 })

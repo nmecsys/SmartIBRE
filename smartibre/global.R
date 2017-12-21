@@ -273,7 +273,7 @@ regressao_parametrica = function(serie_original, defx, defy, covar = NULL, auto=
             serie_defy[(j+1):nrow(serie_defy),j] = serie_acum[1:(nrow(serie_defy)-j),1]
             colunas_defy[j] = paste("Y_def",j, sep="")
           }
-          colnames(serie_defy) = colunas_defy
+          colnames(serie_defy) = colunas_defys
         }
         
         if(defx > 0){
@@ -665,8 +665,8 @@ crawler_blog_ibre <- function(){
                         manchete = manchete,
                         descricao = descricao,
                         date = date,
-                        stringsAsFactors = TRUE
-  )
+                        stringsAsFactors = FALSE
+                        )
   #conn = connection()
   #message("Adicionando novas noticias no banco")
   #
@@ -680,8 +680,8 @@ noticias = crawler_blog_ibre()
 noticias_bi = noticias[1:3,]
 
 noticias_bi$descricao[1] <- paste0(strsplit(as.character(noticias_bi$descricao[1]), " ")[[1]][1:50], collapse = " ")
-noticias_bi$descricao[2] <- paste0(strsplit(as.character(noticias_bi$descricao[2]), " ")[[2]][1:50], collapse = " ")
-noticias_bi$descricao[3] <- paste0(strsplit(as.character(noticias_bi$descricao[3]), " ")[[3]][1:50], collapse = " ")
+noticias_bi$descricao[2] <- paste0(strsplit(as.character(noticias_bi$descricao[2]), " ")[[1]][1:50], collapse = " ")
+noticias_bi$descricao[3] <- paste0(strsplit(as.character(noticias_bi$descricao[3]), " ")[[1]][1:50], collapse = " ")
 
 
 # #Noticias do blog do ibre, pegando as 3 mais atuais
