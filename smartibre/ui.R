@@ -3,7 +3,7 @@ dashboardPage(
   title = "SMARTIBRE",
   header = dashboardHeader(title = div("SMARTIBRE", style = "font-family: sans-serif; font-weight:bold"),
                            dropdownMenuOutput("notif_user")
-                           
+                            
   ),
   sidebar = dashboardSidebar(
     sidebarMenu(id = "menu_esquerda",

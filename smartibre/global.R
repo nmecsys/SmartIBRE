@@ -696,3 +696,4 @@ noticias_bi$descricao[3] <- paste0(strsplit(as.character(noticias_bi$descricao[3
 #  invisible(dbDisconnect(conn))
 
 
+ 
