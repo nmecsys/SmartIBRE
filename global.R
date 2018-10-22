@@ -48,7 +48,7 @@ data_produto_home <- c(tail(as.Date(variacao),18)[1], tail(as.Date(variacao),1))
 # source("funcoes_parametrico.R")
 
 #conexão >> favoritos
-#conn < - dbConnect(MySQL(), host = "200.20.164.178", db = "smartibredb", user = "smartibre_user", password = "123456", port = 3306)
+#conn < - dbConnect()
 #adicionar ao favoritos
 
 #user = $_GET[$hdsau]
